@@ -1,21 +1,43 @@
-player_id,player_name,competition_id,competition_name,club_id,club_name,age,position,nationality,market_value,goals,assists,minutes_played,height,foot
-315858,Gianluigi Donnarumma,GB1,Premier League,281,Manchester City,27,Goalkeeper,Italy,45000000.0,0,0,3159,196.0,right
-566799,James Trafford,GB1,Premier League,281,Manchester City,23,Goalkeeper,England,25000000.0,0,0,2258,192.0,right
-262749,David Raya,GB1,Premier League,11,Arsenal FC,30,Goalkeeper,Spain,30000000.0,0,0,2360,186.0,right
-192279,Kepa Arrizabalaga,GB1,Premier League,11,Arsenal FC,31,Goalkeeper,Spain,5000000.0,0,0,1255,188.0,right
-108390,Thibaut Courtois,ES1,La Liga,418,Real Madrid,34,Goalkeeper,Belgium,15000000.0,0,0,1339,199.0,left
-404839,Andriy Lunin,ES1,La Liga,418,Real Madrid,27,Goalkeeper,Ukraine,12000000.0,0,0,1814,191.0,right
-561613,Joan García,ES1,La Liga,131,FC Barcelona,25,Goalkeeper,Spain,45000000.0,0,0,3090,194.0,right
-74857,Marc-André ter Stegen,ES1,La Liga,131,FC Barcelona,34,Goalkeeper,Germany,3000000.0,0,0,872,187.0,right
-607720,Jonas Urbig,L1,Bundesliga,27,Bayern Munich,22,Goalkeeper,Germany,18000000.0,0,0,2082,189.0,both
-195778,Alexander Nübel,L1,Bundesliga,27,Bayern Munich,29,Goalkeeper,Germany,12000000.0,0,0,1863,193.0,right
-486046,Maarten Vandevoordt,L1,Bundesliga,23826,RB Leipzig,24,Goalkeeper,Belgium,15000000.0,0,0,1827,192.0,right
-57071,Péter Gulácsi,L1,Bundesliga,23826,RB Leipzig,36,Goalkeeper,Hungary,1000000.0,0,0,1038,193.0,right
-388516,Josep Martínez,IT1,Serie A,46,Inter Milan,28,Goalkeeper,Spain,10000000.0,0,0,1686,191.0,right
-70580,Raffaele Di Gennaro,IT1,Serie A,46,Inter Milan,32,Goalkeeper,Italy,300000.0,0,0,1372,188.0,right
-182906,Mike Maignan,IT1,Serie A,5,AC Milan,30,Goalkeeper,France,20000000.0,0,0,2033,191.0,right
-96254,Pietro Terracciano,IT1,Serie A,5,AC Milan,36,Goalkeeper,Italy,900000.0,0,0,763,193.0,right
-318470,Matvey Safonov,FR1,Ligue 1,583,Paris Saint-Germain,27,Goalkeeper,Russia,30000000.0,0,0,2269,192.0,right
-463600,Lucas Chevalier,FR1,Ligue 1,583,Paris Saint-Germain,24,Goalkeeper,France,25000000.0,0,0,2357,189.0,right
-251322,Philipp Köhn,FR1,Ligue 1,162,AS Monaco,28,Goalkeeper,Switzerland,3500000.0,0,0,1304,190.0,right
-346546,Radoslaw Majecki,FR1,Ligue 1,162,AS Monaco,26,Goalkeeper,Poland,2500000.0,0,0,1248,193.0,right
+player_id,player_name,competition_id,competition_name,club_id,club_name,age,position,nationality,market_value,goals,assists,minutes_played,height,foot,is_estimated_stats
+315858,Gianluigi Donnarumma,GB1,Premier League,281,Manchester City,27,Goalkeeper,Italy,45000000.0,0,0,2986,196.0,right,True
+566799,James Trafford,GB1,Premier League,281,Manchester City,23,Goalkeeper,England,25000000.0,0,0,2173,192.0,right,True
+116648,Marcus Bettinelli,GB1,Premier League,281,Manchester City,34,Goalkeeper,England,300000.0,0,0,945,193.0,right,True
+262749,David Raya,GB1,Premier League,11,Arsenal FC,30,Goalkeeper,Spain,30000000.0,0,0,2404,186.0,right,True
+192279,Kepa Arrizabalaga,GB1,Premier League,11,Arsenal FC,31,Goalkeeper,Spain,5000000.0,0,0,1558,188.0,right,True
+495666,William Saliba,GB1,Premier League,11,Arsenal FC,25,Centre-Back,France,100000000.0,3,8,3134,192.0,right,True
+834397,Mike Penders,GB1,Premier League,631,Chelsea FC,20,Goalkeeper,Belgium,25000000.0,0,0,2175,200.0,left,True
+403151,Robert Sánchez,GB1,Premier League,631,Chelsea FC,28,Goalkeeper,Spain,22000000.0,0,0,2013,197.0,right,True
+585323,Filip Jørgensen,GB1,Premier League,631,Chelsea FC,24,Goalkeeper,Denmark,15000000.0,0,0,1653,192.0,right,True
+108390,Thibaut Courtois,ES1,La Liga,418,Real Madrid,34,Goalkeeper,Belgium,15000000.0,0,0,1440,199.0,left,True
+404839,Andriy Lunin,ES1,La Liga,418,Real Madrid,27,Goalkeeper,Ukraine,12000000.0,0,0,1758,191.0,right,True
+1055220,Fran González,ES1,La Liga,418,Real Madrid,21,Goalkeeper,Spain,3000000.0,0,0,1179,199.0,right,True
+561613,Joan García,ES1,La Liga,131,FC Barcelona,25,Goalkeeper,Spain,45000000.0,0,0,3091,194.0,right,True
+74857,Marc-André ter Stegen,ES1,La Liga,131,FC Barcelona,34,Goalkeeper,Germany,3000000.0,0,0,1025,187.0,right,True
+938145,Áron Yaakobishvili,ES1,La Liga,131,FC Barcelona,20,Goalkeeper,Hungary,3000000.0,0,0,1167,187.0,both,True
+121483,Jan Oblak,ES1,La Liga,13,Atlético de Madrid,33,Goalkeeper,Slovenia,15000000.0,0,0,1678,188.0,right,True
+242359,Juan Musso,ES1,La Liga,13,Atlético de Madrid,32,Goalkeeper,Argentina,3000000.0,0,0,1330,193.0,right,True
+525438,Horațiu Moldovan,ES1,La Liga,13,Atlético de Madrid,28,Goalkeeper,Romania,1800000.0,0,0,1426,193.0,right,True
+607720,Jonas Urbig,L1,Bundesliga,27,Bayern Munich,22,Goalkeeper,Germany,18000000.0,0,0,1904,189.0,both,True
+195778,Alexander Nübel,L1,Bundesliga,27,Bayern Munich,29,Goalkeeper,Germany,12000000.0,0,0,1727,193.0,right,True
+17259,Manuel Neuer,L1,Bundesliga,27,Bayern Munich,40,Goalkeeper,Germany,4000000.0,0,0,993,193.0,right,True
+486046,Maarten Vandevoordt,L1,Bundesliga,23826,RB Leipzig,24,Goalkeeper,Belgium,15000000.0,0,0,1918,192.0,right,True
+57071,Péter Gulácsi,L1,Bundesliga,23826,RB Leipzig,36,Goalkeeper,Hungary,1000000.0,0,0,732,193.0,right,True
+897425,Timo Schlieck,L1,Bundesliga,23826,RB Leipzig,20,Goalkeeper,Germany,400000.0,0,0,1151,193.0,right,True
+125714,Mark Flekken,L1,Bundesliga,15,Bayer 04 Leverkusen,33,Goalkeeper,Netherlands,6000000.0,0,0,1553,195.0,both,True
+81173,Janis Blaswich,L1,Bundesliga,15,Bayer 04 Leverkusen,35,Goalkeeper,Germany,700000.0,0,0,683,193.0,right,True
+85543,Niklas Lomb,L1,Bundesliga,15,Bayer 04 Leverkusen,32,Goalkeeper,Germany,250000.0,0,0,1141,186.0,right,True
+388516,Josep Martínez,IT1,Serie A,46,Inter Milan,28,Goalkeeper,Spain,10000000.0,0,0,1638,191.0,right,True
+70580,Raffaele Di Gennaro,IT1,Serie A,46,Inter Milan,32,Goalkeeper,Italy,300000.0,0,0,1344,188.0,right,True
+315853,Alessandro Bastoni,IT1,Serie A,46,Inter Milan,27,Centre-Back,Italy,65000000.0,3,8,3012,190.0,left,True
+182906,Mike Maignan,IT1,Serie A,5,AC Milan,30,Goalkeeper,France,20000000.0,0,0,1974,191.0,right,True
+96254,Pietro Terracciano,IT1,Serie A,5,AC Milan,36,Goalkeeper,Italy,900000.0,0,0,1024,193.0,right,True
+939745,Lorenzo Torriani,IT1,Serie A,5,AC Milan,21,Goalkeeper,Italy,800000.0,0,0,1070,197.0,right,True
+301238,Michele Di Gregorio,IT1,Serie A,506,Juventus FC,28,Goalkeeper,Italy,10000000.0,0,0,1406,187.0,right,True
+110923,Mattia Perin,IT1,Serie A,506,Juventus FC,33,Goalkeeper,Italy,2000000.0,0,0,1245,188.0,right,True
+75411,Carlo Pinsoglio,IT1,Serie A,506,Juventus FC,36,Goalkeeper,Italy,200000.0,0,0,692,194.0,left,True
+318470,Matvey Safonov,FR1,Ligue 1,583,Paris Saint-Germain,27,Goalkeeper,Russia,30000000.0,0,0,2493,192.0,right,True
+463600,Lucas Chevalier,FR1,Ligue 1,583,Paris Saint-Germain,24,Goalkeeper,France,25000000.0,0,0,2028,189.0,right,True
+1041614,Renato Marin,FR1,Ligue 1,583,Paris Saint-Germain,19,Goalkeeper,Italy,1000000.0,0,0,768,190.0,right,True
+251322,Philipp Köhn,FR1,Ligue 1,162,AS Monaco,28,Goalkeeper,Switzerland,3500000.0,0,0,1353,190.0,right,True
+346546,Radoslaw Majecki,FR1,Ligue 1,162,AS Monaco,26,Goalkeeper,Poland,2500000.0,0,0,1167,193.0,right,True
+48015,Lukas Hradecky,FR1,Ligue 1,162,AS Monaco,36,Goalkeeper,Finland,1500000.0,0,0,1074,192.0,right,True

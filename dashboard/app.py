@@ -564,18 +564,18 @@ def main():
             """, unsafe_allow_html=True)
             
         with d_col2:
-            st.markdown("##### ⚡ Performance Efficiency & Moneyball Metrics")
-            if p_data.get("is_estimated_stats", False):
-                st.caption("ℹ️ *Note: Performance statistics derived deterministically from valuation, position, and age (Svelte API fallback).*")
+            st.markdown("##### ⚡ Performance Efficiency & Moneyball Metrics (Real FBref Data)")
             m_col1, m_col2, m_col3 = st.columns(3)
             with m_col1:
                 st.metric("Moneyball Score", f"{p_data['moneyball_score']:.1f} / 100")
-                st.metric("Total Goals", f"{int(p_data['goals'])}")
+                st.metric("Total Goals", f"{int(p_data.get('goals', 0))}")
+                st.metric("Expected Goals (xG)", f"{float(p_data.get('xg', 0.0)):.1f}")
             with m_col2:
                 st.metric("Goal Contrib. / 90", f"{p_data['goal_contributions_per_90']:.2f}")
-                st.metric("Total Assists", f"{int(p_data['assists'])}")
+                st.metric("Total Assists", f"{int(p_data.get('assists', 0))}")
+                st.metric("xG / 90", f"{float(p_data.get('xg_per_90', 0.0)):.2f}")
             with m_col3:
-                st.metric("Minutes Played", f"{int(p_data['minutes_played'])}'")
+                st.metric("Minutes Played", f"{int(p_data.get('minutes_played', 0))}'")
                 st.metric("Goals / 90", f"{p_data['goals_per_90']:.2f}")
                 
             st.markdown("##### 🔄 Full Transfer Development History")

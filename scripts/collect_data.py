@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 FootyDex — Football Transfer Intelligence Dashboard (Moneyball Edition)
-Data Collection Script: Collects club, player, market value, transfer, and performance data
+Data Collection Script: Collects club, player profile, market value, and transfer fee data
 from the local Transfermarkt API running at http://localhost:8000.
 """
 
@@ -9,7 +9,6 @@ import os
 import time
 import argparse
 import logging
-import random
 import re
 import pandas as pd
 import requests
@@ -74,42 +73,6 @@ def parse_currency_to_float(val):
         return float(val_str) * mult if val_str else 0.0
     except ValueError:
         return 0.0
-
-def derive_performance_stats(position, market_value, age, player_id=None):
-    """
-    Intelligently estimates/imputes goals, assists, and minutes played when the HTML scraper returns empty stats
-    due to third-party Svelte web component migrations, ensuring realistic downstream Moneyball feature calculations.
-    Uses a seeded local random generator based on player_id for 100% reproducible results across runs.
-    """
-    seed_val = int(re.sub(r"\D", "", str(player_id)) or 42) if player_id else 42
-    rng = random.Random(seed_val)
-    
-    # Estimate minutes played based on market value and age (higher value = starter)
-    mv_in_m = market_value / 1_000_000.0
-    base_minutes = min(3000, max(500, int(mv_in_m * 40 + 1200)))
-    if age < 20 or age > 33:
-        base_minutes = int(base_minutes * 0.7)
-    minutes_played = max(270, min(3420, base_minutes + rng.randint(-200, 200)))
-    
-    games_eq = minutes_played / 90.0
-    pos_lower = str(position).lower() if position else "midfielder"
-    
-    if "forward" in pos_lower or "striker" in pos_lower or "wing" in pos_lower or "attack" in pos_lower:
-        goals_rate = min(0.85, max(0.15, mv_in_m * 0.008 + 0.25))
-        assists_rate = min(0.45, max(0.08, mv_in_m * 0.005 + 0.15))
-    elif "midfield" in pos_lower:
-        goals_rate = min(0.35, max(0.05, mv_in_m * 0.004 + 0.10))
-        assists_rate = min(0.50, max(0.10, mv_in_m * 0.006 + 0.20))
-    elif "back" in pos_lower or "defen" in pos_lower:
-        goals_rate = min(0.12, max(0.01, mv_in_m * 0.001 + 0.03))
-        assists_rate = min(0.25, max(0.02, mv_in_m * 0.003 + 0.08))
-    else:  # Goalkeeper or other
-        goals_rate = 0.0
-        assists_rate = min(0.05, max(0.0, mv_in_m * 0.0005))
-        
-    goals = int(games_eq * goals_rate * rng.uniform(0.8, 1.2))
-    assists = int(games_eq * assists_rate * rng.uniform(0.8, 1.2))
-    return goals, assists, minutes_played
 
 def collect_data(limit_per_club=None, max_clubs_per_league=None):
     os.makedirs("data", exist_ok=True)
@@ -180,28 +143,6 @@ def collect_data(limit_per_club=None, max_clubs_per_league=None):
                 except ValueError:
                     height = 180.0
                 foot = profile_resp.get("foot", p.get("foot", "right"))
-                
-                # 2. Stats
-                stats_resp = make_request(f"{BASE_URL}/players/{player_id}/stats") or {}
-                stats_list = stats_resp.get("stats", [])
-                
-                total_goals = 0
-                total_assists = 0
-                total_minutes = 0
-                
-                if stats_list and len(stats_list) > 0:
-                    for st in stats_list:
-                        try:
-                            total_goals += int(st.get("goals", 0) or 0)
-                            total_assists += int(st.get("assists", 0) or 0)
-                            total_minutes += int(st.get("minutesPlayed", 0) or 0)
-                        except ValueError:
-                            pass
-                
-                is_estimated = False
-                if total_minutes == 0:
-                    total_goals, total_assists, total_minutes = derive_performance_stats(position, market_value, age, player_id=player_id)
-                    is_estimated = True
                     
                 players_data.append({
                     "player_id": player_id,
@@ -214,15 +155,11 @@ def collect_data(limit_per_club=None, max_clubs_per_league=None):
                     "position": position,
                     "nationality": nationality,
                     "market_value": market_value,
-                    "goals": total_goals,
-                    "assists": total_assists,
-                    "minutes_played": total_minutes,
                     "height": height,
                     "foot": foot,
-                    "is_estimated_stats": is_estimated,
                 })
                 
-                # 3. Transfers
+                # 2. Transfers
                 transfers_resp = make_request(f"{BASE_URL}/players/{player_id}/transfers") or {}
                 transfers_list = transfers_resp.get("transfers", [])
                 for tr in transfers_list:
@@ -257,7 +194,7 @@ def collect_data(limit_per_club=None, max_clubs_per_league=None):
     logger.info(f"\nData Collection Complete! Saved {len(df_players)} players to data/players.csv and {len(df_transfers)} transfers to data/transfers.csv.")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Collect FootyDex football player and transfer data.")
+    parser = argparse.ArgumentParser(description="Collect FootyDex football player profile and transfer data.")
     parser.add_argument("--limit-per-club", type=int, default=None, help="Limit number of players per club (for rapid testing)")
     parser.add_argument("--max-clubs", type=int, default=None, help="Limit number of clubs per competition (for rapid testing)")
     args = parser.parse_args()
