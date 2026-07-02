@@ -1,21 +1,43 @@
-player_id,player_name,competition_id,competition_name,club_id,club_name,age,position,nationality,market_value,goals,assists,minutes_played,height,foot,transfer_fee,market_value_at_transfer,season,transfer_date,fee_to_value_ratio,age_at_transfer,goals_per_90,assists_per_90,goal_contributions_per_90,moneyball_score,moneyball_label
-315858,Gianluigi Donnarumma,GB1,Premier League,281,Manchester City,27,Goalkeeper,Italy,45000000.0,0,0,3159,196.0,right,30000000.0,40000000.0,25/26,2025-01-09,0.6666666666666666,27,0.0,0.0,0.0,81.2,Bargain
-566799,James Trafford,GB1,Premier League,281,Manchester City,23,Goalkeeper,England,25000000.0,0,0,2258,192.0,right,31200000.0,22000000.0,25/26,2025-07-29,1.248,23,0.0,0.0,0.0,71.5,Fair Value
-262749,David Raya,GB1,Premier League,11,Arsenal FC,30,Goalkeeper,Spain,30000000.0,0,0,2360,186.0,right,31900000.0,35000000.0,24/25,2024-04-07,1.0633333333333332,30,0.0,0.0,0.0,57.4,High Risk
-192279,Kepa Arrizabalaga,GB1,Premier League,11,Arsenal FC,31,Goalkeeper,Spain,5000000.0,0,0,1255,188.0,right,5800000.0,10000000.0,25/26,2025-01-07,1.16,31,0.0,0.0,0.0,47.1,High Risk
-108390,Thibaut Courtois,ES1,La Liga,418,Real Madrid,34,Goalkeeper,Belgium,15000000.0,0,0,1339,199.0,left,35000000.0,65000000.0,18/19,2018-09-08,2.3333333333333335,34,0.0,0.0,0.0,22.8,High Risk
-404839,Andriy Lunin,ES1,La Liga,418,Real Madrid,27,Goalkeeper,Ukraine,12000000.0,0,0,1814,191.0,right,0.0,2700000.0,19/20,2020-07-21,0.6,27,0.0,0.0,0.0,77.6,Hidden Gem
-561613,Joan García,ES1,La Liga,131,FC Barcelona,25,Goalkeeper,Spain,45000000.0,0,0,3090,194.0,right,0.0,45000000.0,,,0.6,25,0.0,0.0,0.0,91.4,Bargain
-74857,Marc-André ter Stegen,ES1,La Liga,131,FC Barcelona,34,Goalkeeper,Germany,3000000.0,0,0,872,187.0,right,0.0,3000000.0,25/26,2026-06-30,0.6,34,0.0,0.0,0.0,58.9,Fair Value
-607720,Jonas Urbig,L1,Bundesliga,27,Bayern Munich,22,Goalkeeper,Germany,18000000.0,0,0,2082,189.0,both,7000000.0,3000000.0,24/25,2025-01-27,0.3888888888888889,22,0.0,0.0,0.0,95.0,Bargain
-195778,Alexander Nübel,L1,Bundesliga,27,Bayern Munich,29,Goalkeeper,Germany,12000000.0,0,0,1863,193.0,right,0.0,12000000.0,25/26,2026-06-30,0.6,29,0.0,0.0,0.0,70.9,Hidden Gem
-486046,Maarten Vandevoordt,L1,Bundesliga,23826,RB Leipzig,24,Goalkeeper,Belgium,15000000.0,0,0,1827,192.0,right,10000000.0,11000000.0,24/25,2024-01-07,0.6666666666666666,24,0.0,0.0,0.0,85.8,Bargain
-57071,Péter Gulácsi,L1,Bundesliga,23826,RB Leipzig,36,Goalkeeper,Hungary,1000000.0,0,0,1038,193.0,right,3000000.0,1750000.0,15/16,2015-01-07,3.0,36,0.0,0.0,0.0,10.0,High Risk
-388516,Josep Martínez,IT1,Serie A,46,Inter Milan,28,Goalkeeper,Spain,10000000.0,0,0,1686,191.0,right,14000000.0,8000000.0,24/25,2024-09-07,1.4,28,0.0,0.0,0.0,50.4,Fair Value
-70580,Raffaele Di Gennaro,IT1,Serie A,46,Inter Milan,32,Goalkeeper,Italy,300000.0,0,0,1372,188.0,right,0.0,350000.0,23/24,2023-07-13,0.6,32,0.0,0.0,0.0,64.0,Fair Value
-182906,Mike Maignan,IT1,Serie A,5,AC Milan,30,Goalkeeper,France,20000000.0,0,0,2033,191.0,right,16399999.0,25000000.0,21/22,2021-01-07,0.81999995,30,0.0,0.0,0.0,62.8,Fair Value
-96254,Pietro Terracciano,IT1,Serie A,5,AC Milan,36,Goalkeeper,Italy,900000.0,0,0,763,193.0,right,0.0,1000000.0,25/26,2025-07-18,0.6,36,0.0,0.0,0.0,57.4,Fair Value
-318470,Matvey Safonov,FR1,Ligue 1,583,Paris Saint-Germain,27,Goalkeeper,Russia,30000000.0,0,0,2269,192.0,right,20000000.0,20000000.0,24/25,2024-01-07,0.6666666666666666,27,0.0,0.0,0.0,77.7,Bargain
-463600,Lucas Chevalier,FR1,Ligue 1,583,Paris Saint-Germain,24,Goalkeeper,France,25000000.0,0,0,2357,189.0,right,40000000.0,30000000.0,25/26,2025-09-08,1.6,24,0.0,0.0,0.0,63.9,Fair Value
-251322,Philipp Köhn,FR1,Ligue 1,162,AS Monaco,28,Goalkeeper,Switzerland,3500000.0,0,0,1304,190.0,right,8000000.0,4500000.0,23/24,2023-07-15,2.2857142857142856,28,0.0,0.0,0.0,30.3,Overpriced
-346546,Radoslaw Majecki,FR1,Ligue 1,162,AS Monaco,26,Goalkeeper,Poland,2500000.0,0,0,1248,193.0,right,0.0,2500000.0,25/26,2026-06-30,0.6,26,0.0,0.0,0.0,77.9,Hidden Gem
+player_id,player_name,competition_id,competition_name,club_id,club_name,age,position,nationality,market_value,height,foot,goals,assists,minutes_played,xg,transfer_fee,market_value_at_transfer,season,transfer_date,fee_to_value_ratio,age_at_transfer,goals_per_90,assists_per_90,goal_contributions_per_90,xg_per_90,moneyball_score,moneyball_label
+315858,Gianluigi Donnarumma,GB1,Premier League,281,Manchester City,27,Goalkeeper,Italy,45000000.0,196.0,right,0,0,0,0.0,30000000.0,40000000.0,25/26,2025-01-09,0.6666666666666666,27,0.0,0.0,0.0,0.0,51.3,Fair Value
+566799,James Trafford,GB1,Premier League,281,Manchester City,23,Goalkeeper,England,25000000.0,192.0,right,0,0,0,0.0,31200000.0,22000000.0,25/26,2025-07-29,1.248,23,0.0,0.0,0.0,0.0,51.1,Fair Value
+116648,Marcus Bettinelli,GB1,Premier League,281,Manchester City,34,Goalkeeper,England,300000.0,193.0,right,0,0,0,0.0,2400000.0,600000.0,25/26,2025-10-06,8.0,34,0.0,0.0,0.0,0.0,10.0,High Risk
+262749,David Raya,GB1,Premier League,11,Arsenal FC,30,Goalkeeper,Spain,30000000.0,186.0,right,0,0,3420,0.0,31900000.0,35000000.0,24/25,2024-04-07,1.0633333333333332,30,0.0,0.0,0.0,0.0,48.3,High Risk
+192279,Kepa Arrizabalaga,GB1,Premier League,11,Arsenal FC,31,Goalkeeper,Spain,5000000.0,188.0,right,0,0,2790,0.0,5800000.0,10000000.0,25/26,2025-01-07,1.16,31,0.0,0.0,0.0,0.0,46.5,High Risk
+495666,William Saliba,GB1,Premier League,11,Arsenal FC,25,Centre-Back,France,100000000.0,192.0,right,2,0,3039,0.0,0.0,30000000.0,21/22,2022-06-30,0.6,25,0.059230009871668314,0.0,0.059230009871668314,0.0,95.0,Bargain
+834397,Mike Penders,GB1,Premier League,631,Chelsea FC,20,Goalkeeper,Belgium,25000000.0,200.0,left,0,0,0,0.0,0.0,25000000.0,25/26,2026-06-30,0.6,20,0.0,0.0,0.0,0.0,52.2,Fair Value
+403151,Robert Sánchez,GB1,Premier League,631,Chelsea FC,28,Goalkeeper,Spain,22000000.0,197.0,right,0,0,2880,0.0,23000000.0,22000000.0,23/24,2023-05-08,1.0454545454545454,28,0.0,0.0,0.0,0.0,51.2,Fair Value
+585323,Filip Jørgensen,GB1,Premier League,631,Chelsea FC,24,Goalkeeper,Denmark,15000000.0,192.0,right,0,0,540,0.0,24500000.0,20000000.0,24/25,2024-07-30,1.6333333333333333,24,0.0,0.0,0.0,0.0,52.9,Fair Value
+108390,Thibaut Courtois,ES1,La Liga,418,Real Madrid,34,Goalkeeper,Belgium,15000000.0,199.0,left,0,0,0,0.0,35000000.0,65000000.0,18/19,2018-09-08,2.3333333333333335,34,0.0,0.0,0.0,0.0,30.6,High Risk
+404839,Andriy Lunin,ES1,La Liga,418,Real Madrid,27,Goalkeeper,Ukraine,12000000.0,191.0,right,0,0,0,0.0,0.0,2700000.0,19/20,2020-07-21,0.6,27,0.0,0.0,0.0,0.0,52.2,Fair Value
+1055220,Fran González,ES1,La Liga,418,Real Madrid,21,Goalkeeper,Spain,3000000.0,199.0,right,0,0,0,0.0,0.0,0.0,24/25,2024-01-07,1.0,21,0.0,0.0,0.0,0.0,50.1,Fair Value
+561613,Joan García,ES1,La Liga,131,FC Barcelona,25,Goalkeeper,Spain,45000000.0,194.0,right,0,0,0,0.0,25000000.0,25000000.0,25/26,2025-01-07,0.5555555555555556,25,0.0,0.0,0.0,0.0,57.5,Fair Value
+74857,Marc-André ter Stegen,ES1,La Liga,131,FC Barcelona,34,Goalkeeper,Germany,3000000.0,187.0,right,0,0,0,0.0,0.0,3000000.0,25/26,2026-06-30,0.6,34,0.0,0.0,0.0,0.0,45.9,Fair Value
+938145,Áron Yaakobishvili,ES1,La Liga,131,FC Barcelona,20,Goalkeeper,Hungary,3000000.0,187.0,both,0,0,0,0.0,0.0,3000000.0,25/26,2026-06-30,0.6,20,0.0,0.0,0.0,0.0,52.2,Fair Value
+121483,Jan Oblak,ES1,La Liga,13,Atlético de Madrid,33,Goalkeeper,Slovenia,15000000.0,188.0,right,0,0,0,0.0,16000000.0,4000000.0,14/15,2014-07-16,1.0666666666666667,33,0.0,0.0,0.0,0.0,40.6,High Risk
+242359,Juan Musso,ES1,La Liga,13,Atlético de Madrid,32,Goalkeeper,Argentina,3000000.0,193.0,right,0,0,0,0.0,3000000.0,3500000.0,25/26,2025-10-06,1.0,32,0.0,0.0,0.0,0.0,41.5,Fair Value
+525438,Horațiu Moldovan,ES1,La Liga,13,Atlético de Madrid,28,Goalkeeper,Romania,1800000.0,193.0,right,0,0,0,0.0,0.0,1800000.0,25/26,2026-06-30,0.6,28,0.0,0.0,0.0,0.0,49.9,Fair Value
+607720,Jonas Urbig,L1,Bundesliga,27,Bayern Munich,22,Goalkeeper,Germany,18000000.0,189.0,both,0,0,0,0.0,7000000.0,3000000.0,24/25,2025-01-27,0.3888888888888889,22,0.0,0.0,0.0,0.0,59.8,Fair Value
+195778,Alexander Nübel,L1,Bundesliga,27,Bayern Munich,29,Goalkeeper,Germany,12000000.0,193.0,right,0,0,0,0.0,0.0,12000000.0,25/26,2026-06-30,0.6,29,0.0,0.0,0.0,0.0,48.2,Fair Value
+17259,Manuel Neuer,L1,Bundesliga,27,Bayern Munich,40,Goalkeeper,Germany,4000000.0,193.0,right,0,0,0,0.0,30000000.0,28000000.0,11/12,2011-01-07,7.5,40,0.0,0.0,0.0,0.0,11.2,High Risk
+486046,Maarten Vandevoordt,L1,Bundesliga,23826,RB Leipzig,24,Goalkeeper,Belgium,15000000.0,192.0,right,0,0,0,0.0,10000000.0,11000000.0,24/25,2024-01-07,0.6666666666666666,24,0.0,0.0,0.0,0.0,57.4,Fair Value
+57071,Péter Gulácsi,L1,Bundesliga,23826,RB Leipzig,36,Goalkeeper,Hungary,1000000.0,193.0,right,0,0,0,0.0,3000000.0,1750000.0,15/16,2015-01-07,3.0,36,0.0,0.0,0.0,0.0,26.8,High Risk
+897425,Timo Schlieck,L1,Bundesliga,23826,RB Leipzig,20,Goalkeeper,Germany,400000.0,193.0,right,0,0,0,0.0,0.0,400000.0,25/26,2026-06-30,0.6,20,0.0,0.0,0.0,0.0,52.2,Fair Value
+125714,Mark Flekken,L1,Bundesliga,15,Bayer 04 Leverkusen,33,Goalkeeper,Netherlands,6000000.0,195.0,both,0,2,3275,0.0,11000000.0,10000000.0,25/26,2025-01-07,1.8333333333333333,33,0.0,0.05496183206106871,0.05496183206106871,0.0,69.9,High Risk
+81173,Janis Blaswich,L1,Bundesliga,15,Bayer 04 Leverkusen,35,Goalkeeper,Germany,700000.0,193.0,right,0,0,0,0.0,2000000.0,700000.0,25/26,2025-11-08,2.857142857142857,35,0.0,0.0,0.0,0.0,27.6,High Risk
+85543,Niklas Lomb,L1,Bundesliga,15,Bayer 04 Leverkusen,32,Goalkeeper,Germany,250000.0,186.0,right,0,0,0,0.0,0.0,250000.0,18/19,2019-06-30,0.6,32,0.0,0.0,0.0,0.0,46.1,Fair Value
+388516,Josep Martínez,IT1,Serie A,46,Inter Milan,28,Goalkeeper,Spain,10000000.0,191.0,right,0,0,0,0.0,14000000.0,8000000.0,24/25,2024-09-07,1.4,28,0.0,0.0,0.0,0.0,41.5,Fair Value
+70580,Raffaele Di Gennaro,IT1,Serie A,46,Inter Milan,32,Goalkeeper,Italy,300000.0,188.0,right,0,0,0,0.0,0.0,350000.0,23/24,2023-07-13,0.6,32,0.0,0.0,0.0,0.0,46.1,Fair Value
+315853,Alessandro Bastoni,IT1,Serie A,46,Inter Milan,27,Centre-Back,Italy,65000000.0,190.0,left,0,0,0,0.0,0.0,15000000.0,18/19,2019-06-30,0.6,27,0.0,0.0,0.0,0.0,52.2,Fair Value
+182906,Mike Maignan,IT1,Serie A,5,AC Milan,30,Goalkeeper,France,20000000.0,191.0,right,0,0,0,0.0,16399999.0,25000000.0,21/22,2021-01-07,0.81999995,30,0.0,0.0,0.0,0.0,44.4,Fair Value
+96254,Pietro Terracciano,IT1,Serie A,5,AC Milan,36,Goalkeeper,Italy,900000.0,193.0,right,0,0,0,0.0,0.0,1000000.0,25/26,2025-07-18,0.6,36,0.0,0.0,0.0,0.0,45.9,Fair Value
+939745,Lorenzo Torriani,IT1,Serie A,5,AC Milan,21,Goalkeeper,Italy,800000.0,197.0,right,0,0,0,0.0,0.0,10000.0,24/25,2024-01-07,0.6,21,0.0,0.0,0.0,0.0,54.7,Fair Value
+301238,Michele Di Gregorio,IT1,Serie A,506,Juventus FC,28,Goalkeeper,Italy,10000000.0,187.0,right,0,0,0,0.0,14300000.0,18000000.0,25/26,2025-01-07,1.43,28,0.0,0.0,0.0,0.0,41.2,Fair Value
+110923,Mattia Perin,IT1,Serie A,506,Juventus FC,33,Goalkeeper,Italy,2000000.0,188.0,right,0,0,0,0.0,0.0,7000000.0,20/21,2021-06-30,0.6,33,0.0,0.0,0.0,0.0,45.9,Fair Value
+75411,Carlo Pinsoglio,IT1,Serie A,506,Juventus FC,36,Goalkeeper,Italy,200000.0,194.0,left,0,0,0,0.0,0.0,800000.0,16/17,2017-06-30,0.6,36,0.0,0.0,0.0,0.0,45.9,Fair Value
+318470,Matvey Safonov,FR1,Ligue 1,583,Paris Saint-Germain,27,Goalkeeper,Russia,30000000.0,192.0,right,0,0,0,0.0,20000000.0,20000000.0,24/25,2024-01-07,0.6666666666666666,27,0.0,0.0,0.0,0.0,51.3,Fair Value
+463600,Lucas Chevalier,FR1,Ligue 1,583,Paris Saint-Germain,24,Goalkeeper,France,25000000.0,189.0,right,0,0,0,0.0,40000000.0,30000000.0,25/26,2025-09-08,1.6,24,0.0,0.0,0.0,0.0,48.1,Fair Value
+1041614,Renato Marin,FR1,Ligue 1,583,Paris Saint-Germain,19,Goalkeeper,Italy,1000000.0,190.0,right,0,0,0,0.0,0.0,500000.0,25/26,2025-07-17,0.6,19,0.0,0.0,0.0,0.0,49.9,Fair Value
+251322,Philipp Köhn,FR1,Ligue 1,162,AS Monaco,28,Goalkeeper,Switzerland,3500000.0,190.0,right,0,0,0,0.0,8000000.0,4500000.0,23/24,2023-07-15,2.2857142857142856,28,0.0,0.0,0.0,0.0,35.0,Overpriced
+346546,Radoslaw Majecki,FR1,Ligue 1,162,AS Monaco,26,Goalkeeper,Poland,2500000.0,193.0,right,0,0,0,0.0,0.0,2500000.0,25/26,2026-06-30,0.6,26,0.0,0.0,0.0,0.0,54.7,Fair Value
+48015,Lukas Hradecky,FR1,Ligue 1,162,AS Monaco,36,Goalkeeper,Finland,1500000.0,192.0,right,0,0,0,0.0,3000000.0,2000000.0,25/26,2025-08-08,2.0,36,0.0,0.0,0.0,0.0,32.8,High Risk

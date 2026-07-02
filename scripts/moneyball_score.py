@@ -29,6 +29,7 @@ def engineer_features(df_players, df_transfers, df_fbref):
     logger.info("Merging Transfermarkt profiles with real FBref performance statistics...")
     
     # 1. Merge FBref stats onto Transfermarkt players using normalized player names
+    df_players = df_players.drop(columns=["goals", "assists", "minutes_played", "xg", "xg_per_90"], errors="ignore")
     df_players["name_norm"] = df_players["player_name"].apply(normalize_name)
     
     if not df_fbref.empty:

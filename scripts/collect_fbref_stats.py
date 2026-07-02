@@ -31,6 +31,16 @@ def clean_fbref_data(df):
     # Reset MultiIndex (league, season, team, player) into standard columns
     df_reset = df.reset_index()
     
+    # Flatten MultiIndex columns so row indexing returns clean scalar strings, not Series
+    flat_cols = []
+    for col in df_reset.columns:
+        if isinstance(col, tuple):
+            parts = [str(p).strip() for p in col if str(p).strip() != ""]
+            flat_cols.append("_".join(parts) if parts else "unknown")
+        else:
+            flat_cols.append(str(col).strip())
+    df_reset.columns = flat_cols
+    
     clean_records = []
     
     for _, row in df_reset.iterrows():
@@ -40,23 +50,23 @@ def clean_fbref_data(df):
         league = row.get("league", row.get("League", "Unknown"))
         season = row.get("season", row.get("Season", "2024-25"))
         
-        # Helper to find stat values across MultiIndex tuples or flat column strings
+        # Helper to find stat values across flat column strings
         def find_stat(target_keys):
             for col in df_reset.columns:
-                # If col is a tuple (e.g. ('Performance', 'Gls')), take the last element or join
-                col_name = str(col[-1] if isinstance(col, tuple) else col).strip().lower()
-                if col_name in target_keys:
-                    val = row[col]
-                    try:
-                        return float(val) if pd.notnull(val) and val != "" else 0.0
-                    except (ValueError, TypeError):
-                        return 0.0
+                col_name = str(col).strip().lower()
+                for t in target_keys:
+                    if col_name == t or col_name.endswith("_" + t) or col_name.endswith(" " + t):
+                        val = row[col]
+                        try:
+                            return float(val) if pd.notnull(val) and val != "" else 0.0
+                        except (ValueError, TypeError):
+                            continue
             return 0.0
             
-        minutes = find_stat(["min", "mp", "minutes", "minutes_played", "mins"])
+        minutes = find_stat(["min", "minutes", "minutes_played", "mins"])
         goals = find_stat(["gls", 'goals', 'g'])
         assists = find_stat(["ast", 'assists', 'a'])
-        xg = find_stat(["xg", 'expected_goals', 'exp_g'])
+        xg = find_stat(["xg", 'expected_goals', 'exp_g', 'xgo'])
         
         clean_records.append({
             "player_name": str(player).strip(),
