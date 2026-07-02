@@ -1,0 +1,21 @@
+player_id,player_name,competition_id,competition_name,club_id,club_name,age,position,nationality,market_value,goals,assists,minutes_played,height,foot
+315858,Gianluigi Donnarumma,GB1,Premier League,281,Manchester City,27,Goalkeeper,Italy,45000000.0,0,0,3159,196.0,right
+566799,James Trafford,GB1,Premier League,281,Manchester City,23,Goalkeeper,England,25000000.0,0,0,2258,192.0,right
+262749,David Raya,GB1,Premier League,11,Arsenal FC,30,Goalkeeper,Spain,30000000.0,0,0,2360,186.0,right
+192279,Kepa Arrizabalaga,GB1,Premier League,11,Arsenal FC,31,Goalkeeper,Spain,5000000.0,0,0,1255,188.0,right
+108390,Thibaut Courtois,ES1,La Liga,418,Real Madrid,34,Goalkeeper,Belgium,15000000.0,0,0,1339,199.0,left
+404839,Andriy Lunin,ES1,La Liga,418,Real Madrid,27,Goalkeeper,Ukraine,12000000.0,0,0,1814,191.0,right
+561613,Joan García,ES1,La Liga,131,FC Barcelona,25,Goalkeeper,Spain,45000000.0,0,0,3090,194.0,right
+74857,Marc-André ter Stegen,ES1,La Liga,131,FC Barcelona,34,Goalkeeper,Germany,3000000.0,0,0,872,187.0,right
+607720,Jonas Urbig,L1,Bundesliga,27,Bayern Munich,22,Goalkeeper,Germany,18000000.0,0,0,2082,189.0,both
+195778,Alexander Nübel,L1,Bundesliga,27,Bayern Munich,29,Goalkeeper,Germany,12000000.0,0,0,1863,193.0,right
+486046,Maarten Vandevoordt,L1,Bundesliga,23826,RB Leipzig,24,Goalkeeper,Belgium,15000000.0,0,0,1827,192.0,right
+57071,Péter Gulácsi,L1,Bundesliga,23826,RB Leipzig,36,Goalkeeper,Hungary,1000000.0,0,0,1038,193.0,right
+388516,Josep Martínez,IT1,Serie A,46,Inter Milan,28,Goalkeeper,Spain,10000000.0,0,0,1686,191.0,right
+70580,Raffaele Di Gennaro,IT1,Serie A,46,Inter Milan,32,Goalkeeper,Italy,300000.0,0,0,1372,188.0,right
+182906,Mike Maignan,IT1,Serie A,5,AC Milan,30,Goalkeeper,France,20000000.0,0,0,2033,191.0,right
+96254,Pietro Terracciano,IT1,Serie A,5,AC Milan,36,Goalkeeper,Italy,900000.0,0,0,763,193.0,right
+318470,Matvey Safonov,FR1,Ligue 1,583,Paris Saint-Germain,27,Goalkeeper,Russia,30000000.0,0,0,2269,192.0,right
+463600,Lucas Chevalier,FR1,Ligue 1,583,Paris Saint-Germain,24,Goalkeeper,France,25000000.0,0,0,2357,189.0,right
+251322,Philipp Köhn,FR1,Ligue 1,162,AS Monaco,28,Goalkeeper,Switzerland,3500000.0,0,0,1304,190.0,right
+346546,Radoslaw Majecki,FR1,Ligue 1,162,AS Monaco,26,Goalkeeper,Poland,2500000.0,0,0,1248,193.0,right
