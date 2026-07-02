@@ -74,14 +74,18 @@ def parse_currency_to_float(val):
     except ValueError:
         return 0.0
 
-def collect_data(limit_per_club=None, max_clubs_per_league=None):
+def collect_data(limit_per_club=None, max_clubs_per_league=None, target_league=None):
     os.makedirs("data", exist_ok=True)
     players_data = []
     transfers_data = []
     
-    logger.info("Starting FootyDex Data Collection across 5 target competitions...")
+    comps_to_process = TARGET_COMPETITIONS
+    if target_league:
+        comps_to_process = [c for c in TARGET_COMPETITIONS if target_league.lower() in c["name"].lower() or target_league.lower() == c["id"].lower()]
+        
+    logger.info(f"Starting FootyDex Data Collection across {len(comps_to_process)} competitions...")
     
-    for comp in TARGET_COMPETITIONS:
+    for comp in comps_to_process:
         comp_name = comp["name"]
         comp_id = comp["id"]
         logger.info(f"\n--- Processing Competition: {comp_name} ({comp_id}) ---")
@@ -197,6 +201,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Collect FootyDex football player profile and transfer data.")
     parser.add_argument("--limit-per-club", type=int, default=None, help="Limit number of players per club (for rapid testing)")
     parser.add_argument("--max-clubs", type=int, default=None, help="Limit number of clubs per competition (for rapid testing)")
+    parser.add_argument("--league", type=str, default=None, help="Filter by competition name or ID (e.g. 'Premier League' or 'GB1')")
     args = parser.parse_args()
     
-    collect_data(limit_per_club=args.limit_per_club, max_clubs_per_league=args.max_clubs)
+    collect_data(limit_per_club=args.limit_per_club, max_clubs_per_league=args.max_clubs, target_league=args.league)

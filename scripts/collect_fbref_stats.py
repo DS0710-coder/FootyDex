@@ -86,9 +86,12 @@ def clean_fbref_data(df):
 
 def collect_fbref_stats(leagues=None, season=TARGET_SEASON):
     os.makedirs("data", exist_ok=True)
-    leagues_to_scrape = leagues or TARGET_LEAGUES
-    
-    logger.info(f"Initializing soccerdata FBref scraper for season {season} across {len(leagues_to_scrape)} leagues...")
+    if leagues is None or leagues == TARGET_LEAGUES:
+        leagues_to_scrape = ["Big 5 European Leagues Combined"]
+        logger.info(f"Initializing soccerdata FBref scraper for season {season} using Big 5 Combined optimization...")
+    else:
+        leagues_to_scrape = leagues
+        logger.info(f"Initializing soccerdata FBref scraper for season {season} across {len(leagues_to_scrape)} leagues...")
     fbref = sd.FBref(leagues=leagues_to_scrape, seasons=season)
     
     logger.info("Reading standard player season statistics from FBref...")
