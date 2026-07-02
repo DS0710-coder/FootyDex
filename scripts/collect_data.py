@@ -75,17 +75,21 @@ def parse_currency_to_float(val):
     except ValueError:
         return 0.0
 
-def derive_performance_stats(position, market_value, age):
+def derive_performance_stats(position, market_value, age, player_id=None):
     """
     Intelligently estimates/imputes goals, assists, and minutes played when the HTML scraper returns empty stats
     due to third-party Svelte web component migrations, ensuring realistic downstream Moneyball feature calculations.
+    Uses a seeded local random generator based on player_id for 100% reproducible results across runs.
     """
+    seed_val = int(re.sub(r"\D", "", str(player_id)) or 42) if player_id else 42
+    rng = random.Random(seed_val)
+    
     # Estimate minutes played based on market value and age (higher value = starter)
     mv_in_m = market_value / 1_000_000.0
     base_minutes = min(3000, max(500, int(mv_in_m * 40 + 1200)))
     if age < 20 or age > 33:
         base_minutes = int(base_minutes * 0.7)
-    minutes_played = max(270, min(3420, base_minutes + random.randint(-200, 200)))
+    minutes_played = max(270, min(3420, base_minutes + rng.randint(-200, 200)))
     
     games_eq = minutes_played / 90.0
     pos_lower = str(position).lower() if position else "midfielder"
@@ -103,8 +107,8 @@ def derive_performance_stats(position, market_value, age):
         goals_rate = 0.0
         assists_rate = min(0.05, max(0.0, mv_in_m * 0.0005))
         
-    goals = int(games_eq * goals_rate * random.uniform(0.8, 1.2))
-    assists = int(games_eq * assists_rate * random.uniform(0.8, 1.2))
+    goals = int(games_eq * goals_rate * rng.uniform(0.8, 1.2))
+    assists = int(games_eq * assists_rate * rng.uniform(0.8, 1.2))
     return goals, assists, minutes_played
 
 def collect_data(limit_per_club=None, max_clubs_per_league=None):
@@ -194,8 +198,10 @@ def collect_data(limit_per_club=None, max_clubs_per_league=None):
                         except ValueError:
                             pass
                 
+                is_estimated = False
                 if total_minutes == 0:
-                    total_goals, total_assists, total_minutes = derive_performance_stats(position, market_value, age)
+                    total_goals, total_assists, total_minutes = derive_performance_stats(position, market_value, age, player_id=player_id)
+                    is_estimated = True
                     
                 players_data.append({
                     "player_id": player_id,
@@ -213,6 +219,7 @@ def collect_data(limit_per_club=None, max_clubs_per_league=None):
                     "minutes_played": total_minutes,
                     "height": height,
                     "foot": foot,
+                    "is_estimated_stats": is_estimated,
                 })
                 
                 # 3. Transfers

@@ -565,6 +565,8 @@ def main():
             
         with d_col2:
             st.markdown("##### ⚡ Performance Efficiency & Moneyball Metrics")
+            if p_data.get("is_estimated_stats", False):
+                st.caption("ℹ️ *Note: Performance statistics derived deterministically from valuation, position, and age (Svelte API fallback).*")
             m_col1, m_col2, m_col3 = st.columns(3)
             with m_col1:
                 st.metric("Moneyball Score", f"{p_data['moneyball_score']:.1f} / 100")
