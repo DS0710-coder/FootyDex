@@ -34,7 +34,7 @@ def make_request(url, params=None, retries=3):
     for attempt in range(retries):
         try:
             time.sleep(RATE_LIMIT_DELAY)
-            response = requests.get(url, params=params, timeout=10)
+            response = requests.get(url, params=params, timeout=20)
             if response.status_code == 200:
                 return response.json()
             elif response.status_code == 404:
