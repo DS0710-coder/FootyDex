@@ -24,7 +24,7 @@ TARGET_LEAGUES = [
     "FRA-Ligue 1",
 ]
 
-TARGET_SEASON = "2425"
+TARGET_SEASON = "2526"
 
 def get_fbref_table(fb, stat_type):
     """Custom extractor to pull any FBref table by bypassing default stat_type restrictions."""

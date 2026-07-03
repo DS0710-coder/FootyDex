@@ -138,6 +138,12 @@ def collect_data(limit_per_club=None, max_clubs_per_league=None, target_league=N
                 citizenship = profile_resp.get("citizenship", p.get("nationality", ["Unknown"]))
                 nationality = citizenship[0] if isinstance(citizenship, list) and citizenship else str(citizenship)
                 
+                num_str = str(profile_resp.get("shirtNumber", "")).replace("#", "").strip()
+                try:
+                    shirt_number = int(num_str) if num_str.isdigit() and int(num_str) > 0 else np.nan
+                except ValueError:
+                    shirt_number = np.nan
+                
                 mv_raw = profile_resp.get("marketValue", p.get("marketValue", 0))
                 market_value = parse_currency_to_float(mv_raw)
                 
@@ -185,6 +191,7 @@ def collect_data(limit_per_club=None, max_clubs_per_league=None, target_league=N
                     "contract_expires": contract_expires,
                     "total_days_injured": total_days_injured,
                     "total_games_missed": total_games_missed,
+                    "shirt_number": shirt_number,
                 })
                 
                 # 2. Transfers
