@@ -224,13 +224,137 @@ def main():
         bargain_cnt = len(f_df[f_df["recommendation"].str.contains("GOOD|ELITE", na=False) & f_df["risk_profile"].str.contains("LOW", na=False)])
         st.markdown(f'<div class="metric-card"><div class="metric-label">Low-Risk Bargains</div><div class="metric-value" style="color:#FEE140;">{bargain_cnt}</div></div>', unsafe_allow_html=True)
         
-    tab1, tab2, tab3, tab4 = st.tabs([
-        "🔎 Executive Narrative Briefing (Centerpiece)", 
+    tab0, tab1, tab2, tab3, tab4 = st.tabs([
+        "🏟️ Squad & Club Explorer",
+        "🔎 Executive Narrative Briefing", 
         "📊 Recruitment Index Leaderboard", 
         "⚔️ Interactive Radar & Compare", 
         "📈 Market Valuation vs. RI Analytics"
     ])
-    
+
+    # ==========================================
+    # TAB 0: SQUAD & CLUB EXPLORER
+    # ==========================================
+    with tab0:
+        st.markdown("### 🏟️ European Club & Squad Explorer")
+        st.markdown("Select a competition below to view its clubs as interactive blocks with crests. Click a club to explore its full squad categorized by position.")
+        
+        # 1. League Selector
+        leagues_avail = sorted(df["competition_name"].dropna().unique())
+        sel_comp_exp = st.radio("🏆 Select European League:", options=leagues_avail, horizontal=True, key="exp_comp")
+        
+        comp_df = df[df["competition_name"] == sel_comp_exp]
+        clubs_in_comp = sorted(comp_df["club_name"].dropna().unique())
+        
+        # Session state for selected club
+        if "exp_selected_club" not in st.session_state or st.session_state["exp_selected_club"] not in clubs_in_comp:
+            st.session_state["exp_selected_club"] = clubs_in_comp[0] if clubs_in_comp else ""
+            
+        # 2. Club Blocks Grid with Logos
+        st.markdown(f"#### 🛡️ Clubs in {sel_comp_exp}")
+        
+        cols_per_row = 5
+        for i in range(0, len(clubs_in_comp), cols_per_row):
+            row_clubs = clubs_in_comp[i:i+cols_per_row]
+            cols = st.columns(cols_per_row)
+            for j, c_name in enumerate(row_clubs):
+                with cols[j]:
+                    c_id_series = comp_df[comp_df["club_name"] == c_name]["club_id"].dropna()
+                    c_id = int(c_id_series.iloc[0]) if not c_id_series.empty else 0
+                    logo_url = f"https://tmssl.akamaized.net/images/wappen/head/{c_id}.png"
+                    
+                    is_sel = (c_name == st.session_state["exp_selected_club"])
+                    border_color = "#00F2FE" if is_sel else "rgba(255,255,255,0.1)"
+                    bg_color = "rgba(0,242,254,0.15)" if is_sel else "rgba(22,27,34,0.6)"
+                    
+                    st.markdown(f"""
+                    <div style="text-align:center;background:{bg_color};padding:0.6rem;border-radius:10px;border:2px solid {border_color};margin-bottom:0.3rem;">
+                        <img src="{logo_url}" style="height:45px;margin-bottom:0.4rem;" onerror="this.style.display='none'">
+                        <div style="font-weight:700;font-size:0.85rem;color:#E2E8F0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{c_name}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    if st.button(f"👉 Select", key=f"btn_club_{c_id}_{j}_{i}", use_container_width=True):
+                        st.session_state["exp_selected_club"] = c_name
+                        
+        st.markdown("---")
+        
+        # Direct selectbox fallback synced with session state
+        curr_club = st.session_state["exp_selected_club"]
+        idx_curr = clubs_in_comp.index(curr_club) if curr_club in clubs_in_comp else 0
+        sel_club_direct = st.selectbox("Or choose club directly:", options=clubs_in_comp, index=idx_curr, key="exp_club_dropdown")
+        if sel_club_direct != curr_club:
+            st.session_state["exp_selected_club"] = sel_club_direct
+            curr_club = sel_club_direct
+            
+        # 3. Squad Directory & Filters
+        st.markdown(f"### 👥 {curr_club} Squad Directory")
+        
+        sq_c1, sq_c2, sq_c3, sq_c4 = st.columns(4)
+        with sq_c1:
+            sq_search = st.text_input("🔍 Filter Squad (Name / Foot / Nat):", "", key="sq_search").strip()
+        with sq_c2:
+            sq_max_age = st.slider("Max Age:", 15, 45, 40, key="sq_age_slider")
+        with sq_c3:
+            sq_max_mv = st.slider("Max Market Value (€M):", 0.0, 250.0, 250.0, step=5.0, key="sq_mv_slider")
+        with sq_c4:
+            sq_sort = st.selectbox("Sort Squad By:", [
+                "Recruitment Index ⭐ (High to Low)",
+                "Market Value (High to Low)",
+                "Age (Young to Old)",
+                "Player Name (A-Z)"
+            ], key="sq_sort")
+            
+        club_squad = comp_df[comp_df["club_name"] == curr_club].copy()
+        if sq_search:
+            club_squad = club_squad[
+                club_squad["player_name"].str.contains(sq_search, case=False, na=False, regex=False) |
+                club_squad["foot"].astype(str).str.contains(sq_search, case=False, na=False, regex=False) |
+                club_squad["nationality"].astype(str).str.contains(sq_search, case=False, na=False, regex=False)
+            ]
+        club_squad = club_squad[
+            (club_squad["age"] <= sq_max_age) & 
+            ((club_squad["market_value"] / 1e6) <= sq_max_mv)
+        ]
+        
+        if "Recruitment Index" in sq_sort:
+            club_squad = club_squad.sort_values("recruitment_index", ascending=False)
+        elif "Market Value" in sq_sort:
+            club_squad = club_squad.sort_values("market_value", ascending=False)
+        elif "Age" in sq_sort:
+            club_squad = club_squad.sort_values("age", ascending=True)
+        else:
+            club_squad = club_squad.sort_values("player_name", ascending=True)
+            
+        # 4. Display by Positional Buckets
+        pos_buckets = [
+            ("🧤 Goalkeepers", ["Goalkeeper"]),
+            ("🛡️ Defenders", ["Centre-Back", "Left-Back", "Right-Back", "Defender"]),
+            ("⚙️ Midfielders", ["Central Midfield", "Defensive Midfield", "Attacking Midfield", "Right Midfield", "Left Midfield", "Midfielder"]),
+            ("⚡ Attackers", ["Centre-Forward", "Left Winger", "Right Winger", "Second Striker", "Attacker", "Winger"])
+        ]
+        
+        display_cols = ["player_name", "position", "age", "foot", "mv_display", "contract_expires", "recruitment_index", "recommendation", "risk_profile"]
+        valid_cols = [c for c in display_cols if c in club_squad.columns]
+        
+        for group_title, pos_list in pos_buckets:
+            sub_squad = club_squad[club_squad["position"].isin(pos_list)]
+            st.markdown(f"#### {group_title} ({len(sub_squad)})")
+            if sub_squad.empty:
+                st.info("No players found in this category matching current filters.")
+            else:
+                st.dataframe(
+                    sub_squad[valid_cols].rename(columns={
+                        "player_name": "Player Name", "position": "Position", "age": "Age",
+                        "foot": "Foot", "mv_display": "Market Value", "contract_expires": "Contract Expires",
+                        "recruitment_index": "RI ⭐", "recommendation": "Recommendation", "risk_profile": "Risk"
+                    }).style.format({
+                        "RI ⭐": "{:.1f}"
+                    }),
+                    use_container_width=True,
+                    height=min(350, 40 + len(sub_squad)*36)
+                )
+
     # ==========================================
     # TAB 1: EXECUTIVE NARRATIVE BRIEFING
     # ==========================================
