@@ -169,7 +169,11 @@ def collect_fbref_stats(leagues=None, season=TARGET_SEASON):
     if os.path.exists(out_path) and not df_clean.empty:
         try:
             df_existing = pd.read_csv(out_path)
-            df_clean = pd.concat([df_existing, df_clean], ignore_index=True).drop_duplicates(subset=["player_name", "club"], keep="last")
+            combined = pd.concat([df_existing, df_clean], ignore_index=True)
+            # Use season+league alongside player+club so records from different
+            # seasons or competitions are preserved rather than overwritten.
+            dedup_cols = [c for c in ["league", "season", "player_name", "club"] if c in combined.columns]
+            df_clean = combined.drop_duplicates(subset=dedup_cols, keep="last")
         except Exception as e:
             logger.error(f"Could not merge with existing {out_path}: {e}. Aborting write to protect historical data.")
             write_fbref = False

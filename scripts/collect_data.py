@@ -151,9 +151,14 @@ def collect_data(limit_per_club=None, max_clubs_per_league=None, target_league=N
                 club_obj = profile_resp.get("club", {})
                 contract_expires = club_obj.get("contractExpires", "") if isinstance(club_obj, dict) else ""
                 
-                # Injury history
+                # Injury history — endpoint can return a bare list or a dict
                 injuries_resp = make_request(f"{BASE_URL}/players/{player_id}/injuries") or {}
-                injuries_list = injuries_resp.get("injuries", [])
+                if isinstance(injuries_resp, list):
+                    injuries_list = injuries_resp
+                elif isinstance(injuries_resp, dict):
+                    injuries_list = injuries_resp.get("injuries", [])
+                else:
+                    injuries_list = []
                 total_days_injured = 0
                 total_games_missed = 0
                 for inj in injuries_list:
@@ -212,22 +217,30 @@ def collect_data(limit_per_club=None, max_clubs_per_league=None, target_league=N
     df_transfers = pd.DataFrame(transfers_data)
     
     write_players = True
-    if os.path.exists("data/players.csv") and not df_players.empty:
-        try:
-            df_existing_p = pd.read_csv("data/players.csv")
-            df_players = pd.concat([df_existing_p, df_players], ignore_index=True).drop_duplicates(subset=["player_id"], keep="last")
-        except Exception as e:
-            logger.error(f"Could not merge with existing players.csv: {e}. Aborting write for players.csv to protect historical data.")
+    if os.path.exists("data/players.csv"):
+        if df_players.empty:
+            logger.info("Current players batch is empty; preserving existing data/players.csv.")
             write_players = False
+        else:
+            try:
+                df_existing_p = pd.read_csv("data/players.csv")
+                df_players = pd.concat([df_existing_p, df_players], ignore_index=True).drop_duplicates(subset=["player_id"], keep="last")
+            except Exception as e:
+                logger.error(f"Could not merge with existing players.csv: {e}. Aborting write for players.csv to protect historical data.")
+                write_players = False
             
     write_transfers = True
-    if os.path.exists("data/transfers.csv") and not df_transfers.empty:
-        try:
-            df_existing_t = pd.read_csv("data/transfers.csv")
-            df_transfers = pd.concat([df_existing_t, df_transfers], ignore_index=True).drop_duplicates(subset=["transfer_id"], keep="last")
-        except Exception as e:
-            logger.error(f"Could not merge with existing transfers.csv: {e}. Aborting write for transfers.csv to protect historical data.")
+    if os.path.exists("data/transfers.csv"):
+        if df_transfers.empty:
+            logger.info("Current transfers batch is empty; preserving existing data/transfers.csv.")
             write_transfers = False
+        else:
+            try:
+                df_existing_t = pd.read_csv("data/transfers.csv")
+                df_transfers = pd.concat([df_existing_t, df_transfers], ignore_index=True).drop_duplicates(subset=["transfer_id"], keep="last")
+            except Exception as e:
+                logger.error(f"Could not merge with existing transfers.csv: {e}. Aborting write for transfers.csv to protect historical data.")
+                write_transfers = False
             
     if write_players:
         df_players.to_csv("data/players.csv", index=False)

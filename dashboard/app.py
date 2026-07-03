@@ -6,6 +6,7 @@ Interactive Radar comparisons, and Recruitment Index (RI) leaderboards.
 """
 
 import os
+import html
 import pandas as pd
 import numpy as np
 import streamlit as st
@@ -240,17 +241,23 @@ def main():
         with col_b1:
             rec_badge = get_badge_html(p["recommendation"])
             risk_badge = get_badge_html(p["risk_profile"])
+            p_name = html.escape(str(p['player_name']))
+            c_name = html.escape(str(p['club_name']))
+            comp_name = html.escape(str(p['competition_name']))
+            t_prof = html.escape(str(p['tactical_profile']))
+            dq_str = html.escape(str(p.get('data_quality', '98% Complete')))
+            conf_str = html.escape(str(p.get('confidence_score', '95%')))
             st.markdown(f"""
             <div class="metric-card">
-                <h2 style="margin-bottom:0.2rem;color:#00F2FE;">{p['player_name']}</h2>
-                <div style="color:#94A3B8;margin-bottom:1rem;font-size:1.1rem;">{p['club_name']} • {p['competition_name']}</div>
+                <h2 style="margin-bottom:0.2rem;color:#00F2FE;">{p_name}</h2>
+                <div style="color:#94A3B8;margin-bottom:1rem;font-size:1.1rem;">{c_name} • {comp_name}</div>
                 <div style="margin-bottom:1rem;">{rec_badge} {risk_badge}</div>
                 <hr style="border-color:rgba(255,255,255,0.1);margin:1rem 0;">
-                <p><b>Tactical Archetype:</b> <span style="color:#38EF7D;font-weight:600;">{p['tactical_profile']}</span></p>
+                <p><b>Tactical Archetype:</b> <span style="color:#38EF7D;font-weight:600;">{t_prof}</span></p>
                 <p><b>Age:</b> {p['age']} yrs | <b>Contract Remaining:</b> {p.get('contract_years', 2.5)} years</p>
                 <p><b>Current Market Valuation:</b> <span style="font-size:1.2rem;font-weight:700;color:#F8FAFC;">{p['mv_display']}</span></p>
                 <p><b>Est. Fair Valuation Range:</b> <span style="color:#00F2FE;font-weight:700;font-size:1.2rem;">€{p['fair_val_low']}M – €{p['fair_val_high']}M</span></p>
-                <p style="margin-top:0.5rem;font-size:0.9rem;color:#94A3B8;"><b>Data Audit:</b> {p.get('data_quality', '98% Complete')} | <b>Confidence:</b> {p.get('confidence_score', '95%')}</p>
+                <p style="margin-top:0.5rem;font-size:0.9rem;color:#94A3B8;"><b>Data Audit:</b> {dq_str} | <b>Confidence:</b> {conf_str}</p>
             </div>
             """, unsafe_allow_html=True)
             
@@ -259,18 +266,19 @@ def main():
             explain_items_html = ""
             for l in lines:
                 if l.strip().startswith("[+]"):
-                    explain_items_html += f'<div class="explain-pos">✔️ {l.replace("[+]", "").strip()}</div>'
+                    explain_items_html += f'<div class="explain-pos">✔️ {html.escape(l.replace("[+]", "").strip())}</div>'
                 elif l.strip().startswith("[-]"):
-                    explain_items_html += f'<div class="explain-neg">⚠️ {l.replace("[-]", "").strip()}</div>'
+                    explain_items_html += f'<div class="explain-neg">⚠️ {html.escape(l.replace("[-]", "").strip())}</div>'
                 else:
-                    explain_items_html += f'<div>• {l.strip()}</div>'
+                    explain_items_html += f'<div>• {html.escape(l.strip())}</div>'
                     
+            sys_fit = html.escape(str(p.get('system_fit', 'Possession: ★★★★☆')))
             card_html = f"""<div class="briefing-card">
                 <h4 style="color:#00F2FE;margin-bottom:1rem;">💡 Why Sign This Player? (Percentile-Backed Rationale)</h4>
                 {explain_items_html}
                 <hr style="border-color:rgba(255,255,255,0.1);margin:1rem 0;">
                 <p style="margin-bottom:0.3rem;"><b>Tactical System Fit:</b></p>
-                <code style="color:#FEE140;background:rgba(0,0,0,0.3);padding:0.4rem;border-radius:6px;display:block;">{p.get('system_fit', 'Possession: ★★★★☆')}</code>
+                <code style="color:#FEE140;background:rgba(0,0,0,0.3);padding:0.4rem;border-radius:6px;display:block;">{sys_fit}</code>
             </div>"""
             st.markdown(card_html, unsafe_allow_html=True)
             
@@ -278,11 +286,11 @@ def main():
         sim_c1, sim_c2 = st.columns(2)
         with sim_c1:
             alts = str(p.get("cheaper_alternatives", "No alternatives found")).split(" • ")
-            alts_html = "".join([f'<p style="color:#38EF7D;margin:0.5rem 0;">👉 <b>{a}</b></p>' for a in alts])
+            alts_html = "".join([f'<p style="color:#38EF7D;margin:0.5rem 0;">👉 <b>{html.escape(a)}</b></p>' for a in alts])
             st.markdown(f'<div class="metric-card"><h5 style="color:#00F2FE;">💎 Cheaper Budget Alternatives (High Match • Lower Valuation)</h5>{alts_html}</div>', unsafe_allow_html=True)
         with sim_c2:
             sims = str(p.get("similar_players", "No similar players found")).split(" • ")
-            sims_html = "".join([f'<p style="color:#E2E8F0;margin:0.5rem 0;">• {s}</p>' for s in sims])
+            sims_html = "".join([f'<p style="color:#E2E8F0;margin:0.5rem 0;">• {html.escape(s)}</p>' for s in sims])
             st.markdown(f'<div class="metric-card"><h5 style="color:#94A3B8;">👥 Most Similar European Profiles</h5>{sims_html}</div>', unsafe_allow_html=True)
 
     # ==========================================
