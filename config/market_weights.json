@@ -1,0 +1,25 @@
+{
+  "contract_leverage_curve": {
+    "0.0_1.0": 0.65,
+    "1.0_2.0": 0.82,
+    "2.0_3.0": 0.95,
+    "3.0_4.0": 1.05,
+    "4.0_10.0": 1.15
+  },
+  "age_potential_curve": {
+    "16_21": {"label": "High Potential Premium", "multiplier": 1.15, "resale_rating": "Elite"},
+    "22_25": {"label": "Peak Growth Window", "multiplier": 1.08, "resale_rating": "Strong"},
+    "26_29": {"label": "Prime Athletic Years", "multiplier": 1.00, "resale_rating": "Moderate"},
+    "30_40": {"label": "Gradual Depreciation", "multiplier": 0.88, "resale_rating": "Low"}
+  },
+  "injury_penalties": {
+    "days_missed_threshold_low": 30,
+    "days_missed_threshold_high": 90,
+    "penalty_factor_per_day": 0.0015
+  },
+  "selling_club_leverage": {
+    "tier_1_extractors": ["Brighton & Hove Albion", "SL Benfica", "Ajax Amsterdam", "Sporting CP", "Atalanta BC", "Borussia Dortmund"],
+    "tier_1_multiplier": 1.15,
+    "default_multiplier": 1.00
+  }
+}

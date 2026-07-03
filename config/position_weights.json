@@ -1,0 +1,42 @@
+{
+  "Goalkeeper": {
+    "primary": ["pass_cmp_pct", "long_pass_cmp_pct", "clearances", "recoveries"],
+    "secondary": ["minutes_played", "aerial_won_pct"],
+    "negative": ["errors_to_shot"]
+  },
+  "Centre-Back": {
+    "primary": ["def_duels_won_pct", "aerial_won_pct", "interceptions", "blocks", "clearances"],
+    "secondary": ["recoveries", "prg_pass_dist", "long_pass_cmp_pct", "prg_carries"],
+    "negative": ["errors_to_shot"]
+  },
+  "Full-Back": {
+    "primary": ["prg_carries", "prg_passes", "tackles_won", "interceptions", "recoveries"],
+    "secondary": ["final_third_passes", "xag", "dribble_success_pct", "successful_dribbles"],
+    "negative": ["errors_to_shot"]
+  },
+  "Defensive Midfield": {
+    "primary": ["recoveries", "interceptions", "tackles_won", "prg_passes", "pass_cmp_pct"],
+    "secondary": ["def_duels_won_pct", "long_pass_cmp_pct", "aerial_won_pct", "final_third_passes"],
+    "negative": ["errors_to_shot"]
+  },
+  "Central Midfield": {
+    "primary": ["prg_passes", "final_third_passes", "recoveries", "pass_cmp_pct", "through_balls"],
+    "secondary": ["prg_carries", "key_passes", "interceptions", "xag"],
+    "negative": ["errors_to_shot"]
+  },
+  "Attacking Midfield": {
+    "primary": ["xag", "key_passes", "through_balls", "sca", "gca"],
+    "secondary": ["final_third_passes", "prg_passes", "goals", "prg_carries"],
+    "negative": ["errors_to_shot"]
+  },
+  "Winger": {
+    "primary": ["successful_dribbles", "prg_carries", "touches_in_box", "xag", "sca"],
+    "secondary": ["key_passes", "goals", "npxg", "dribble_success_pct"],
+    "negative": ["errors_to_shot"]
+  },
+  "Striker": {
+    "primary": ["goals", "npxg", "shot_conversion_pct", "touches_in_box", "shots_on_target_pct"],
+    "secondary": ["aerial_won_pct", "xag", "sca", "key_passes"],
+    "negative": ["errors_to_shot"]
+  }
+}
