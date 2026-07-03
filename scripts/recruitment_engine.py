@@ -343,7 +343,7 @@ def run_recruitment_engine():
     most_similar_list = []
     cheaper_alt_list = []
     
-    records = df_merged.to_dict('records')
+    records = df_merged[["player_name", "club", "broad_pos", "market_value"]].to_dict('records')
     for idx in range(len(records)):
         row = records[idx]
         target_pos = row["broad_pos"]
