@@ -1,0 +1,42 @@
+{
+  "Goalkeeper": {
+    "primary": ["save_pct", "psxg_net_per_90", "cross_claims_pct", "sweeper_actions_per_90"],
+    "secondary": ["pass_cmp_pct", "long_pass_cmp_pct", "minutes_played"],
+    "negative": ["errors_to_shot", "errors_to_goal"]
+  },
+  "Centre-Back": {
+    "primary": ["def_duels_won_pct", "aerial_won_pct", "interceptions_per_90", "blocks_per_90", "clearances_per_90"],
+    "secondary": ["recoveries_per_90", "prg_pass_dist_per_90", "long_pass_cmp_pct", "prg_carries_per_90"],
+    "negative": ["errors_to_shot", "errors_to_goal", "turnovers_per_90"]
+  },
+  "Full-Back": {
+    "primary": ["prg_carries_per_90", "prg_passes_per_90", "tackles_won_per_90", "interceptions_per_90", "recoveries_per_90"],
+    "secondary": ["cross_accuracy_pct", "carries_final_third_per_90", "xag_per_90", "dribble_success_pct"],
+    "negative": ["turnovers_per_90", "dispossessed_per_90"]
+  },
+  "Defensive Midfield": {
+    "primary": ["recoveries_per_90", "interceptions_per_90", "tackles_won_per_90", "prg_passes_per_90", "press_resistance_pct"],
+    "secondary": ["def_duels_won_pct", "long_pass_cmp_pct", "switches_per_90", "pass_cmp_pct"],
+    "negative": ["turnovers_per_90", "dispossessed_per_90"]
+  },
+  "Central Midfield": {
+    "primary": ["prg_passes_per_90", "final_third_passes_per_90", "recoveries_per_90", "press_resistance_pct", "pass_cmp_pct"],
+    "secondary": ["prg_carries_per_90", "key_passes_per_90", "interceptions_per_90", "xag_per_90"],
+    "negative": ["turnovers_per_90", "dispossessed_per_90"]
+  },
+  "Attacking Midfield": {
+    "primary": ["xag_per_90", "key_passes_per_90", "through_balls_per_90", "sca_per_90", "gca_per_90"],
+    "secondary": ["ppa_per_90", "prg_passes_per_90", "goals_per_90", "prg_carries_per_90"],
+    "negative": ["turnovers_per_90", "dispossessed_per_90"]
+  },
+  "Winger": {
+    "primary": ["successful_dribbles_per_90", "prg_carries_per_90", "carries_into_box_per_90", "xag_per_90", "sca_per_90"],
+    "secondary": ["key_passes_per_90", "touches_in_box_per_90", "goals_per_90", "npxg_per_90"],
+    "negative": ["turnovers_per_90", "dispossessed_per_90"]
+  },
+  "Striker": {
+    "primary": ["goals_per_90", "npxg_per_90", "goals_above_xg_per_90", "shot_conversion_pct", "touches_in_box_per_90"],
+    "secondary": ["shots_on_target_pct", "big_chances_converted_per_90", "xag_per_90", "prg_passes_received_per_90"],
+    "negative": ["turnovers_per_90", "dispossessed_per_90"]
+  }
+}

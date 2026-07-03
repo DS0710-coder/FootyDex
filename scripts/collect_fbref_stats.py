@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-FootyDex — Football Transfer Intelligence Dashboard (Moneyball Edition)
-FBref Stats Collector: Scrapes real standard player performance stats (goals, assists, minutes, xG)
-from FBref across the 5 major European leagues for the 2024-25 season using soccerdata.
+FootyDex — Football Transfer Intelligence Dashboard (v2.0)
+FBref Stats Collector: Scrapes and merges multi-table player performance stats
+(standard, passing, defense, possession, gca, misc, shooting) across major leagues.
 """
 
 import os
@@ -10,6 +10,8 @@ import argparse
 import logging
 import pandas as pd
 import soccerdata as sd
+from lxml import etree, html
+from soccerdata.fbref import FBREF_API, _parse_table, _fix_nation_col, _concat, TEAMNAME_REPLACEMENTS, standardize_colnames
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("FootyDex.FBrefCollector")
@@ -24,94 +26,160 @@ TARGET_LEAGUES = [
 
 TARGET_SEASON = "2425"
 
-def clean_fbref_data(df):
-    """Resets MultiIndex and standardizes column names into a clean tabular structure."""
-    logger.info("Cleaning and standardizing FBref performance data...")
-    
-    # Reset MultiIndex (league, season, team, player) into standard columns
-    df_reset = df.reset_index()
-    
-    # Flatten MultiIndex columns so row indexing returns clean scalar strings, not Series
+def get_fbref_table(fb, stat_type):
+    """Custom extractor to pull any FBref table by bypassing default stat_type restrictions."""
+    page = stat_type
+    seasons = fb.read_seasons()
+    filemask = "players_{}_{}_{}.html"
+    players = []
+    for (lkey, skey), season in seasons.iterrows():
+        big_five = lkey == "Big 5 European Leagues Combined"
+        filepath = fb.data_dir / filemask.format(lkey, skey, stat_type)
+        url = (FBREF_API + "/".join(season.url.split("/")[:-1]) + f"/{page}" + ("/players/" if big_five else "/") + season.url.split("/")[-1])
+        reader = fb.get(url, filepath)
+        tree = html.parse(reader)
+        for elem in tree.xpath('//td[@data-stat="comp_level"]//span'):
+            elem.getparent().remove(elem)
+        try:
+            (el,) = tree.xpath(f'//comment()[contains(., "div_stats_{stat_type}")]')
+            parser = etree.HTMLParser(recover=True)
+            (html_table,) = etree.fromstring(el.text, parser).xpath(f'//table[contains(@id, "stats_{stat_type}")]')
+            df_table = _parse_table(html_table)
+            df_table[("Unnamed: league", "league")] = lkey
+            df_table[("Unnamed: season", "season")] = skey
+            df_table = _fix_nation_col(df_table)
+            players.append(df_table)
+        except Exception as e:
+            logger.warning(f"Failed to parse table {stat_type} for {lkey} {skey}: {e}")
+            continue
+    if not players:
+        return pd.DataFrame()
+    df = _concat(players, key=["league", "season"])
+    df = df[df.Player != "Player"]
+    return df.drop("Matches", axis=1, level=0, errors="ignore").drop("Rk", axis=1, level=0, errors="ignore").rename(columns={"Squad": "team"}).replace({"team": TEAMNAME_REPLACEMENTS}).pipe(standardize_colnames, cols=["Player", "Nation", "Pos", "Age", "Born"]).set_index(["league", "season", "team", "player"]).sort_index()
+
+def flatten_columns(df, prefix=""):
     flat_cols = []
-    for col in df_reset.columns:
+    for col in df.columns:
         if isinstance(col, tuple):
-            parts = [str(p).strip() for p in col if str(p).strip() != ""]
-            flat_cols.append("_".join(parts) if parts else "unknown")
+            parts = [str(p).strip() for p in col if str(p).strip() != "" and not str(p).startswith("Unnamed")]
+            col_name = "_".join(parts)
         else:
-            flat_cols.append(str(col).strip())
-    df_reset.columns = flat_cols
-    
-    clean_records = []
-    
-    for _, row in df_reset.iterrows():
-        # 1. Extract Index / Basic Info
-        player = row.get("player", row.get("Player", "Unknown"))
-        team = row.get("team", row.get("Team", row.get("Squad", "Unknown")))
-        league = row.get("league", row.get("League", "Unknown"))
-        season = row.get("season", row.get("Season", "2024-25"))
-        
-        # Helper to find stat values across flat column strings
-        def find_stat(target_keys):
-            for col in df_reset.columns:
-                col_name = str(col).strip().lower()
-                for t in target_keys:
-                    if col_name == t or col_name.endswith("_" + t) or col_name.endswith(" " + t):
-                        val = row[col]
-                        try:
-                            return float(val) if pd.notnull(val) and val != "" else 0.0
-                        except (ValueError, TypeError):
-                            continue
-            return 0.0
-            
-        minutes = find_stat(["min", "minutes", "minutes_played", "mins"])
-        goals = find_stat(["gls", 'goals', 'g'])
-        assists = find_stat(["ast", 'assists', 'a'])
-        xg = find_stat(["xg", 'expected_goals', 'exp_g', 'xgo'])
-        
-        clean_records.append({
-            "player_name": str(player).strip(),
-            "club": str(team).strip(),
-            "league": str(league).strip(),
-            "season": str(season).strip(),
-            "goals": int(goals),
-            "assists": int(assists),
-            "minutes_played": int(minutes),
-            "xg": float(xg),
-        })
-        
-    df_clean = pd.DataFrame(clean_records)
-    # Drop duplicates if a player played for two clubs or appeared twice
-    df_clean = df_clean.drop_duplicates(subset=["player_name", "club", "league"], keep="first")
-    return df_clean
+            col_name = str(col).strip()
+        flat_cols.append(f"{prefix}{col_name}".lower())
+    df.columns = flat_cols
+    return df
 
 def collect_fbref_stats(leagues=None, season=TARGET_SEASON):
     os.makedirs("data", exist_ok=True)
-    if leagues is None or leagues == TARGET_LEAGUES:
-        leagues_to_scrape = ["Big 5 European Leagues Combined"]
-        logger.info(f"Initializing soccerdata FBref scraper for season {season} using Big 5 Combined optimization...")
-    else:
-        leagues_to_scrape = leagues
-        logger.info(f"Initializing soccerdata FBref scraper for season {season} across {len(leagues_to_scrape)} leagues...")
-    fbref = sd.FBref(leagues=leagues_to_scrape, seasons=season)
+    leagues_to_scrape = leagues if leagues else ["Big 5 European Leagues Combined"]
+    logger.info(f"Initializing soccerdata FBref scraper for season {season} across {leagues_to_scrape}...")
+    fb = sd.FBref(leagues=leagues_to_scrape, seasons=season)
     
-    logger.info("Reading standard player season statistics from FBref...")
-    df_raw = fbref.read_player_season_stats(stat_type="standard")
+    tables_to_pull = ["standard", "passing", "defense", "possession", "gca", "misc", "shooting"]
+    merged_df = None
     
-    if df_raw is None or df_raw.empty:
-        logger.error("Failed to retrieve data from FBref.")
+    for t_name in tables_to_pull:
+        logger.info(f"Extracting FBref table: {t_name}...")
+        try:
+            if t_name == "standard":
+                df_t = fb.read_player_season_stats(stat_type="standard")
+            else:
+                df_t = get_fbref_table(fb, t_name)
+                
+            if df_t is None or df_t.empty:
+                logger.warning(f"Table {t_name} is empty, skipping...")
+                continue
+                
+            df_t = flatten_columns(df_t, prefix=f"{t_name}_" if t_name != "standard" else "")
+            
+            if merged_df is None:
+                merged_df = df_t
+            else:
+                # Merge on index [league, season, team, player]
+                cols_to_use = [c for c in df_t.columns if c not in merged_df.columns]
+                merged_df = merged_df.join(df_t[cols_to_use], how="left")
+        except Exception as e:
+            logger.error(f"Error processing table {t_name}: {e}")
+            
+    if merged_df is None or merged_df.empty:
+        logger.error("No data extracted from FBref.")
         return
         
-    df_clean = clean_fbref_data(df_raw)
+    df_clean = merged_df.reset_index()
     
+    # Clean up standard column names for downstream engines
+    rename_map = {
+        "player": "player_name",
+        "team": "club",
+        "playing time_min": "minutes_played",
+        "performance_gls": "goals",
+        "performance_ast": "assists",
+        "expected_xg": "xg",
+        "expected_xag": "xag",
+        "expected_npxg": "npxg",
+        "progression_prgc": "prg_carries",
+        "progression_prgp": "prg_passes",
+        "progression_prgr": "prg_passes_received",
+        "passing_total_cmp%": "pass_cmp_pct",
+        "passing_total_prgdist": "prg_pass_dist",
+        "passing_long_cmp%": "long_pass_cmp_pct",
+        "passing_1/3": "final_third_passes",
+        "passing_kp": "key_passes",
+        "passing_tb": "through_balls",
+        "passing_sw": "switches",
+        "defense_tackles_tklw": "tackles_won",
+        "defense_challenges_tkl%": "def_duels_won_pct",
+        "defense_blocks_blocks": "blocks",
+        "defense_int": "interceptions",
+        "defense_clr": "clearances",
+        "defense_err": "errors_to_shot",
+        "possession_touches_att pen": "touches_in_box",
+        "possession_take-ons_succ": "successful_dribbles",
+        "possession_take-ons_succ%": "dribble_success_pct",
+        "possession_carries_1/3": "carries_final_third",
+        "possession_carries_cpa": "carries_into_box",
+        "possession_mis": "miscontrols",
+        "possession_dis": "dispossessed",
+        "gca_sca_sca": "sca",
+        "gca_gca_gca": "gca",
+        "misc_aerial duels_won%": "aerial_won_pct",
+        "misc_recov": "recoveries",
+        "shooting_standard_sot%": "shots_on_target_pct",
+        "shooting_standard_g/sh": "shot_conversion_pct"
+    }
+    
+    for old_col, new_col in rename_map.items():
+        if old_col in df_clean.columns:
+            df_clean[new_col] = df_clean[old_col]
+            
+    # Ensure numerical formatting
+    num_cols = ["minutes_played", "goals", "assists", "xg", "xag", "npxg", "prg_carries", "prg_passes", 
+                "pass_cmp_pct", "prg_pass_dist", "long_pass_cmp_pct", "final_third_passes", "key_passes", 
+                "through_balls", "tackles_won", "def_duels_won_pct", "blocks", "interceptions", "clearances", 
+                "errors_to_shot", "touches_in_box", "successful_dribbles", "dribble_success_pct", "sca", "gca", 
+                "aerial_won_pct", "recoveries", "shots_on_target_pct", "shot_conversion_pct"]
+                
+    for col in num_cols:
+        if col in df_clean.columns:
+            df_clean[col] = pd.to_numeric(df_clean[col], errors="coerce").fillna(0.0)
+        else:
+            df_clean[col] = 0.0
+            
     out_path = "data/fbref_stats.csv"
+    if os.path.exists(out_path) and not df_clean.empty:
+        try:
+            df_existing = pd.read_csv(out_path)
+            df_clean = pd.concat([df_existing, df_clean], ignore_index=True).drop_duplicates(subset=["player_name", "club"], keep="last")
+        except Exception as e:
+            logger.warning(f"Could not merge with existing {out_path}: {e}")
+            
     df_clean.to_csv(out_path, index=False)
-    logger.info(f"Successfully saved {len(df_clean)} player performance records to {out_path}.")
-    logger.info(f"\nSample data:\n{df_clean.head(5)}")
+    logger.info(f"Successfully saved {len(df_clean)} enriched multi-table player records to {out_path}.")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Scrape FBref standard player season stats.")
-    parser.add_argument("--league", type=str, default=None, help="Specific league to scrape (for testing)")
+    parser = argparse.ArgumentParser(description="Scrape FBref multi-table player stats.")
+    parser.add_argument("--league", type=str, default=None, help="Specific league to scrape")
     args = parser.parse_args()
-    
-    leagues_arg = [args.league] if args.league else None
-    collect_fbref_stats(leagues=leagues_arg)
+    leagues = [args.league] if args.league else None
+    collect_fbref_stats(leagues=leagues)

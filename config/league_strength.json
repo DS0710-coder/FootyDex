@@ -1,0 +1,16 @@
+{
+  "Premier League": 1.00,
+  "La Liga": 0.96,
+  "Bundesliga": 0.95,
+  "Serie A": 0.95,
+  "Ligue 1": 0.88,
+  "Primeira Liga": 0.82,
+  "Eredivisie": 0.80,
+  "Championship": 0.78,
+  "Belgian Pro League": 0.78,
+  "MLS": 0.70,
+  "Saudi Pro League": 0.70,
+  "Brasileirao": 0.72,
+  "Argentine Primera": 0.70,
+  "default": 0.75
+}

@@ -1,0 +1,14 @@
+{
+  "model_name": "FootyDex Recruitment Index (RI)",
+  "version": "v2.0",
+  "release_date": "2026-07-03",
+  "engines": {
+    "recruitment_index_engine": "v2.0",
+    "tactical_clustering_engine": "v0.9 (K-Means / 13 Archetypes)",
+    "similarity_engine": "v1.1 (Cosine Similarity on Z-scored Feature Store)",
+    "replacement_value_engine": "v1.0 (Positional Average Delta)",
+    "confidence_engine": "v1.0 (Sample Size & League Reliability)",
+    "explainability_engine": "v2.0 (Percentile-Backed Narrative Generator)"
+  },
+  "notes": "Locked-in enterprise architecture with 4 pillars, external JSON configurations, and narrative-first UX."
+}

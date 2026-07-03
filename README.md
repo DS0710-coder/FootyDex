@@ -6,13 +6,51 @@
 ![Docker](https://img.shields.io/badge/Docker-Self--Hosted_API-2496ED?style=for-the-badge&logo=docker)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-**FootyDex** is a state-of-the-art football transfer intelligence and valuation platform inspired by *Moneyball*. Built to uncover high-value bargains, hidden squad gems, and overpriced high-risk transfers across the top 5 European football leagues, FootyDex combines custom data engineering pipelines with advanced statistical feature engineering and an interactive glassmorphic dark-themed dashboard.
+**FootyDex** is an enterprise-grade football recruitment intelligence and transfer valuation platform. 
+
+> **FootyDex doesn't try to answer:**  
+> *"Who is the best player?"*  
+> **It answers:**  
+> *"If your club had €50M to spend today... who is the smartest signing?"*
+
+Built to uncover market inefficiencies, high-leverage contractual bargains, and cheaper budget alternatives across Europe's top 5 leagues, FootyDex combines custom data engineering with unsupervised machine learning (**K-Means Clustering** & **Cosine Similarity Engine**) and a narrative-first scouting UI.
 
 ---
 
-## 🏗️ Architecture & Data Engineering Strategy: The Story Behind the Pivot
+## 🏗️ Architecture: The 4-Pillar Recruitment Engine
 
-A core technical distinction of FootyDex is how its data engineering pipeline evolved to overcome real-world data collection challenges. Rather than relying on static, outdated CSVs from platforms like Kaggle, FootyDex was architected from the ground up to handle fresh, multi-source football intelligence.
+Unlike simple statistical dashboards that mix on-pitch output with market price, FootyDex separates recruitment analysis into distinct, logical pillars that mirror how professional Champions League scouting departments operate:
+
+```
+RAW DATA SOURCES
+├── Transfermarkt Local Docker API (Biometrics, Transfers, Contract Expiry Date, Injuries, Market Value)
+├── FBref / soccerdata (Standard, Shooting, Passing, Defense, Possession, GCA, Match Logs)
+└── Config Directory (`config/league_strength.json`, `position_weights.json`, `market_weights.json`)
+        │
+        ▼
+FEATURE ENGINEERING & CENTRAL FEATURE STORE
+├── Data Cleaning & Harmonization (Diacritic/ASCII normalization)
+├── Per-90 & Volume Normalization
+├── Temporal Weighting (Current Season 60% • Previous 30% • Two Years Ago 10%)
+└── CENTRAL FEATURE STORE (Standardized z-score features serving downstream engines without recalculation)
+        │
+        ▼
+THE THREE EVALUATION PILLARS
+├── PILLAR 1: Footballing Ability & Execution (Position Impact • Technical • Tactical • Physical • Form)
+├── PILLAR 2: Context & Environment (League Strength • Team Dominance • Big Match & Pressure Output)
+└── PILLAR 3: Market & Leverage (Contract Years Remaining ⭐ • Age Trajectory • Selling Club Leverage • Injuries)
+        │
+        ▼
+RECRUITMENT INTELLIGENCE MODELS (ML & Inference Layer)
+├── Recruitment Index (RI) Engine (Holistic proprietary 0–100 recruitment rating)
+├── Tactical Profile Discovery Engine (Unsupervised K-Means clustering into 13 scouting archetypes)
+├── Similarity Engine (Cosine similarity for Most Similar Profiles & Cheaper Budget Alternatives ⭐)
+├── Replacement Value Engine (+X RI above average positional starter)
+└── Explainability Engine (Automated percentile-backed + and - narrative generation)
+        │
+        ▼
+SCOUTING REPORT GENERATION (Narrative-First UI)
+```
 
 ```
 +------------------------------------------------------------------------------------+
@@ -113,17 +151,17 @@ cd FootyDex
 pip install -r requirements.txt
 ```
 
-### 2. Run the Data Pipeline (Scheduled Batch Refresh)
-Execute the specialized collectors to generate fresh datasets:
+### 2. Run the Data Pipeline & Recruitment Models (Scheduled Refresh)
+Execute the specialized collectors and machine learning models to generate fresh recruitment datasets:
 ```bash
-# Step 1: Collect profile, valuation, and transfer fee data from Transfermarkt
+# Step 1: Collect profile, contract expiration dates, injuries, and valuations from Transfermarkt
 python3 scripts/collect_data.py
 
-# Step 2: Scrape real performance and Expected Goals (xG) statistics from FBref
+# Step 2: Scrape multi-table performance statistics from FBref
 python3 scripts/collect_fbref_stats.py
 
-# Step 3: Engineer features, calculate Z-scores, and assign strategic Moneyball labels
-python3 scripts/moneyball_score.py
+# Step 3: Execute Feature Store, the 3 Pillars, Cosine Similarity, K-Means Clustering & Explainability
+python3 scripts/recruitment_engine.py
 ```
 *(Note: For rapid testing or demonstrations, you can limit collection using `python3 scripts/collect_data.py --limit-per-club 3` or `python3 scripts/collect_fbref_stats.py --league "ENG-Premier League"`).*
 

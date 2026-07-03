@@ -1,191 +1,571 @@
-player_id,player_name,competition_id,competition_name,club_id,club_name,age,position,nationality,market_value,height,foot
-315858,Gianluigi Donnarumma,GB1,Premier League,281,Manchester City,27,Goalkeeper,Italy,45000000.0,196.0,right
-566799,James Trafford,GB1,Premier League,281,Manchester City,23,Goalkeeper,England,25000000.0,192.0,right
-116648,Marcus Bettinelli,GB1,Premier League,281,Manchester City,34,Goalkeeper,England,300000.0,193.0,right
-392757,Marc Guéhi,GB1,Premier League,281,Manchester City,25,Centre-Back,England,70000000.0,182.0,right
-475959,Josko Gvardiol,GB1,Premier League,281,Manchester City,24,Centre-Back,Croatia,70000000.0,185.0,left
-258004,Rúben Dias,GB1,Premier League,281,Manchester City,29,Centre-Back,Portugal,55000000.0,187.0,right
-763079,Abdukodir Khusanov,GB1,Premier League,281,Manchester City,22,Centre-Back,Uzbekistan,50000000.0,186.0,right
-1005575,Vitor Reis,GB1,Premier League,281,Manchester City,20,Centre-Back,Brazil,30000000.0,186.0,right
-177476,Nathan Aké,GB1,Premier League,281,Manchester City,31,Centre-Back,Netherlands,12000000.0,180.0,left
-1121298,Juma Bah,GB1,Premier League,281,Manchester City,20,Centre-Back,Sierra Leone,10000000.0,195.0,right
-262749,David Raya,GB1,Premier League,11,Arsenal FC,30,Goalkeeper,Spain,30000000.0,186.0,right
-192279,Kepa Arrizabalaga,GB1,Premier League,11,Arsenal FC,31,Goalkeeper,Spain,5000000.0,188.0,right
-495666,William Saliba,GB1,Premier League,11,Arsenal FC,25,Centre-Back,France,100000000.0,192.0,right
-435338,Gabriel,GB1,Premier League,11,Arsenal FC,28,Centre-Back,Brazil,75000000.0,190.0,left
-659813,Piero Hincapié,GB1,Premier League,11,Arsenal FC,24,Centre-Back,Ecuador,50000000.0,183.0,left
-646750,Cristhian Mosquera,GB1,Premier League,11,Arsenal FC,22,Centre-Back,Spain,40000000.0,191.0,right
-502821,Riccardo Calafiori,GB1,Premier League,11,Arsenal FC,24,Left-Back,Italy,55000000.0,188.0,left
-420243,Jurriën Timber,GB1,Premier League,11,Arsenal FC,25,Right-Back,Netherlands,70000000.0,179.0,right
-335721,Ben White,GB1,Premier League,11,Arsenal FC,28,Right-Back,England,30000000.0,186.0,right
-423440,Martín Zubimendi,GB1,Premier League,11,Arsenal FC,27,Defensive Midfield,Spain,75000000.0,181.0,right
-834397,Mike Penders,GB1,Premier League,631,Chelsea FC,20,Goalkeeper,Belgium,25000000.0,200.0,left
-403151,Robert Sánchez,GB1,Premier League,631,Chelsea FC,28,Goalkeeper,Spain,22000000.0,197.0,right
-585323,Filip Jørgensen,GB1,Premier League,631,Chelsea FC,24,Goalkeeper,Denmark,15000000.0,192.0,right
-656316,Gabriel Slonina,GB1,Premier League,631,Chelsea FC,22,Goalkeeper,United States,3000000.0,193.0,right
-731466,Teddy Sharman-Lowe,GB1,Premier League,631,Chelsea FC,23,Goalkeeper,England,500000.0,189.0,right
-614258,Levi Colwill,GB1,Premier League,631,Chelsea FC,23,Centre-Back,England,50000000.0,187.0,left
-346314,Trevoh Chalobah,GB1,Premier League,631,Chelsea FC,26,Centre-Back,England,40000000.0,192.0,right
-475411,Wesley Fofana,GB1,Premier League,631,Chelsea FC,25,Centre-Back,France,28000000.0,188.0,right
-910905,Mamadou Sarr,GB1,Premier League,631,Chelsea FC,20,Centre-Back,Senegal,22000000.0,194.0,right
-258878,Tosin Adarabioyo,GB1,Premier League,631,Chelsea FC,28,Centre-Back,England,16000000.0,197.0,right
-502676,Giorgi Mamardashvili,GB1,Premier League,31,Liverpool FC,25,Goalkeeper,Georgia,28000000.0,197.0,left
-105470,Alisson,GB1,Premier League,31,Liverpool FC,33,Goalkeeper,Brazil,15000000.0,193.0,right
-486604,Vitezslav Jaros,GB1,Premier League,31,Liverpool FC,24,Goalkeeper,Czech Republic,5000000.0,190.0,right
-226049,Freddie Woodman,GB1,Premier League,31,Liverpool FC,29,Goalkeeper,England,3000000.0,188.0,right
-706815,Harvey Davies,GB1,Premier League,31,Liverpool FC,22,Goalkeeper,England,500000.0,190.0,left
-1004301,Jérémy Jacquet,GB1,Premier League,31,Liverpool FC,20,Centre-Back,France,55000000.0,190.0,right
-1086619,Giovanni Leoni,GB1,Premier League,31,Liverpool FC,19,Centre-Back,Italy,25000000.0,196.0,right
-139208,Virgil van Dijk,GB1,Premier League,31,Liverpool FC,34,Centre-Back,Netherlands,15000000.0,195.0,right
-256178,Joe Gomez,GB1,Premier League,31,Liverpool FC,29,Centre-Back,England,13000000.0,188.0,right
-730861,Milos Kerkez,GB1,Premier League,31,Liverpool FC,22,Left-Back,Hungary,35000000.0,180.0,left
-503883,Senne Lammens,GB1,Premier League,985,Manchester United,23,Goalkeeper,Belgium,35000000.0,193.0,right
-234509,André Onana,GB1,Premier League,985,Manchester United,30,Goalkeeper,Cameroon,10000000.0,190.0,right
-336077,Altay Bayındır,GB1,Premier League,985,Manchester United,28,Goalkeeper,Türkiye,5000000.0,198.0,right
-34130,Tom Heaton,GB1,Premier League,985,Manchester United,40,Goalkeeper,England,100000.0,188.0,right
-923831,Leny Yoro,GB1,Premier League,985,Manchester United,20,Centre-Back,France,50000000.0,190.0,right
-480762,Lisandro Martínez,GB1,Premier League,985,Manchester United,28,Centre-Back,Argentina,40000000.0,175.0,left
-326031,Matthijs de Ligt,GB1,Premier League,985,Manchester United,26,Centre-Back,Netherlands,30000000.0,189.0,right
-1078163,Ayden Heaven,GB1,Premier League,985,Manchester United,19,Centre-Back,England,30000000.0,189.0,left
-177907,Harry Maguire,GB1,Premier League,985,Manchester United,33,Centre-Back,England,8000000.0,194.0,right
-911424,Tyler Fredricson,GB1,Premier League,985,Manchester United,21,Centre-Back,England,3000000.0,188.0,right
-565093,Bart Verbruggen,GB1,Premier League,1237,Brighton & Hove Albion,23,Goalkeeper,Netherlands,40000000.0,193.0,right
-646353,Carl Rushworth,GB1,Premier League,1237,Brighton & Hove Albion,25,Goalkeeper,England,16000000.0,191.0,left
-670860,James Beadle,GB1,Premier League,1237,Brighton & Hove Albion,21,Goalkeeper,England,6000000.0,201.0,right
-73564,Jason Steele,GB1,Premier League,1237,Brighton & Hove Albion,35,Goalkeeper,England,500000.0,188.0,right
-406556,Tom McGill,GB1,Premier League,1237,Brighton & Hove Albion,26,Goalkeeper,Canada,500000.0,185.0,right
-410708,Pascal Struijk,GB1,Premier League,1237,Brighton & Hove Albion,26,Centre-Back,Netherlands,22000000.0,190.0,left
-660860,Diego Coppola,GB1,Premier League,1237,Brighton & Hove Albion,22,Centre-Back,Italy,18000000.0,193.0,right
-318508,Olivier Boscagli,GB1,Premier League,1237,Brighton & Hove Albion,28,Centre-Back,France,15000000.0,181.0,left
-380350,Igor Julio,GB1,Premier League,1237,Brighton & Hove Albion,28,Centre-Back,Brazil,10000000.0,188.0,left
-581330,Eiran Cashin,GB1,Premier League,1237,Brighton & Hove Albion,24,Centre-Back,Ireland,5000000.0,184.0,left
-923757,Ewen Jaouen,GB1,Premier League,762,Newcastle United,20,Goalkeeper,France,12000000.0,200.0,right
-192080,Nick Pope,GB1,Premier League,762,Newcastle United,34,Goalkeeper,England,5000000.0,198.0,right
-142389,Mark Gillespie,GB1,Premier League,762,Newcastle United,34,Goalkeeper,England,100000.0,191.0,right
-521964,Malick Thiaw,GB1,Premier League,762,Newcastle United,24,Centre-Back,Germany,45000000.0,194.0,right
-361093,Sven Botman,GB1,Premier League,762,Newcastle United,26,Centre-Back,Netherlands,35000000.0,193.0,left
-135343,Fabian Schär,GB1,Premier League,762,Newcastle United,34,Centre-Back,Switzerland,4000000.0,186.0,right
-134270,Dan Burn,GB1,Premier League,762,Newcastle United,34,Centre-Back,England,4000000.0,201.0,left
-670858,Lewis Hall,GB1,Premier League,762,Newcastle United,21,Left-Back,England,40000000.0,179.0,left
-900601,Alex Murphy,GB1,Premier League,762,Newcastle United,22,Left-Back,Ireland,1500000.0,188.0,left
-503981,Tino Livramento,GB1,Premier League,762,Newcastle United,23,Right-Back,England,45000000.0,182.0,right
-465555,Djordje Petrovic,GB1,Premier League,989,AFC Bournemouth,26,Goalkeeper,Serbia,28000000.0,194.0,right
-617009,Alex Paulsen,GB1,Premier League,989,AFC Bournemouth,23,Goalkeeper,New Zealand,500000.0,193.0,right
-52570,Fraser Forster,GB1,Premier League,989,AFC Bournemouth,38,Goalkeeper,England,400000.0,201.0,right
-582078,Will Dennis,GB1,Premier League,989,AFC Bournemouth,25,Goalkeeper,England,325000.0,188.0,right
-463605,Bafodé Diakité,GB1,Premier League,989,AFC Bournemouth,25,Centre-Back,France,25000000.0,184.0,right
-611793,James Hill,GB1,Premier League,989,AFC Bournemouth,24,Centre-Back,England,23000000.0,184.0,right
-989112,Veljko Milosavljevic,GB1,Premier League,989,AFC Bournemouth,19,Centre-Back,Serbia,20000000.0,192.0,right
-994604,Matai Akinmboni,GB1,Premier League,989,AFC Bournemouth,19,Centre-Back,United States,1000000.0,188.0,left
-654539,Adrien Truffert,GB1,Premier League,989,AFC Bournemouth,24,Left-Back,France,30000000.0,176.0,left
-1009658,Julio Soler,GB1,Premier League,989,AFC Bournemouth,21,Left-Back,Argentina,8000000.0,175.0,left
-111873,Emiliano Martínez,GB1,Premier League,405,Aston Villa,33,Goalkeeper,Argentina,12000000.0,195.0,right
-555074,Oliwier Zych,GB1,Premier League,405,Aston Villa,22,Goalkeeper,Poland,2000000.0,193.0,right
-124884,Marco Bizot,GB1,Premier League,405,Aston Villa,35,Goalkeeper,Netherlands,1500000.0,193.0,right
-591844,Joe Gauci,GB1,Premier League,405,Aston Villa,25,Goalkeeper,Australia,1200000.0,194.0,right
-413403,Ezri Konsa,GB1,Premier League,405,Aston Villa,28,Centre-Back,England,40000000.0,180.0,right
-399776,Pau Torres,GB1,Premier League,405,Aston Villa,29,Centre-Back,Spain,20000000.0,192.0,left
-1282860,Modou Kéba Cissé,GB1,Premier League,405,Aston Villa,20,Centre-Back,Senegal,6000000.0,191.0,
-184573,Victor Lindelöf,GB1,Premier League,405,Aston Villa,31,Centre-Back,Sweden,5000000.0,187.0,right
-253677,Tyrone Mings,GB1,Premier League,405,Aston Villa,33,Centre-Back,England,3000000.0,196.0,left
-485585,Ian Maatsen,GB1,Premier League,405,Aston Villa,24,Left-Back,Netherlands,30000000.0,178.0,left
-432914,John Victor,GB1,Premier League,703,Nottingham Forest,30,Goalkeeper,Brazil,5000000.0,197.0,right
-127202,Matz Sels,GB1,Premier League,703,Nottingham Forest,34,Goalkeeper,Belgium,3500000.0,188.0,right
-1005649,Murillo,GB1,Premier League,703,Nottingham Forest,23,Centre-Back,Brazil,50000000.0,180.0,left
-413507,Nikola Milenković,GB1,Premier League,703,Nottingham Forest,28,Centre-Back,Serbia,28000000.0,195.0,right
-984096,Jair Cunha,GB1,Premier League,703,Nottingham Forest,21,Centre-Back,Brazil,15000000.0,198.0,both
-673492,Morato,GB1,Premier League,703,Nottingham Forest,25,Centre-Back,Brazil,14000000.0,192.0,left
-933017,Zach Abbott,GB1,Premier League,703,Nottingham Forest,20,Centre-Back,England,4000000.0,180.0,right
-1007720,Tyler Bindon,GB1,Premier League,703,Nottingham Forest,21,Centre-Back,New Zealand,3500000.0,190.0,right
-503680,Neco Williams,GB1,Premier League,703,Nottingham Forest,25,Left-Back,Wales,28000000.0,183.0,right
-524285,Luca Netz,GB1,Premier League,703,Nottingham Forest,23,Left-Back,Germany,8000000.0,184.0,left
-258919,Dean Henderson,GB1,Premier League,873,Crystal Palace,29,Goalkeeper,England,28000000.0,188.0,right
-296802,Walter Benítez,GB1,Premier League,873,Crystal Palace,33,Goalkeeper,Argentina,4000000.0,191.0,right
-814848,Owen Goodman,GB1,Premier League,873,Crystal Palace,22,Goalkeeper,Canada,550000.0,193.0,left
-196722,Remi Matthews,GB1,Premier League,873,Crystal Palace,32,Goalkeeper,England,200000.0,183.0,right
-434224,Maxence Lacroix,GB1,Premier League,873,Crystal Palace,26,Centre-Back,France,50000000.0,190.0,right
-1006411,Jaydee Canvot,GB1,Premier League,873,Crystal Palace,19,Centre-Back,France,28000000.0,188.0,right
-578539,Chris Richards,GB1,Premier League,873,Crystal Palace,26,Centre-Back,United States,28000000.0,189.0,right
-689637,Chadi Riad,GB1,Premier League,873,Crystal Palace,23,Centre-Back,Morocco,15000000.0,186.0,left
-730893,Tyrick Mitchell,GB1,Premier League,873,Crystal Palace,26,Left-Back,England,25000000.0,181.0,left
-293194,Borna Sosa,GB1,Premier League,873,Crystal Palace,28,Left-Back,Croatia,3000000.0,187.0,left
-340918,Caoimhín Kelleher,GB1,Premier League,1148,Brentford FC,27,Goalkeeper,Ireland,28000000.0,188.0,right
-488935,Hákon Valdimarsson,GB1,Premier League,1148,Brentford FC,24,Goalkeeper,Iceland,2500000.0,195.0,right
-741236,Matthew Cox,GB1,Premier League,1148,Brentford FC,23,Goalkeeper,England,700000.0,183.0,right
-456292,Ellery Balcombe,GB1,Premier League,1148,Brentford FC,26,Goalkeeper,England,400000.0,190.0,right
-1008553,Julian Eyestone,GB1,Premier League,1148,Brentford FC,20,Goalkeeper,United States,0.0,200.0,right
-541231,Sepp van den Berg,GB1,Premier League,1148,Brentford FC,24,Centre-Back,Netherlands,32000000.0,192.0,right
-469050,Nathan Collins,GB1,Premier League,1148,Brentford FC,25,Centre-Back,Ireland,30000000.0,193.0,right
-915418,Jannik Schuster,GB1,Premier League,1148,Brentford FC,20,Centre-Back,Austria,18000000.0,190.0,right
-328658,Kristoffer Ajer,GB1,Premier League,1148,Brentford FC,28,Centre-Back,Norway,18000000.0,198.0,right
-442248,Ethan Pinnock,GB1,Premier League,1148,Brentford FC,33,Centre-Back,Jamaica,3000000.0,194.0,left
-130164,Jordan Pickford,GB1,Premier League,29,Everton FC,32,Goalkeeper,England,13000000.0,185.0,left
-357658,Mark Travers,GB1,Premier League,29,Everton FC,27,Goalkeeper,Ireland,3000000.0,191.0,right
-215810,Tom King,GB1,Premier League,29,Everton FC,31,Goalkeeper,Wales,100000.0,194.0,right
-661053,Jarrad Branthwaite,GB1,Premier League,29,Everton FC,24,Centre-Back,England,40000000.0,195.0,left
-173504,James Tarkowski,GB1,Premier League,29,Everton FC,33,Centre-Back,England,5000000.0,185.0,right
-118534,Michael Keane,GB1,Premier League,29,Everton FC,33,Centre-Back,England,3000000.0,188.0,right
-404842,Vitaliy Mykolenko,GB1,Premier League,29,Everton FC,27,Left-Back,Ukraine,25000000.0,180.0,left
-938146,Adam Aznou,GB1,Premier League,29,Everton FC,20,Left-Back,Morocco,6000000.0,178.0,left
-711544,Jake O'Brien,GB1,Premier League,29,Everton FC,25,Right-Back,Ireland,18000000.0,197.0,right
-424015,Nathan Patterson,GB1,Premier League,29,Everton FC,24,Right-Back,Scotland,10000000.0,183.0,right
-646991,Robin Roefs,GB1,Premier League,289,Sunderland AFC,23,Goalkeeper,Netherlands,28000000.0,193.0,left
-475946,Anthony Patterson,GB1,Premier League,289,Sunderland AFC,26,Goalkeeper,England,8000000.0,189.0,right
-605426,Melker Ellborg,GB1,Premier League,289,Sunderland AFC,23,Goalkeeper,Sweden,3000000.0,191.0,right
-123536,Simon Moore,GB1,Premier League,289,Sunderland AFC,36,Goalkeeper,England,75000.0,191.0,right
-503686,Dan Ballard,GB1,Premier League,289,Sunderland AFC,26,Centre-Back,Northern Ireland,20000000.0,187.0,right
-353032,Omar Alderete,GB1,Premier League,289,Sunderland AFC,29,Centre-Back,Paraguay,13000000.0,190.0,left
-617755,Jenson Seelt,GB1,Premier League,289,Sunderland AFC,23,Centre-Back,Netherlands,5000000.0,195.0,right
-661208,Leo Hjelde,GB1,Premier League,289,Sunderland AFC,22,Centre-Back,Norway,1500000.0,190.0,left
-502065,Aji Alese,GB1,Premier League,289,Sunderland AFC,25,Centre-Back,England,700000.0,192.0,left
-282939,Luke O'Nien,GB1,Premier League,289,Sunderland AFC,31,Centre-Back,England,700000.0,174.0,right
-352041,Lucas Perri,GB1,Premier League,399,Leeds United,28,Goalkeeper,Brazil,10000000.0,197.0,right
-99397,Karl Darlow,GB1,Premier League,399,Leeds United,35,Goalkeeper,Wales,200000.0,190.0,right
-194386,Alex Cairns,GB1,Premier League,399,Leeds United,33,Goalkeeper,England,50000.0,183.0,right
-371851,Jaka Bijol,GB1,Premier League,399,Leeds United,27,Centre-Back,Slovenia,20000000.0,190.0,right
-297212,Joe Rodon,GB1,Premier League,399,Leeds United,28,Centre-Back,Wales,18000000.0,193.0,right
-338629,Sebastiaan Bornauw,GB1,Premier League,399,Leeds United,27,Centre-Back,Belgium,8000000.0,191.0,right
-263361,Maximilian Wöber,GB1,Premier League,399,Leeds United,28,Centre-Back,Austria,3000000.0,188.0,left
-362108,Gabriel Gudmundsson,GB1,Premier League,399,Leeds United,27,Left-Back,Sweden,20000000.0,181.0,left
-449597,Isaac Schmidt,GB1,Premier League,399,Leeds United,26,Left-Back,Switzerland,2200000.0,172.0,right
-236953,Sam Byram,GB1,Premier League,399,Leeds United,32,Left-Back,England,400000.0,183.0,right
-72476,Bernd Leno,GB1,Premier League,931,Fulham FC,34,Goalkeeper,Germany,6000000.0,190.0,right
-127181,Benjamin Lecomte,GB1,Premier League,931,Fulham FC,35,Goalkeeper,France,800000.0,186.0,left
-461883,Calvin Bassey,GB1,Premier League,931,Fulham FC,26,Centre-Back,Nigeria,28000000.0,185.0,left
-260827,Joachim Andersen,GB1,Premier League,931,Fulham FC,30,Centre-Back,Denmark,20000000.0,192.0,right
-494880,Jorge Cuenca,GB1,Premier League,931,Fulham FC,26,Centre-Back,Spain,8000000.0,190.0,left
-272622,Issa Diop,GB1,Premier League,931,Fulham FC,29,Centre-Back,Morocco,8000000.0,194.0,right
-392775,Ryan Sessegnon,GB1,Premier League,931,Fulham FC,26,Left-Back,England,22000000.0,178.0,left
-349701,Antonee Robinson,GB1,Premier League,931,Fulham FC,28,Left-Back,United States,22000000.0,183.0,left
-206746,Kenny Tete,GB1,Premier League,931,Fulham FC,30,Right-Back,Netherlands,8000000.0,180.0,right
-262226,Timothy Castagne,GB1,Premier League,931,Fulham FC,30,Right-Back,Belgium,8000000.0,185.0,right
-208379,Christian Walton,GB1,Premier League,677,Ipswich Town,30,Goalkeeper,England,2500000.0,195.0,left
-245625,Alex Palmer,GB1,Premier League,677,Ipswich Town,29,Goalkeeper,England,1000000.0,191.0,right
-621997,Cieran Slicker,GB1,Premier League,677,Ipswich Town,23,Goalkeeper,Scotland,350000.0,191.0,
-61814,David Button,GB1,Premier League,677,Ipswich Town,37,Goalkeeper,England,50000.0,191.0,right
-401320,Dara O'Shea,GB1,Premier League,677,Ipswich Town,27,Centre-Back,Ireland,16000000.0,189.0,right
-693095,Jacob Greaves,GB1,Premier League,677,Ipswich Town,25,Centre-Back,England,14000000.0,193.0,left
-364827,Cédric Kipré,GB1,Premier League,677,Ipswich Town,29,Centre-Back,Cote d'Ivoire,2000000.0,193.0,right
-758030,Elkan Baggott,GB1,Premier League,677,Ipswich Town,23,Centre-Back,Indonesia,200000.0,196.0,left
-596446,Leif Davis,GB1,Premier League,677,Ipswich Town,26,Left-Back,England,20000000.0,182.0,left
-468002,Ben Johnson,GB1,Premier League,677,Ipswich Town,26,Right-Back,England,6000000.0,184.0,right
-527329,Oliver Dovin,GB1,Premier League,990,Coventry City,23,Goalkeeper,Sweden,2000000.0,188.0,right
-121352,Ben Wilson,GB1,Premier League,990,Coventry City,33,Goalkeeper,England,300000.0,186.0,right
-788283,Bobby Thomas,GB1,Premier League,990,Coventry City,25,Centre-Back,England,16000000.0,186.0,right
-534701,Liam Kitching,GB1,Premier League,990,Coventry City,26,Centre-Back,England,14000000.0,186.0,left
-412823,Joel Latibeaudiere,GB1,Premier League,990,Coventry City,26,Centre-Back,Jamaica,3000000.0,180.0,right
-527425,Luke Woolfenden,GB1,Premier League,990,Coventry City,27,Centre-Back,England,2000000.0,193.0,right
-258915,Jay Dasilva,GB1,Premier League,990,Coventry City,28,Left-Back,Wales,9000000.0,170.0,left
-713649,Miguel Ángel Brau,GB1,Premier League,990,Coventry City,24,Left-Back,Spain,1000000.0,183.0,left
-121250,Jake Bidwell,GB1,Premier League,990,Coventry City,33,Left-Back,England,600000.0,183.0,left
-587335,Milan van Ewijk,GB1,Premier League,990,Coventry City,25,Right-Back,Netherlands,22000000.0,175.0,right
-128899,Jack Butland,GB1,Premier League,3008,Hull City,33,Goalkeeper,England,1500000.0,196.0,right
-655877,Thimothée Lo-Tutala,GB1,Premier League,3008,Hull City,23,Goalkeeper,France,400000.0,191.0,right
-308431,Dillon Phillips,GB1,Premier League,3008,Hull City,31,Goalkeeper,England,200000.0,188.0,right
-712592,Harvey Cartwright,GB1,Premier League,3008,Hull City,24,Goalkeeper,England,150000.0,192.0,right
-746357,Charlie Hughes,GB1,Premier League,3008,Hull City,22,Centre-Back,England,10000000.0,185.0,right
-167268,Paddy McNair,GB1,Premier League,3008,Hull City,31,Centre-Back,Northern Ireland,1500000.0,189.0,right
-121324,John Egan,GB1,Premier League,3008,Hull City,33,Centre-Back,Ireland,1000000.0,185.0,right
-251912,Semi Ajayi,GB1,Premier League,3008,Hull City,32,Centre-Back,Nigeria,700000.0,193.0,right
-504581,Ryan Giles,GB1,Premier League,3008,Hull City,26,Left-Back,England,12000000.0,183.0,left
-729940,Matty Jacob,GB1,Premier League,3008,Hull City,25,Left-Back,England,400000.0,180.0,left
+player_id,player_name,competition_id,competition_name,club_id,club_name,age,position,nationality,market_value,height,foot,contract_expires,total_days_injured,total_games_missed
+315858,Gianluigi Donnarumma,GB1,Premier League,281,Manchester City,27,Goalkeeper,Italy,45000000.0,196.0,right,,,
+566799,James Trafford,GB1,Premier League,281,Manchester City,23,Goalkeeper,England,25000000.0,192.0,right,,,
+116648,Marcus Bettinelli,GB1,Premier League,281,Manchester City,34,Goalkeeper,England,300000.0,193.0,right,,,
+392757,Marc Guéhi,GB1,Premier League,281,Manchester City,25,Centre-Back,England,70000000.0,182.0,right,,,
+475959,Josko Gvardiol,GB1,Premier League,281,Manchester City,24,Centre-Back,Croatia,70000000.0,185.0,left,,,
+258004,Rúben Dias,GB1,Premier League,281,Manchester City,29,Centre-Back,Portugal,55000000.0,187.0,right,,,
+763079,Abdukodir Khusanov,GB1,Premier League,281,Manchester City,22,Centre-Back,Uzbekistan,50000000.0,186.0,right,,,
+1005575,Vitor Reis,GB1,Premier League,281,Manchester City,20,Centre-Back,Brazil,30000000.0,186.0,right,,,
+177476,Nathan Aké,GB1,Premier League,281,Manchester City,31,Centre-Back,Netherlands,12000000.0,180.0,left,,,
+1121298,Juma Bah,GB1,Premier League,281,Manchester City,20,Centre-Back,Sierra Leone,10000000.0,195.0,right,,,
+262749,David Raya,GB1,Premier League,11,Arsenal FC,30,Goalkeeper,Spain,30000000.0,186.0,right,,,
+192279,Kepa Arrizabalaga,GB1,Premier League,11,Arsenal FC,31,Goalkeeper,Spain,5000000.0,188.0,right,,,
+495666,William Saliba,GB1,Premier League,11,Arsenal FC,25,Centre-Back,France,100000000.0,192.0,right,,,
+435338,Gabriel,GB1,Premier League,11,Arsenal FC,28,Centre-Back,Brazil,75000000.0,190.0,left,,,
+659813,Piero Hincapié,GB1,Premier League,11,Arsenal FC,24,Centre-Back,Ecuador,50000000.0,183.0,left,,,
+646750,Cristhian Mosquera,GB1,Premier League,11,Arsenal FC,22,Centre-Back,Spain,40000000.0,191.0,right,,,
+502821,Riccardo Calafiori,GB1,Premier League,11,Arsenal FC,24,Left-Back,Italy,55000000.0,188.0,left,,,
+420243,Jurriën Timber,GB1,Premier League,11,Arsenal FC,25,Right-Back,Netherlands,70000000.0,179.0,right,,,
+335721,Ben White,GB1,Premier League,11,Arsenal FC,28,Right-Back,England,30000000.0,186.0,right,,,
+423440,Martín Zubimendi,GB1,Premier League,11,Arsenal FC,27,Defensive Midfield,Spain,75000000.0,181.0,right,,,
+834397,Mike Penders,GB1,Premier League,631,Chelsea FC,20,Goalkeeper,Belgium,25000000.0,200.0,left,,,
+403151,Robert Sánchez,GB1,Premier League,631,Chelsea FC,28,Goalkeeper,Spain,22000000.0,197.0,right,,,
+585323,Filip Jørgensen,GB1,Premier League,631,Chelsea FC,24,Goalkeeper,Denmark,15000000.0,192.0,right,,,
+656316,Gabriel Slonina,GB1,Premier League,631,Chelsea FC,22,Goalkeeper,United States,3000000.0,193.0,right,,,
+731466,Teddy Sharman-Lowe,GB1,Premier League,631,Chelsea FC,23,Goalkeeper,England,500000.0,189.0,right,,,
+614258,Levi Colwill,GB1,Premier League,631,Chelsea FC,23,Centre-Back,England,50000000.0,187.0,left,,,
+346314,Trevoh Chalobah,GB1,Premier League,631,Chelsea FC,26,Centre-Back,England,40000000.0,192.0,right,,,
+475411,Wesley Fofana,GB1,Premier League,631,Chelsea FC,25,Centre-Back,France,28000000.0,188.0,right,,,
+910905,Mamadou Sarr,GB1,Premier League,631,Chelsea FC,20,Centre-Back,Senegal,22000000.0,194.0,right,,,
+258878,Tosin Adarabioyo,GB1,Premier League,631,Chelsea FC,28,Centre-Back,England,16000000.0,197.0,right,,,
+502676,Giorgi Mamardashvili,GB1,Premier League,31,Liverpool FC,25,Goalkeeper,Georgia,28000000.0,197.0,left,,,
+105470,Alisson,GB1,Premier League,31,Liverpool FC,33,Goalkeeper,Brazil,15000000.0,193.0,right,,,
+486604,Vitezslav Jaros,GB1,Premier League,31,Liverpool FC,24,Goalkeeper,Czech Republic,5000000.0,190.0,right,,,
+226049,Freddie Woodman,GB1,Premier League,31,Liverpool FC,29,Goalkeeper,England,3000000.0,188.0,right,,,
+706815,Harvey Davies,GB1,Premier League,31,Liverpool FC,22,Goalkeeper,England,500000.0,190.0,left,,,
+1004301,Jérémy Jacquet,GB1,Premier League,31,Liverpool FC,20,Centre-Back,France,55000000.0,190.0,right,,,
+1086619,Giovanni Leoni,GB1,Premier League,31,Liverpool FC,19,Centre-Back,Italy,25000000.0,196.0,right,,,
+139208,Virgil van Dijk,GB1,Premier League,31,Liverpool FC,34,Centre-Back,Netherlands,15000000.0,195.0,right,,,
+256178,Joe Gomez,GB1,Premier League,31,Liverpool FC,29,Centre-Back,England,13000000.0,188.0,right,,,
+730861,Milos Kerkez,GB1,Premier League,31,Liverpool FC,22,Left-Back,Hungary,35000000.0,180.0,left,,,
+503883,Senne Lammens,GB1,Premier League,985,Manchester United,23,Goalkeeper,Belgium,35000000.0,193.0,right,,,
+234509,André Onana,GB1,Premier League,985,Manchester United,30,Goalkeeper,Cameroon,10000000.0,190.0,right,,,
+336077,Altay Bayındır,GB1,Premier League,985,Manchester United,28,Goalkeeper,Türkiye,5000000.0,198.0,right,,,
+34130,Tom Heaton,GB1,Premier League,985,Manchester United,40,Goalkeeper,England,100000.0,188.0,right,,,
+923831,Leny Yoro,GB1,Premier League,985,Manchester United,20,Centre-Back,France,50000000.0,190.0,right,,,
+480762,Lisandro Martínez,GB1,Premier League,985,Manchester United,28,Centre-Back,Argentina,40000000.0,175.0,left,,,
+326031,Matthijs de Ligt,GB1,Premier League,985,Manchester United,26,Centre-Back,Netherlands,30000000.0,189.0,right,,,
+1078163,Ayden Heaven,GB1,Premier League,985,Manchester United,19,Centre-Back,England,30000000.0,189.0,left,,,
+177907,Harry Maguire,GB1,Premier League,985,Manchester United,33,Centre-Back,England,8000000.0,194.0,right,,,
+911424,Tyler Fredricson,GB1,Premier League,985,Manchester United,21,Centre-Back,England,3000000.0,188.0,right,,,
+565093,Bart Verbruggen,GB1,Premier League,1237,Brighton & Hove Albion,23,Goalkeeper,Netherlands,40000000.0,193.0,right,,,
+646353,Carl Rushworth,GB1,Premier League,1237,Brighton & Hove Albion,25,Goalkeeper,England,16000000.0,191.0,left,,,
+670860,James Beadle,GB1,Premier League,1237,Brighton & Hove Albion,21,Goalkeeper,England,6000000.0,201.0,right,,,
+73564,Jason Steele,GB1,Premier League,1237,Brighton & Hove Albion,35,Goalkeeper,England,500000.0,188.0,right,,,
+406556,Tom McGill,GB1,Premier League,1237,Brighton & Hove Albion,26,Goalkeeper,Canada,500000.0,185.0,right,,,
+410708,Pascal Struijk,GB1,Premier League,1237,Brighton & Hove Albion,26,Centre-Back,Netherlands,22000000.0,190.0,left,,,
+660860,Diego Coppola,GB1,Premier League,1237,Brighton & Hove Albion,22,Centre-Back,Italy,18000000.0,193.0,right,,,
+318508,Olivier Boscagli,GB1,Premier League,1237,Brighton & Hove Albion,28,Centre-Back,France,15000000.0,181.0,left,,,
+380350,Igor Julio,GB1,Premier League,1237,Brighton & Hove Albion,28,Centre-Back,Brazil,10000000.0,188.0,left,,,
+581330,Eiran Cashin,GB1,Premier League,1237,Brighton & Hove Albion,24,Centre-Back,Ireland,5000000.0,184.0,left,,,
+923757,Ewen Jaouen,GB1,Premier League,762,Newcastle United,20,Goalkeeper,France,12000000.0,200.0,right,,,
+192080,Nick Pope,GB1,Premier League,762,Newcastle United,34,Goalkeeper,England,5000000.0,198.0,right,,,
+142389,Mark Gillespie,GB1,Premier League,762,Newcastle United,34,Goalkeeper,England,100000.0,191.0,right,,,
+521964,Malick Thiaw,GB1,Premier League,762,Newcastle United,24,Centre-Back,Germany,45000000.0,194.0,right,,,
+361093,Sven Botman,GB1,Premier League,762,Newcastle United,26,Centre-Back,Netherlands,35000000.0,193.0,left,,,
+135343,Fabian Schär,GB1,Premier League,762,Newcastle United,34,Centre-Back,Switzerland,4000000.0,186.0,right,,,
+134270,Dan Burn,GB1,Premier League,762,Newcastle United,34,Centre-Back,England,4000000.0,201.0,left,,,
+670858,Lewis Hall,GB1,Premier League,762,Newcastle United,21,Left-Back,England,40000000.0,179.0,left,,,
+900601,Alex Murphy,GB1,Premier League,762,Newcastle United,22,Left-Back,Ireland,1500000.0,188.0,left,,,
+503981,Tino Livramento,GB1,Premier League,762,Newcastle United,23,Right-Back,England,45000000.0,182.0,right,,,
+465555,Djordje Petrovic,GB1,Premier League,989,AFC Bournemouth,26,Goalkeeper,Serbia,28000000.0,194.0,right,,,
+617009,Alex Paulsen,GB1,Premier League,989,AFC Bournemouth,23,Goalkeeper,New Zealand,500000.0,193.0,right,,,
+52570,Fraser Forster,GB1,Premier League,989,AFC Bournemouth,38,Goalkeeper,England,400000.0,201.0,right,,,
+582078,Will Dennis,GB1,Premier League,989,AFC Bournemouth,25,Goalkeeper,England,325000.0,188.0,right,,,
+463605,Bafodé Diakité,GB1,Premier League,989,AFC Bournemouth,25,Centre-Back,France,25000000.0,184.0,right,,,
+611793,James Hill,GB1,Premier League,989,AFC Bournemouth,24,Centre-Back,England,23000000.0,184.0,right,,,
+989112,Veljko Milosavljevic,GB1,Premier League,989,AFC Bournemouth,19,Centre-Back,Serbia,20000000.0,192.0,right,,,
+994604,Matai Akinmboni,GB1,Premier League,989,AFC Bournemouth,19,Centre-Back,United States,1000000.0,188.0,left,,,
+654539,Adrien Truffert,GB1,Premier League,989,AFC Bournemouth,24,Left-Back,France,30000000.0,176.0,left,,,
+1009658,Julio Soler,GB1,Premier League,989,AFC Bournemouth,21,Left-Back,Argentina,8000000.0,175.0,left,,,
+111873,Emiliano Martínez,GB1,Premier League,405,Aston Villa,33,Goalkeeper,Argentina,12000000.0,195.0,right,,,
+555074,Oliwier Zych,GB1,Premier League,405,Aston Villa,22,Goalkeeper,Poland,2000000.0,193.0,right,,,
+124884,Marco Bizot,GB1,Premier League,405,Aston Villa,35,Goalkeeper,Netherlands,1500000.0,193.0,right,,,
+591844,Joe Gauci,GB1,Premier League,405,Aston Villa,25,Goalkeeper,Australia,1200000.0,194.0,right,,,
+413403,Ezri Konsa,GB1,Premier League,405,Aston Villa,28,Centre-Back,England,40000000.0,180.0,right,,,
+399776,Pau Torres,GB1,Premier League,405,Aston Villa,29,Centre-Back,Spain,20000000.0,192.0,left,,,
+1282860,Modou Kéba Cissé,GB1,Premier League,405,Aston Villa,20,Centre-Back,Senegal,6000000.0,191.0,,,,
+184573,Victor Lindelöf,GB1,Premier League,405,Aston Villa,31,Centre-Back,Sweden,5000000.0,187.0,right,,,
+253677,Tyrone Mings,GB1,Premier League,405,Aston Villa,33,Centre-Back,England,3000000.0,196.0,left,,,
+485585,Ian Maatsen,GB1,Premier League,405,Aston Villa,24,Left-Back,Netherlands,30000000.0,178.0,left,,,
+432914,John Victor,GB1,Premier League,703,Nottingham Forest,30,Goalkeeper,Brazil,5000000.0,197.0,right,,,
+127202,Matz Sels,GB1,Premier League,703,Nottingham Forest,34,Goalkeeper,Belgium,3500000.0,188.0,right,,,
+1005649,Murillo,GB1,Premier League,703,Nottingham Forest,23,Centre-Back,Brazil,50000000.0,180.0,left,,,
+413507,Nikola Milenković,GB1,Premier League,703,Nottingham Forest,28,Centre-Back,Serbia,28000000.0,195.0,right,,,
+984096,Jair Cunha,GB1,Premier League,703,Nottingham Forest,21,Centre-Back,Brazil,15000000.0,198.0,both,,,
+673492,Morato,GB1,Premier League,703,Nottingham Forest,25,Centre-Back,Brazil,14000000.0,192.0,left,,,
+933017,Zach Abbott,GB1,Premier League,703,Nottingham Forest,20,Centre-Back,England,4000000.0,180.0,right,,,
+1007720,Tyler Bindon,GB1,Premier League,703,Nottingham Forest,21,Centre-Back,New Zealand,3500000.0,190.0,right,,,
+503680,Neco Williams,GB1,Premier League,703,Nottingham Forest,25,Left-Back,Wales,28000000.0,183.0,right,,,
+524285,Luca Netz,GB1,Premier League,703,Nottingham Forest,23,Left-Back,Germany,8000000.0,184.0,left,,,
+258919,Dean Henderson,GB1,Premier League,873,Crystal Palace,29,Goalkeeper,England,28000000.0,188.0,right,,,
+296802,Walter Benítez,GB1,Premier League,873,Crystal Palace,33,Goalkeeper,Argentina,4000000.0,191.0,right,,,
+814848,Owen Goodman,GB1,Premier League,873,Crystal Palace,22,Goalkeeper,Canada,550000.0,193.0,left,,,
+196722,Remi Matthews,GB1,Premier League,873,Crystal Palace,32,Goalkeeper,England,200000.0,183.0,right,,,
+434224,Maxence Lacroix,GB1,Premier League,873,Crystal Palace,26,Centre-Back,France,50000000.0,190.0,right,,,
+1006411,Jaydee Canvot,GB1,Premier League,873,Crystal Palace,19,Centre-Back,France,28000000.0,188.0,right,,,
+578539,Chris Richards,GB1,Premier League,873,Crystal Palace,26,Centre-Back,United States,28000000.0,189.0,right,,,
+689637,Chadi Riad,GB1,Premier League,873,Crystal Palace,23,Centre-Back,Morocco,15000000.0,186.0,left,,,
+730893,Tyrick Mitchell,GB1,Premier League,873,Crystal Palace,26,Left-Back,England,25000000.0,181.0,left,,,
+293194,Borna Sosa,GB1,Premier League,873,Crystal Palace,28,Left-Back,Croatia,3000000.0,187.0,left,,,
+340918,Caoimhín Kelleher,GB1,Premier League,1148,Brentford FC,27,Goalkeeper,Ireland,28000000.0,188.0,right,,,
+488935,Hákon Valdimarsson,GB1,Premier League,1148,Brentford FC,24,Goalkeeper,Iceland,2500000.0,195.0,right,,,
+741236,Matthew Cox,GB1,Premier League,1148,Brentford FC,23,Goalkeeper,England,700000.0,183.0,right,,,
+456292,Ellery Balcombe,GB1,Premier League,1148,Brentford FC,26,Goalkeeper,England,400000.0,190.0,right,,,
+1008553,Julian Eyestone,GB1,Premier League,1148,Brentford FC,20,Goalkeeper,United States,0.0,200.0,right,,,
+541231,Sepp van den Berg,GB1,Premier League,1148,Brentford FC,24,Centre-Back,Netherlands,32000000.0,192.0,right,,,
+469050,Nathan Collins,GB1,Premier League,1148,Brentford FC,25,Centre-Back,Ireland,30000000.0,193.0,right,,,
+915418,Jannik Schuster,GB1,Premier League,1148,Brentford FC,20,Centre-Back,Austria,18000000.0,190.0,right,,,
+328658,Kristoffer Ajer,GB1,Premier League,1148,Brentford FC,28,Centre-Back,Norway,18000000.0,198.0,right,,,
+442248,Ethan Pinnock,GB1,Premier League,1148,Brentford FC,33,Centre-Back,Jamaica,3000000.0,194.0,left,,,
+130164,Jordan Pickford,GB1,Premier League,29,Everton FC,32,Goalkeeper,England,13000000.0,185.0,left,,,
+357658,Mark Travers,GB1,Premier League,29,Everton FC,27,Goalkeeper,Ireland,3000000.0,191.0,right,,,
+215810,Tom King,GB1,Premier League,29,Everton FC,31,Goalkeeper,Wales,100000.0,194.0,right,,,
+661053,Jarrad Branthwaite,GB1,Premier League,29,Everton FC,24,Centre-Back,England,40000000.0,195.0,left,,,
+173504,James Tarkowski,GB1,Premier League,29,Everton FC,33,Centre-Back,England,5000000.0,185.0,right,,,
+118534,Michael Keane,GB1,Premier League,29,Everton FC,33,Centre-Back,England,3000000.0,188.0,right,,,
+404842,Vitaliy Mykolenko,GB1,Premier League,29,Everton FC,27,Left-Back,Ukraine,25000000.0,180.0,left,,,
+938146,Adam Aznou,GB1,Premier League,29,Everton FC,20,Left-Back,Morocco,6000000.0,178.0,left,,,
+711544,Jake O'Brien,GB1,Premier League,29,Everton FC,25,Right-Back,Ireland,18000000.0,197.0,right,,,
+424015,Nathan Patterson,GB1,Premier League,29,Everton FC,24,Right-Back,Scotland,10000000.0,183.0,right,,,
+646991,Robin Roefs,GB1,Premier League,289,Sunderland AFC,23,Goalkeeper,Netherlands,28000000.0,193.0,left,,,
+475946,Anthony Patterson,GB1,Premier League,289,Sunderland AFC,26,Goalkeeper,England,8000000.0,189.0,right,,,
+605426,Melker Ellborg,GB1,Premier League,289,Sunderland AFC,23,Goalkeeper,Sweden,3000000.0,191.0,right,,,
+123536,Simon Moore,GB1,Premier League,289,Sunderland AFC,36,Goalkeeper,England,75000.0,191.0,right,,,
+503686,Dan Ballard,GB1,Premier League,289,Sunderland AFC,26,Centre-Back,Northern Ireland,20000000.0,187.0,right,,,
+353032,Omar Alderete,GB1,Premier League,289,Sunderland AFC,29,Centre-Back,Paraguay,13000000.0,190.0,left,,,
+617755,Jenson Seelt,GB1,Premier League,289,Sunderland AFC,23,Centre-Back,Netherlands,5000000.0,195.0,right,,,
+661208,Leo Hjelde,GB1,Premier League,289,Sunderland AFC,22,Centre-Back,Norway,1500000.0,190.0,left,,,
+502065,Aji Alese,GB1,Premier League,289,Sunderland AFC,25,Centre-Back,England,700000.0,192.0,left,,,
+282939,Luke O'Nien,GB1,Premier League,289,Sunderland AFC,31,Centre-Back,England,700000.0,174.0,right,,,
+352041,Lucas Perri,GB1,Premier League,399,Leeds United,28,Goalkeeper,Brazil,10000000.0,197.0,right,,,
+99397,Karl Darlow,GB1,Premier League,399,Leeds United,35,Goalkeeper,Wales,200000.0,190.0,right,,,
+194386,Alex Cairns,GB1,Premier League,399,Leeds United,33,Goalkeeper,England,50000.0,183.0,right,,,
+371851,Jaka Bijol,GB1,Premier League,399,Leeds United,27,Centre-Back,Slovenia,20000000.0,190.0,right,,,
+297212,Joe Rodon,GB1,Premier League,399,Leeds United,28,Centre-Back,Wales,18000000.0,193.0,right,,,
+338629,Sebastiaan Bornauw,GB1,Premier League,399,Leeds United,27,Centre-Back,Belgium,8000000.0,191.0,right,,,
+263361,Maximilian Wöber,GB1,Premier League,399,Leeds United,28,Centre-Back,Austria,3000000.0,188.0,left,,,
+362108,Gabriel Gudmundsson,GB1,Premier League,399,Leeds United,27,Left-Back,Sweden,20000000.0,181.0,left,,,
+449597,Isaac Schmidt,GB1,Premier League,399,Leeds United,26,Left-Back,Switzerland,2200000.0,172.0,right,,,
+236953,Sam Byram,GB1,Premier League,399,Leeds United,32,Left-Back,England,400000.0,183.0,right,,,
+72476,Bernd Leno,GB1,Premier League,931,Fulham FC,34,Goalkeeper,Germany,6000000.0,190.0,right,,,
+127181,Benjamin Lecomte,GB1,Premier League,931,Fulham FC,35,Goalkeeper,France,800000.0,186.0,left,,,
+461883,Calvin Bassey,GB1,Premier League,931,Fulham FC,26,Centre-Back,Nigeria,28000000.0,185.0,left,,,
+260827,Joachim Andersen,GB1,Premier League,931,Fulham FC,30,Centre-Back,Denmark,20000000.0,192.0,right,,,
+494880,Jorge Cuenca,GB1,Premier League,931,Fulham FC,26,Centre-Back,Spain,8000000.0,190.0,left,,,
+272622,Issa Diop,GB1,Premier League,931,Fulham FC,29,Centre-Back,Morocco,8000000.0,194.0,right,,,
+392775,Ryan Sessegnon,GB1,Premier League,931,Fulham FC,26,Left-Back,England,22000000.0,178.0,left,,,
+349701,Antonee Robinson,GB1,Premier League,931,Fulham FC,28,Left-Back,United States,22000000.0,183.0,left,,,
+206746,Kenny Tete,GB1,Premier League,931,Fulham FC,30,Right-Back,Netherlands,8000000.0,180.0,right,,,
+262226,Timothy Castagne,GB1,Premier League,931,Fulham FC,30,Right-Back,Belgium,8000000.0,185.0,right,,,
+208379,Christian Walton,GB1,Premier League,677,Ipswich Town,30,Goalkeeper,England,2500000.0,195.0,left,,,
+245625,Alex Palmer,GB1,Premier League,677,Ipswich Town,29,Goalkeeper,England,1000000.0,191.0,right,,,
+621997,Cieran Slicker,GB1,Premier League,677,Ipswich Town,23,Goalkeeper,Scotland,350000.0,191.0,,,,
+61814,David Button,GB1,Premier League,677,Ipswich Town,37,Goalkeeper,England,50000.0,191.0,right,,,
+401320,Dara O'Shea,GB1,Premier League,677,Ipswich Town,27,Centre-Back,Ireland,16000000.0,189.0,right,,,
+693095,Jacob Greaves,GB1,Premier League,677,Ipswich Town,25,Centre-Back,England,14000000.0,193.0,left,,,
+364827,Cédric Kipré,GB1,Premier League,677,Ipswich Town,29,Centre-Back,Cote d'Ivoire,2000000.0,193.0,right,,,
+758030,Elkan Baggott,GB1,Premier League,677,Ipswich Town,23,Centre-Back,Indonesia,200000.0,196.0,left,,,
+596446,Leif Davis,GB1,Premier League,677,Ipswich Town,26,Left-Back,England,20000000.0,182.0,left,,,
+468002,Ben Johnson,GB1,Premier League,677,Ipswich Town,26,Right-Back,England,6000000.0,184.0,right,,,
+527329,Oliver Dovin,GB1,Premier League,990,Coventry City,23,Goalkeeper,Sweden,2000000.0,188.0,right,,,
+121352,Ben Wilson,GB1,Premier League,990,Coventry City,33,Goalkeeper,England,300000.0,186.0,right,,,
+788283,Bobby Thomas,GB1,Premier League,990,Coventry City,25,Centre-Back,England,16000000.0,186.0,right,,,
+534701,Liam Kitching,GB1,Premier League,990,Coventry City,26,Centre-Back,England,14000000.0,186.0,left,,,
+412823,Joel Latibeaudiere,GB1,Premier League,990,Coventry City,26,Centre-Back,Jamaica,3000000.0,180.0,right,,,
+527425,Luke Woolfenden,GB1,Premier League,990,Coventry City,27,Centre-Back,England,2000000.0,193.0,right,,,
+258915,Jay Dasilva,GB1,Premier League,990,Coventry City,28,Left-Back,Wales,9000000.0,170.0,left,,,
+713649,Miguel Ángel Brau,GB1,Premier League,990,Coventry City,24,Left-Back,Spain,1000000.0,183.0,left,,,
+121250,Jake Bidwell,GB1,Premier League,990,Coventry City,33,Left-Back,England,600000.0,183.0,left,,,
+587335,Milan van Ewijk,GB1,Premier League,990,Coventry City,25,Right-Back,Netherlands,22000000.0,175.0,right,,,
+128899,Jack Butland,GB1,Premier League,3008,Hull City,33,Goalkeeper,England,1500000.0,196.0,right,,,
+655877,Thimothée Lo-Tutala,GB1,Premier League,3008,Hull City,23,Goalkeeper,France,400000.0,191.0,right,,,
+308431,Dillon Phillips,GB1,Premier League,3008,Hull City,31,Goalkeeper,England,200000.0,188.0,right,,,
+712592,Harvey Cartwright,GB1,Premier League,3008,Hull City,24,Goalkeeper,England,150000.0,192.0,right,,,
+746357,Charlie Hughes,GB1,Premier League,3008,Hull City,22,Centre-Back,England,10000000.0,185.0,right,,,
+167268,Paddy McNair,GB1,Premier League,3008,Hull City,31,Centre-Back,Northern Ireland,1500000.0,189.0,right,,,
+121324,John Egan,GB1,Premier League,3008,Hull City,33,Centre-Back,Ireland,1000000.0,185.0,right,,,
+251912,Semi Ajayi,GB1,Premier League,3008,Hull City,32,Centre-Back,Nigeria,700000.0,193.0,right,,,
+504581,Ryan Giles,GB1,Premier League,3008,Hull City,26,Left-Back,England,12000000.0,183.0,left,,,
+729940,Matty Jacob,GB1,Premier League,3008,Hull City,25,Left-Back,England,400000.0,180.0,left,,,
+108390,Thibaut Courtois,ES1,La Liga,418,Real Madrid,34,Goalkeeper,Belgium,15000000.0,199.0,left,2027-06-30,494.0,96.0
+404839,Andriy Lunin,ES1,La Liga,418,Real Madrid,27,Goalkeeper,Ukraine,12000000.0,191.0,right,2030-06-30,88.0,17.0
+1055220,Fran González,ES1,La Liga,418,Real Madrid,21,Goalkeeper,Spain,3000000.0,199.0,right,2028-06-30,0.0,0.0
+890290,Dean Huijsen,ES1,La Liga,418,Real Madrid,21,Centre-Back,Spain,60000000.0,197.0,both,2030-06-30,88.0,18.0
+357119,Ibrahima Konaté,ES1,La Liga,418,Real Madrid,27,Centre-Back,France,45000000.0,194.0,right,2030-06-30,578.0,92.0
+401530,Éder Militão,ES1,La Liga,418,Real Madrid,28,Centre-Back,Brazil,20000000.0,186.0,right,2028-06-30,843.0,158.0
+935245,Raúl Asencio,ES1,La Liga,418,Real Madrid,23,Centre-Back,Spain,20000000.0,184.0,right,2031-06-30,47.0,8.0
+86202,Antonio Rüdiger,ES1,La Liga,418,Real Madrid,33,Centre-Back,Germany,6000000.0,190.0,right,2027-06-30,415.0,81.0
+284857,Marc Cucurella,ES1,La Liga,418,Real Madrid,27,Left-Back,Spain,50000000.0,173.0,left,2032-06-30,237.0,31.0
+811778,Álvaro Carreras,ES1,La Liga,418,Real Madrid,23,Left-Back,Spain,50000000.0,186.0,left,2031-06-30,29.0,7.0
+561613,Joan García,ES1,La Liga,131,FC Barcelona,25,Goalkeeper,Spain,45000000.0,194.0,right,2031-06-30,235.0,9.0
+74857,Marc-André ter Stegen,ES1,La Liga,131,FC Barcelona,34,Goalkeeper,Germany,3000000.0,187.0,right,2028-06-30,822.0,143.0
+938145,Áron Yaakobishvili,ES1,La Liga,131,FC Barcelona,20,Goalkeeper,Hungary,3000000.0,187.0,both,2028-06-30,10.0,3.0
+938144,Diego Kochen,ES1,La Liga,131,FC Barcelona,20,Goalkeeper,United States,1500000.0,190.0,right,2028-06-30,35.0,13.0
+44058,Wojciech Szczesny,ES1,La Liga,131,FC Barcelona,36,Goalkeeper,Poland,800000.0,195.0,right,2027-06-30,271.0,23.0
+962110,Pau Cubarsí,ES1,La Liga,131,FC Barcelona,19,Centre-Back,Spain,80000000.0,184.0,right,2029-06-30,7.0,1.0
+466794,Eric García,ES1,La Liga,131,FC Barcelona,25,Centre-Back,Spain,40000000.0,183.0,right,2031-06-30,214.0,37.0
+705395,Gerard Martín,ES1,La Liga,131,FC Barcelona,24,Centre-Back,Spain,35000000.0,186.0,left,2028-06-30,40.0,0.0
+480267,Ronald Araujo,ES1,La Liga,131,FC Barcelona,27,Centre-Back,Uruguay,20000000.0,192.0,right,2031-06-30,417.0,80.0
+196948,Andreas Christensen,ES1,La Liga,131,FC Barcelona,30,Centre-Back,Denmark,8000000.0,189.0,right,2028-06-30,535.0,116.0
+121483,Jan Oblak,ES1,La Liga,13,Atlético de Madrid,33,Goalkeeper,Slovenia,15000000.0,188.0,right,2028-06-30,248.0,36.0
+242359,Juan Musso,ES1,La Liga,13,Atlético de Madrid,32,Goalkeeper,Argentina,3000000.0,193.0,right,2028-06-30,115.0,12.0
+525438,Horațiu Moldovan,ES1,La Liga,13,Atlético de Madrid,28,Goalkeeper,Romania,1800000.0,193.0,right,2027-06-30,6.0,1.0
+404418,Dávid Hancko,ES1,La Liga,13,Atlético de Madrid,28,Centre-Back,Slovakia,35000000.0,188.0,left,2030-06-30,286.0,37.0
+844637,Marc Pubill,ES1,La Liga,13,Atlético de Madrid,23,Centre-Back,Spain,35000000.0,191.0,right,2030-06-30,121.0,16.0
+351809,Robin Le Normand,ES1,La Liga,13,Atlético de Madrid,29,Centre-Back,Spain,20000000.0,187.0,right,2029-06-30,149.0,27.0
+250845,José María Giménez,ES1,La Liga,13,Atlético de Madrid,31,Centre-Back,Uruguay,9000000.0,186.0,right,2028-06-30,524.0,76.0
+616631,Matteo Ruggeri,ES1,La Liga,13,Atlético de Madrid,23,Left-Back,Italy,28000000.0,187.0,left,2030-06-30,331.0,54.0
+193082,Alejandro Grimaldo,ES1,La Liga,13,Atlético de Madrid,30,Left-Back,Spain,20000000.0,171.0,left,2030-06-30,401.0,60.0
+282411,Marcos Llorente,ES1,La Liga,13,Atlético de Madrid,31,Right-Back,Spain,20000000.0,183.0,right,2027-06-30,436.0,64.0
+712107,Luiz Júnior,ES1,La Liga,1050,Villarreal CF,25,Goalkeeper,Brazil,12000000.0,192.0,left,2030-06-30,0.0,0.0
+466783,Arnau Tenas,ES1,La Liga,1050,Villarreal CF,25,Goalkeeper,Spain,4000000.0,185.0,right,2029-06-30,40.0,15.0
+341713,Diego Conde,ES1,La Liga,1050,Villarreal CF,27,Goalkeeper,Spain,3000000.0,188.0,right,2029-06-30,43.0,4.0
+805714,Renato Veiga,ES1,La Liga,1050,Villarreal CF,22,Centre-Back,Portugal,25000000.0,188.0,left,2032-06-30,77.0,10.0
+484988,Logan Costa,ES1,La Liga,1050,Villarreal CF,25,Centre-Back,Cape Verde,15000000.0,190.0,right,2030-06-30,281.0,51.0
+1061336,Pau Navarro,ES1,La Liga,1050,Villarreal CF,21,Centre-Back,Spain,15000000.0,185.0,right,2030-06-30,7.0,2.0
+480763,Juan Foyth,ES1,La Liga,1050,Villarreal CF,28,Centre-Back,Argentina,8000000.0,187.0,right,2029-06-30,1039.0,138.0
+780630,Willy Kambwala,ES1,La Liga,1050,Villarreal CF,21,Centre-Back,France,3000000.0,192.0,right,2029-06-30,306.0,41.0
+709372,Carlos Romero,ES1,La Liga,1050,Villarreal CF,24,Left-Back,Spain,25000000.0,174.0,left,2031-06-30,0.0,0.0
+678406,Sergi Cardona,ES1,La Liga,1050,Villarreal CF,26,Left-Back,Spain,9000000.0,186.0,both,2027-06-30,0.0,0.0
+212862,Álex Remiro,ES1,La Liga,681,Real Sociedad,31,Goalkeeper,Spain,9000000.0,192.0,right,2027-06-30,39.0,7.0
+625657,Unai Marrero,ES1,La Liga,681,Real Sociedad,24,Goalkeeper,Spain,1000000.0,189.0,right,2030-06-30,13.0,4.0
+1018938,Jon Martín,ES1,La Liga,681,Real Sociedad,20,Centre-Back,Spain,25000000.0,187.0,right,2031-06-30,17.0,2.0
+355628,Igor Zubeldia,ES1,La Liga,681,Real Sociedad,29,Centre-Back,Spain,6000000.0,181.0,right,2029-06-30,307.0,24.0
+580560,Jon Pacheco,ES1,La Liga,681,Real Sociedad,25,Centre-Back,Spain,5000000.0,184.0,left,2030-06-30,122.0,29.0
+915258,Kazunari Kita,ES1,La Liga,681,Real Sociedad,20,Centre-Back,Japan,2000000.0,189.0,left,2030-06-30,0.0,0.0
+366930,Sergio Gómez,ES1,La Liga,681,Real Sociedad,25,Left-Back,Spain,15000000.0,173.0,left,2030-06-30,45.0,5.0
+568158,Javi López,ES1,La Liga,681,Real Sociedad,24,Left-Back,Spain,5000000.0,183.0,left,2030-06-30,105.0,9.0
+517842,Aihen Muñoz,ES1,La Liga,681,Real Sociedad,28,Left-Back,Spain,2500000.0,175.0,left,2027-06-30,298.0,34.0
+661145,Jon Aramburu,ES1,La Liga,681,Real Sociedad,23,Right-Back,Venezuela,15000000.0,176.0,right,2030-06-30,0.0,0.0
+262396,Unai Simón,ES1,La Liga,621,Athletic Bilbao,29,Goalkeeper,Spain,22000000.0,190.0,right,2029-06-30,229.0,36.0
+625014,Julen Agirrezabala,ES1,La Liga,621,Athletic Bilbao,25,Goalkeeper,Spain,9000000.0,187.0,left,2027-06-30,263.0,27.0
+834483,Álex Padilla,ES1,La Liga,621,Athletic Bilbao,22,Goalkeeper,Mexico,3000000.0,190.0,right,2029-06-30,52.0,6.0
+524000,Dani Vivian,ES1,La Liga,621,Athletic Bilbao,26,Centre-Back,Spain,20000000.0,184.0,right,2032-06-30,167.0,27.0
+176553,Aymeric Laporte,ES1,La Liga,621,Athletic Bilbao,32,Centre-Back,Spain,8000000.0,191.0,left,2028-06-30,581.0,84.0
+591916,Aitor Paredes,ES1,La Liga,621,Athletic Bilbao,26,Centre-Back,Spain,7500000.0,185.0,right,2029-06-30,64.0,4.0
+255488,Yeray Álvarez,ES1,La Liga,621,Athletic Bilbao,31,Centre-Back,Spain,900000.0,182.0,right,2028-06-30,386.0,53.0
+834485,Unai Egiluz,ES1,La Liga,621,Athletic Bilbao,24,Centre-Back,Spain,400000.0,186.0,right,2028-06-30,271.0,45.0
+710671,Adama Boiro,ES1,La Liga,621,Athletic Bilbao,24,Left-Back,Spain,2500000.0,183.0,left,2029-06-30,0.0,0.0
+61812,Yuri Berchiche,ES1,La Liga,621,Athletic Bilbao,36,Left-Back,Spain,1000000.0,181.0,left,2027-06-30,556.0,59.0
+417913,Álvaro Valles,ES1,La Liga,150,Real Betis Balompié,28,Goalkeeper,Spain,7000000.0,191.0,right,2030-06-30,52.0,8.0
+286415,Pau López,ES1,La Liga,150,Real Betis Balompié,31,Goalkeeper,Spain,2500000.0,189.0,left,2028-06-30,277.0,27.0
+567504,Guilherme Fernandes,ES1,La Liga,150,Real Betis Balompié,25,Goalkeeper,Portugal,800000.0,191.0,right,2027-06-30,0.0,0.0
+735568,Natan,ES1,La Liga,150,Real Betis Balompié,25,Centre-Back,Brazil,25000000.0,188.0,left,2030-06-30,107.0,16.0
+985383,Valentín Gómez,ES1,La Liga,150,Real Betis Balompié,23,Centre-Back,Argentina,12000000.0,181.0,left,2030-06-30,43.0,5.0
+246291,Diego Llorente,ES1,La Liga,150,Real Betis Balompié,32,Centre-Back,Spain,2500000.0,186.0,right,2028-06-30,404.0,64.0
+99922,Marc Bartra,ES1,La Liga,150,Real Betis Balompié,35,Centre-Back,Spain,900000.0,184.0,right,2027-06-30,395.0,72.0
+374139,Junior Firpo,ES1,La Liga,150,Real Betis Balompié,29,Left-Back,Dominican Republic,3500000.0,184.0,left,2028-06-30,447.0,69.0
+933908,Ángel Ortiz,ES1,La Liga,150,Real Betis Balompié,21,Right-Back,Spain,4000000.0,167.0,right,2029-06-30,120.0,3.0
+191217,Héctor Bellerín,ES1,La Liga,150,Real Betis Balompié,31,Right-Back,Spain,2400000.0,178.0,right,2028-06-30,558.0,102.0
+303657,Ionuț Radu,ES1,La Liga,940,Celta de Vigo,29,Goalkeeper,Romania,9000000.0,188.0,right,2029-06-30,436.0,60.0
+297194,Iván Villar,ES1,La Liga,940,Celta de Vigo,28,Goalkeeper,Spain,900000.0,183.0,right,2027-06-30,71.0,11.0
+1076815,Javi Rodríguez,ES1,La Liga,940,Celta de Vigo,23,Centre-Back,Spain,18000000.0,183.0,right,2028-06-30,0.0,0.0
+258987,Carl Starfelt,ES1,La Liga,940,Celta de Vigo,31,Centre-Back,Sweden,4500000.0,185.0,right,2027-06-30,294.0,50.0
+939374,Yoel Lago,ES1,La Liga,940,Celta de Vigo,22,Centre-Back,Spain,4000000.0,185.0,right,2029-06-30,0.0,0.0
+338285,Unai Núñez,ES1,La Liga,940,Celta de Vigo,29,Centre-Back,Spain,3500000.0,186.0,right,2029-06-30,79.0,11.0
+636093,Carlos Domínguez,ES1,La Liga,940,Celta de Vigo,25,Centre-Back,Spain,2000000.0,187.0,left,2028-06-30,45.0,6.0
+638124,Manu Fernández,ES1,La Liga,940,Celta de Vigo,25,Centre-Back,Spain,1500000.0,185.0,right,2028-06-30,0.0,0.0
+112515,Marcos Alonso,ES1,La Liga,940,Celta de Vigo,35,Centre-Back,Spain,1200000.0,188.0,left,2026-06-30,482.0,84.0
+618809,Manu Sánchez,ES1,La Liga,940,Celta de Vigo,25,Left-Back,Spain,6000000.0,171.0,left,2028-06-30,13.0,3.0
+124419,Odysseas Vlachodimos,ES1,La Liga,368,Sevilla FC,32,Goalkeeper,Greece,3000000.0,191.0,right,2027-06-30,58.0,10.0
+766583,Kike Salas,ES1,La Liga,368,Sevilla FC,24,Centre-Back,Spain,14000000.0,188.0,left,2029-06-30,83.0,11.0
+768380,Arouna Sangante,ES1,La Liga,368,Sevilla FC,24,Centre-Back,Senegal,8000000.0,189.0,right,2031-06-30,158.0,18.0
+719999,Andrés Castrín,ES1,La Liga,368,Sevilla FC,23,Centre-Back,Spain,6000000.0,188.0,right,2027-06-30,31.0,4.0
+439022,Marcão,ES1,La Liga,368,Sevilla FC,30,Centre-Back,Brazil,2500000.0,185.0,left,2028-06-30,603.0,91.0
+155025,Fábio Cardoso,ES1,La Liga,368,Sevilla FC,32,Centre-Back,Portugal,1500000.0,187.0,right,2028-06-30,137.0,18.0
+538996,Tanguy Nianzou,ES1,La Liga,368,Sevilla FC,24,Centre-Back,France,1200000.0,191.0,right,2027-06-30,694.0,103.0
+660735,Federico Gattoni,ES1,La Liga,368,Sevilla FC,27,Centre-Back,Argentina,800000.0,183.0,right,2027-06-30,125.0,19.0
+1032280,Oso,ES1,La Liga,368,Sevilla FC,22,Left-Back,Spain,10000000.0,183.0,left,2027-06-30,17.0,2.0
+385105,Gabriel Suazo,ES1,La Liga,368,Sevilla FC,28,Left-Back,Chile,6000000.0,178.0,left,2028-06-30,102.0,18.0
+165467,Stole Dimitrievski,ES1,La Liga,1049,Valencia CF,32,Goalkeeper,North Macedonia,2000000.0,188.0,right,2028-06-30,35.0,5.0
+398131,Cristian Rivero,ES1,La Liga,1049,Valencia CF,28,Goalkeeper,Spain,100000.0,188.0,right,2027-06-30,44.0,6.0
+707274,César Tárrega,ES1,La Liga,1049,Valencia CF,24,Centre-Back,Spain,9000000.0,194.0,right,2030-06-30,11.0,1.0
+420196,Justin de Haas,ES1,La Liga,1049,Valencia CF,26,Centre-Back,Netherlands,7000000.0,194.0,left,2030-06-30,125.0,16.0
+520840,José Copete,ES1,La Liga,1049,Valencia CF,26,Centre-Back,Spain,5000000.0,190.0,left,2029-06-30,143.0,16.0
+615350,Cenk Özkacar,ES1,La Liga,1049,Valencia CF,25,Centre-Back,Türkiye,4000000.0,190.0,left,2028-06-30,84.0,13.0
+346289,Mouctar Diakhaby,ES1,La Liga,1049,Valencia CF,29,Centre-Back,Guinea,1500000.0,192.0,right,2027-06-30,866.0,119.0
+834463,Iker Córdoba,ES1,La Liga,1049,Valencia CF,20,Centre-Back,Spain,500000.0,190.0,left,2028-06-30,0.0,0.0
+221322,José Gayà,ES1,La Liga,1049,Valencia CF,31,Left-Back,Spain,4000000.0,172.0,left,2027-06-30,447.0,55.0
+623024,Jesús Vázquez,ES1,La Liga,1049,Valencia CF,23,Left-Back,Spain,4000000.0,182.0,left,2028-06-30,63.0,8.0
+94308,Marko Dmitrovic,ES1,La Liga,714,RCD Espanyol Barcelona,34,Goalkeeper,Serbia,700000.0,189.0,left,2028-06-30,148.0,21.0
+628487,Ángel Fortuño,ES1,La Liga,714,RCD Espanyol Barcelona,24,Goalkeeper,Spain,300000.0,183.0,right,2027-06-30,0.0,0.0
+605528,Pol Tristán,ES1,La Liga,714,RCD Espanyol Barcelona,24,Goalkeeper,Spain,50000.0,188.0,both,2027-06-30,0.0,0.0
+692070,Clemens Riedel,ES1,La Liga,714,RCD Espanyol Barcelona,22,Centre-Back,Germany,4000000.0,186.0,right,2029-06-30,124.0,15.0
+583510,Miguel Rubio,ES1,La Liga,714,RCD Espanyol Barcelona,28,Centre-Back,Spain,1500000.0,191.0,right,2028-06-30,35.0,7.0
+629511,Pablo Ramón,ES1,La Liga,714,RCD Espanyol Barcelona,25,Centre-Back,Spain,1400000.0,184.0,right,2028-06-30,50.0,7.0
+102423,Leandro Cabrera,ES1,La Liga,714,RCD Espanyol Barcelona,35,Centre-Back,Uruguay,900000.0,190.0,left,2027-06-30,169.0,19.0
+819590,José Salinas,ES1,La Liga,714,RCD Espanyol Barcelona,25,Left-Back,Spain,2000000.0,178.0,left,2028-06-30,0.0,0.0
+1204959,Roger Hinojo,ES1,La Liga,714,RCD Espanyol Barcelona,21,Left-Back,Spain,1000000.0,180.0,left,2030-06-30,0.0,0.0
+822331,Omar El Hilali,ES1,La Liga,714,RCD Espanyol Barcelona,22,Right-Back,Morocco,15000000.0,183.0,right,2027-06-30,57.0,10.0
+617059,Pablo Campos,ES1,La Liga,3368,Levante UD,24,Goalkeeper,Spain,1500000.0,188.0,right,2027-06-30,111.0,25.0
+1099061,Dani Martín,ES1,La Liga,3368,Levante UD,20,Goalkeeper,Spain,300000.0,188.0,right,2028-06-30,0.0,0.0
+341263,Adrián Dela,ES1,La Liga,3368,Levante UD,27,Centre-Back,Spain,4000000.0,179.0,right,2027-06-30,16.0,3.0
+1063333,Jorge Cabello,ES1,La Liga,3368,Levante UD,22,Centre-Back,Spain,900000.0,183.0,left,2028-06-30,0.0,0.0
+255495,Unai Elgezabal,ES1,La Liga,3368,Levante UD,33,Centre-Back,Spain,500000.0,185.0,right,2027-06-30,74.0,1.0
+129674,Jeremy Toljan,ES1,La Liga,3368,Levante UD,31,Right-Back,Germany,2000000.0,182.0,right,2027-06-30,299.0,45.0
+590690,Víctor García,ES1,La Liga,3368,Levante UD,28,Right-Back,Spain,1500000.0,180.0,right,2027-06-30,190.0,20.0
+947115,Xavi Grande,ES1,La Liga,3368,Levante UD,21,Right-Back,Spain,800000.0,178.0,right,2028-06-30,0.0,0.0
+1371830,Nacho Pérez,ES1,La Liga,3368,Levante UD,17,Right-Back,Spain,300000.0,176.0,right,2028-06-30,0.0,0.0
+526050,Kervin Arriaga,ES1,La Liga,3368,Levante UD,28,Defensive Midfield,Honduras,2000000.0,191.0,right,2028-06-30,132.0,26.0
+275218,Augusto Batalla,ES1,La Liga,367,Rayo Vallecano,30,Goalkeeper,Argentina,6000000.0,185.0,right,2030-06-30,16.0,3.0
+397676,Dani Cárdenas,ES1,La Liga,367,Rayo Vallecano,29,Goalkeeper,Spain,1800000.0,186.0,right,2027-06-30,66.0,9.0
+1034853,Nobel Mendy,ES1,La Liga,367,Rayo Vallecano,21,Centre-Back,Senegal,7500000.0,187.0,left,2030-06-30,0.0,0.0
+765467,Jozhua Vertrouwd,ES1,La Liga,367,Rayo Vallecano,21,Centre-Back,Netherlands,2000000.0,187.0,left,2026-06-30,0.0,0.0
+127108,Florian Lejeune,ES1,La Liga,367,Rayo Vallecano,35,Centre-Back,France,1800000.0,190.0,right,2028-06-30,554.0,61.0
+692208,Pelayo Fernández,ES1,La Liga,367,Rayo Vallecano,23,Centre-Back,Spain,500000.0,193.0,right,2028-06-30,585.0,31.0
+596122,Pep Chavarría,ES1,La Liga,367,Rayo Vallecano,28,Left-Back,Spain,10000000.0,174.0,left,2030-06-30,10.0,1.0
+527966,Andrei Rațiu,ES1,La Liga,367,Rayo Vallecano,28,Right-Back,Romania,18000000.0,183.0,right,2030-06-30,90.0,6.0
+85295,Iván Balliu,ES1,La Liga,367,Rayo Vallecano,34,Right-Back,Albania,1000000.0,172.0,right,2027-06-30,35.0,4.0
+363057,Pedro Díaz,ES1,La Liga,367,Rayo Vallecano,28,Central Midfield,Spain,3000000.0,180.0,right,2028-06-30,6.0,0.0
+618801,Alejandro Iturbe,ES1,La Liga,1531,Elche CF,22,Goalkeeper,Spain,1400000.0,186.0,right,2029-06-30,0.0,0.0
+144128,Matías Dituro,ES1,La Liga,1531,Elche CF,39,Goalkeeper,Argentina,100000.0,191.0,right,2027-06-30,70.0,9.0
+452483,David Affengruber,ES1,La Liga,1531,Elche CF,25,Centre-Back,Austria,20000000.0,185.0,right,2027-06-30,35.0,6.0
+495625,Víctor Chust,ES1,La Liga,1531,Elche CF,26,Centre-Back,Spain,3500000.0,184.0,both,2029-06-30,0.0,0.0
+1060456,Matia Barzic,ES1,La Liga,1531,Elche CF,22,Centre-Back,Croatia,1000000.0,190.0,right,2028-06-30,0.0,0.0
+627290,John Donald,ES1,La Liga,1531,Elche CF,25,Centre-Back,Spain,1000000.0,182.0,right,2028-06-30,229.0,14.0
+435493,Bambo Diaby,ES1,La Liga,1531,Elche CF,28,Centre-Back,Spain,800000.0,188.0,right,2027-06-30,34.0,6.0
+203043,Pedro Bigas,ES1,La Liga,1531,Elche CF,36,Centre-Back,Spain,300000.0,181.0,left,2027-06-30,383.0,47.0
+962125,Buba Sangaré,ES1,La Liga,1531,Elche CF,18,Right-Back,Spain,4500000.0,183.0,right,2031-06-30,0.0,0.0
+531404,Marc Aguado,ES1,La Liga,1531,Elche CF,26,Defensive Midfield,Spain,3500000.0,182.0,left,2027-06-30,0.0,0.0
+298197,Antonio Sivera,ES1,La Liga,1108,Deportivo Alavés,29,Goalkeeper,Spain,6000000.0,185.0,right,2027-06-30,76.0,5.0
+631693,Jesús Owono,ES1,La Liga,1108,Deportivo Alavés,25,Goalkeeper,Equatorial Guinea,900000.0,186.0,both,2029-06-30,34.0,5.0
+608382,Adrián Rodríguez,ES1,La Liga,1108,Deportivo Alavés,25,Goalkeeper,Argentina,200000.0,195.0,right,2027-06-30,57.0,15.0
+694509,Moussa Diarra,ES1,La Liga,1108,Deportivo Alavés,25,Centre-Back,Mali,2000000.0,185.0,left,2028-06-30,37.0,3.0
+581326,Ville Koski,ES1,La Liga,1108,Deportivo Alavés,24,Centre-Back,Finland,1500000.0,185.0,right,2031-06-30,0.0,0.0
+258475,Nikola Maras,ES1,La Liga,1108,Deportivo Alavés,30,Centre-Back,Serbia,600000.0,189.0,right,2027-06-30,174.0,25.0
+895458,Adrián Pica,ES1,La Liga,1108,Deportivo Alavés,24,Centre-Back,Spain,500000.0,190.0,right,2028-06-30,0.0,0.0
+533354,Facundo Garcés,ES1,La Liga,1108,Deportivo Alavés,26,Centre-Back,Malaysia,0.0,191.0,right,2028-06-30,0.0,0.0
+741289,Youssef Enríquez,ES1,La Liga,1108,Deportivo Alavés,20,Left-Back,Morocco,4000000.0,170.0,left,2029-06-30,0.0,0.0
+591957,Victor Parada,ES1,La Liga,1108,Deportivo Alavés,24,Left-Back,Spain,4000000.0,185.0,left,2029-06-30,0.0,0.0
+248738,Sergio Herrera,ES1,La Liga,331,CA Osasuna,33,Goalkeeper,Spain,2800000.0,192.0,right,2028-06-30,291.0,27.0
+118997,Aitor Fernández,ES1,La Liga,331,CA Osasuna,35,Goalkeeper,Spain,500000.0,182.0,right,2027-06-30,278.0,31.0
+541555,Enzo Boyomo,ES1,La Liga,331,CA Osasuna,24,Centre-Back,Cameroon,15000000.0,184.0,right,2029-06-30,19.0,2.0
+555500,Jorge Herrando,ES1,La Liga,331,CA Osasuna,25,Centre-Back,Spain,3500000.0,192.0,left,2030-06-30,0.0,0.0
+449796,Alejandro Catena,ES1,La Liga,331,CA Osasuna,31,Centre-Back,Spain,2600000.0,194.0,right,2028-06-30,0.0,0.0
+658115,Abel Bretones,ES1,La Liga,331,CA Osasuna,25,Left-Back,Spain,3500000.0,188.0,left,2029-06-30,0.0,0.0
+441170,Valentin Rosier,ES1,La Liga,331,CA Osasuna,29,Right-Back,France,3000000.0,175.0,right,2028-06-30,382.0,49.0
+1065442,Iñigo Arguibide,ES1,La Liga,331,CA Osasuna,21,Right-Back,Spain,800000.0,178.0,right,2027-06-30,0.0,0.0
+213670,Lucas Torró,ES1,La Liga,331,CA Osasuna,31,Defensive Midfield,Spain,2500000.0,190.0,right,2027-06-30,380.0,52.0
+710677,Iker Muñoz,ES1,La Liga,331,CA Osasuna,23,Defensive Midfield,Spain,2000000.0,180.0,right,2030-06-30,62.0,8.0
+379548,Jokin Ezkieta,ES1,La Liga,630,Racing Santander,29,Goalkeeper,Spain,2500000.0,193.0,right,2029-06-30,194.0,38.0
+1088712,Simon Eriksson,ES1,La Liga,630,Racing Santander,20,Goalkeeper,Sweden,2000000.0,195.0,right,2030-06-30,0.0,0.0
+825199,Facundo González,ES1,La Liga,630,Racing Santander,23,Centre-Back,Uruguay,3000000.0,193.0,left,2029-06-30,142.0,16.0
+740253,Javi Castro,ES1,La Liga,630,Racing Santander,25,Centre-Back,Spain,1800000.0,183.0,right,2027-06-30,0.0,0.0
+396161,Manu Hernando,ES1,La Liga,630,Racing Santander,27,Centre-Back,Spain,1400000.0,182.0,right,2028-06-30,214.0,28.0
+1262996,Jorge Salinas,ES1,La Liga,630,Racing Santander,19,Left-Back,Spain,8000000.0,183.0,left,2029-06-30,36.0,6.0
+889459,Mario García,ES1,La Liga,630,Racing Santander,22,Left-Back,Spain,900000.0,172.0,left,2027-06-30,0.0,0.0
+636116,Álvaro Mantilla,ES1,La Liga,630,Racing Santander,26,Right-Back,Spain,1200000.0,184.0,right,2028-06-30,273.0,23.0
+933795,Maguette Gueye,ES1,La Liga,630,Racing Santander,23,Defensive Midfield,Senegal,2000000.0,188.0,left,2029-06-30,81.0,11.0
+936981,Gustavo Puerta,ES1,La Liga,630,Racing Santander,22,Central Midfield,Colombia,10000000.0,173.0,right,2029-06-30,0.0,0.0
+453704,Álvaro Ferllo,ES1,La Liga,897,Deportivo A Coruña,28,Goalkeeper,Spain,2000000.0,185.0,right,2027-06-30,0.0,0.0
+126746,Germán Parreño,ES1,La Liga,897,Deportivo A Coruña,33,Goalkeeper,Spain,250000.0,191.0,right,2028-06-30,183.0,21.0
+786130,Eric Puerto,ES1,La Liga,897,Deportivo A Coruña,23,Goalkeeper,Spain,200000.0,185.0,right,2027-06-30,73.0,4.0
+743379,Lucas Noubi,ES1,La Liga,897,Deportivo A Coruña,21,Centre-Back,Belgium,1500000.0,184.0,right,2029-06-30,23.0,4.0
+857949,Dani Barcia,ES1,La Liga,897,Deportivo A Coruña,23,Centre-Back,Spain,1200000.0,186.0,left,2028-06-30,171.0,15.0
+388542,Arnau Comas,ES1,La Liga,897,Deportivo A Coruña,26,Centre-Back,Spain,500000.0,191.0,right,2028-06-30,602.0,88.0
+458777,Giacomo Quagliata,ES1,La Liga,897,Deportivo A Coruña,26,Left-Back,Italy,2000000.0,180.0,left,2028-06-30,53.0,7.0
+466807,Adrià Altimira,ES1,La Liga,897,Deportivo A Coruña,25,Right-Back,Spain,1800000.0,170.0,right,2029-06-30,0.0,0.0
+400104,Miguel Loureiro,ES1,La Liga,897,Deportivo A Coruña,29,Right-Back,Spain,1200000.0,182.0,right,2028-06-30,40.0,5.0
+527838,Álex Petxarroman,ES1,La Liga,897,Deportivo A Coruña,29,Right-Back,Spain,500000.0,180.0,right,2028-06-30,181.0,27.0
+226012,David Soria,ES1,La Liga,3709,Getafe CF,33,Goalkeeper,Spain,2800000.0,192.0,right,2030-06-30,134.0,14.0
+339079,Jiri Letacek,ES1,La Liga,3709,Getafe CF,27,Goalkeeper,Czech Republic,2000000.0,196.0,right,2028-06-30,232.0,8.0
+559979,Abdel Abqar,ES1,La Liga,3709,Getafe CF,27,Centre-Back,Morocco,3500000.0,188.0,right,2028-06-30,192.0,34.0
+461843,Juan Berrocal,ES1,La Liga,3709,Getafe CF,27,Centre-Back,Spain,1500000.0,187.0,both,2027-06-30,31.0,3.0
+898352,Sebastián Boselli,ES1,La Liga,3709,Getafe CF,22,Centre-Back,Uruguay,1500000.0,183.0,right,2030-06-30,50.0,8.0
+221150,Dakonam Djené,ES1,La Liga,3709,Getafe CF,34,Centre-Back,Togo,1400000.0,178.0,right,2027-06-30,13.0,1.0
+1268764,Davinchi,ES1,La Liga,3709,Getafe CF,18,Left-Back,Spain,1000000.0,182.0,left,2028-06-30,199.0,24.0
+76467,Kiko Femenía,ES1,La Liga,3709,Getafe CF,35,Right-Back,Spain,700000.0,174.0,right,2027-06-30,223.0,31.0
+1164331,Ismael Bekhoucha,ES1,La Liga,3709,Getafe CF,21,Right-Back,Morocco,300000.0,176.0,right,2028-06-30,0.0,0.0
+948273,Mario Martín,ES1,La Liga,3709,Getafe CF,22,Defensive Midfield,Spain,10000000.0,177.0,right,2030-06-30,8.0,1.0
+129478,Alfonso Herrero,ES1,La Liga,1084,Málaga CF,32,Goalkeeper,Spain,400000.0,183.0,right,2028-06-30,0.0,0.0
+1004298,Carlos López,ES1,La Liga,1084,Málaga CF,21,Goalkeeper,Spain,100000.0,183.0,right,2029-06-30,0.0,0.0
+635930,Diego Murillo,ES1,La Liga,1084,Málaga CF,25,Centre-Back,Spain,1500000.0,179.0,right,2029-06-30,0.0,0.0
+251046,Einar Galilea,ES1,La Liga,1084,Málaga CF,32,Centre-Back,Spain,350000.0,185.0,left,2026-06-30,238.0,30.0
+398056,Álex Pastor,ES1,La Liga,1084,Málaga CF,26,Centre-Back,Spain,300000.0,185.0,right,2028-06-30,308.0,46.0
+897521,Ángel Recio,ES1,La Liga,1084,Málaga CF,23,Centre-Back,Spain,300000.0,185.0,right,2029-06-30,0.0,0.0
+1057392,Pablo Arriaza,ES1,La Liga,1084,Málaga CF,22,Centre-Back,Spain,50000.0,177.0,right,2027-06-30,0.0,0.0
+923080,Moussa Diarra,ES1,La Liga,1084,Málaga CF,24,Centre-Back,Mali,25000.0,188.0,right,2028-06-30,313.0,35.0
+622951,Dani Sánchez,ES1,La Liga,1084,Málaga CF,26,Left-Back,Spain,400000.0,171.0,left,2027-06-30,74.0,9.0
+1064717,Rafita Garrido,ES1,La Liga,1084,Málaga CF,21,Right-Back,Spain,1000000.0,170.0,right,2029-06-30,0.0,0.0
+607720,Jonas Urbig,L1,Bundesliga,27,Bayern Munich,22,Goalkeeper,Germany,18000000.0,189.0,both,2029-06-30,68.0,5.0
+195778,Alexander Nübel,L1,Bundesliga,27,Bayern Munich,29,Goalkeeper,Germany,12000000.0,193.0,right,2029-06-30,103.0,17.0
+17259,Manuel Neuer,L1,Bundesliga,27,Bayern Munich,40,Goalkeeper,Germany,4000000.0,193.0,right,2027-06-30,590.0,92.0
+40680,Sven Ulreich,L1,Bundesliga,27,Bayern Munich,37,Goalkeeper,Germany,500000.0,192.0,right,2027-06-30,314.0,46.0
+1009439,Leon Klanac,L1,Bundesliga,27,Bayern Munich,19,Goalkeeper,Germany,150000.0,185.0,right,2027-06-30,181.0,50.0
+344695,Dayot Upamecano,L1,Bundesliga,27,Bayern Munich,27,Centre-Back,France,70000000.0,186.0,right,2030-06-30,207.0,39.0
+196357,Jonathan Tah,L1,Bundesliga,27,Bayern Munich,30,Centre-Back,Germany,28000000.0,195.0,right,2029-06-30,223.0,46.0
+503482,Min-jae Kim,L1,Bundesliga,27,Bayern Munich,29,Centre-Back,"Korea, South",20000000.0,190.0,right,2028-06-30,271.0,29.0
+353892,Hiroki Ito,L1,Bundesliga,27,Bayern Munich,27,Centre-Back,Japan,18000000.0,188.0,left,2028-06-30,519.0,91.0
+744729,Tarek Buchmann,L1,Bundesliga,27,Bayern Munich,21,Centre-Back,Germany,300000.0,188.0,right,2027-06-30,943.0,129.0
+486046,Maarten Vandevoordt,L1,Bundesliga,23826,RB Leipzig,24,Goalkeeper,Belgium,15000000.0,192.0,right,2030-06-30,286.0,17.0
+57071,Péter Gulácsi,L1,Bundesliga,23826,RB Leipzig,36,Goalkeeper,Hungary,1000000.0,193.0,right,2027-06-30,531.0,70.0
+897425,Timo Schlieck,L1,Bundesliga,23826,RB Leipzig,20,Goalkeeper,Germany,400000.0,193.0,right,2029-06-30,350.0,54.0
+160971,Leopold Zingerle,L1,Bundesliga,23826,RB Leipzig,32,Goalkeeper,Germany,300000.0,182.0,right,2028-06-30,288.0,19.0
+618472,Castello Lukeba,L1,Bundesliga,23826,RB Leipzig,23,Centre-Back,France,50000000.0,184.0,left,2029-06-30,151.0,25.0
+787912,El Chadaille Bitshiabu,L1,Bundesliga,23826,RB Leipzig,21,Centre-Back,France,18000000.0,196.0,left,2029-06-30,155.0,34.0
+1130445,Abdoul Koné,L1,Bundesliga,23826,RB Leipzig,21,Centre-Back,France,15000000.0,192.0,right,2031-06-30,110.0,15.0
+93740,Willi Orbán,L1,Bundesliga,23826,RB Leipzig,33,Centre-Back,Hungary,5000000.0,186.0,right,2027-06-30,468.0,74.0
+215599,Lukas Klostermann,L1,Bundesliga,23826,RB Leipzig,30,Centre-Back,Germany,3500000.0,189.0,right,2028-06-30,404.0,70.0
+318204,David Raum,L1,Bundesliga,23826,RB Leipzig,28,Left-Back,Germany,25000000.0,181.0,left,2027-06-30,123.0,24.0
+125714,Mark Flekken,L1,Bundesliga,15,Bayer 04 Leverkusen,33,Goalkeeper,Netherlands,6000000.0,195.0,both,2028-06-30,601.0,90.0
+81173,Janis Blaswich,L1,Bundesliga,15,Bayer 04 Leverkusen,35,Goalkeeper,Germany,700000.0,193.0,right,2027-06-30,774.0,106.0
+85543,Niklas Lomb,L1,Bundesliga,15,Bayer 04 Leverkusen,32,Goalkeeper,Germany,250000.0,186.0,right,2027-06-30,68.0,14.0
+632349,Jarell Quansah,L1,Bundesliga,15,Bayer 04 Leverkusen,23,Centre-Back,England,45000000.0,190.0,right,2030-06-30,38.0,7.0
+564545,Edmond Tapsoba,L1,Bundesliga,15,Bayer 04 Leverkusen,27,Centre-Back,Burkina Faso,35000000.0,194.0,right,2031-06-30,181.0,33.0
+730581,Loïc Badé,L1,Bundesliga,15,Bayer 04 Leverkusen,26,Centre-Back,France,20000000.0,191.0,right,2030-06-30,272.0,46.0
+919515,Jeanuël Belocian,L1,Bundesliga,15,Bayer 04 Leverkusen,21,Centre-Back,France,12000000.0,186.0,left,2029-06-30,295.0,49.0
+1077670,Axel Tape,L1,Bundesliga,15,Bayer 04 Leverkusen,18,Centre-Back,France,8000000.0,180.0,right,2030-06-30,78.0,19.0
+1182738,Abdoulaye Faye,L1,Bundesliga,15,Bayer 04 Leverkusen,21,Centre-Back,Senegal,4500000.0,191.0,left,2030-06-30,177.0,24.0
+696164,Tim Oermann,L1,Bundesliga,15,Bayer 04 Leverkusen,22,Centre-Back,Germany,4000000.0,189.0,right,2029-06-30,133.0,15.0
+257814,Gregor Kobel,L1,Bundesliga,16,Borussia Dortmund,28,Goalkeeper,Switzerland,40000000.0,196.0,right,2028-06-30,161.0,31.0
+448705,Diant Ramaj,L1,Bundesliga,16,Borussia Dortmund,24,Goalkeeper,Germany,7000000.0,189.0,right,2029-06-30,466.0,59.0
+76158,Alexander Meyer,L1,Bundesliga,16,Borussia Dortmund,35,Goalkeeper,Germany,500000.0,195.0,right,2027-06-30,856.0,95.0
+94192,Patrick Drewes,L1,Bundesliga,16,Borussia Dortmund,33,Goalkeeper,Germany,300000.0,194.0,right,2027-06-30,226.0,43.0
+684116,Silas Ostrzinski,L1,Bundesliga,16,Borussia Dortmund,22,Goalkeeper,Germany,200000.0,198.0,right,2027-06-30,70.0,12.0
+388198,Nico Schlotterbeck,L1,Bundesliga,16,Borussia Dortmund,26,Centre-Back,Germany,55000000.0,191.0,left,2031-06-30,366.0,52.0
+1075577,Joane Gadou,L1,Bundesliga,16,Borussia Dortmund,19,Centre-Back,France,20000000.0,195.0,right,2031-06-30,49.0,1.0
+193004,Waldemar Anton,L1,Bundesliga,16,Borussia Dortmund,29,Centre-Back,Germany,18000000.0,189.0,right,2028-06-30,200.0,24.0
+1074990,Luca Reggiani,L1,Bundesliga,16,Borussia Dortmund,18,Centre-Back,Italy,10000000.0,194.0,right,,209.0,23.0
+284732,Ramy Bensebaini,L1,Bundesliga,16,Borussia Dortmund,31,Centre-Back,Algeria,7000000.0,187.0,left,2027-06-30,211.0,33.0
+800946,Dennis Seimen,L1,Bundesliga,79,VfB Stuttgart,20,Goalkeeper,Germany,10000000.0,192.0,left,2029-06-30,68.0,23.0
+187624,Fabian Bredlow,L1,Bundesliga,79,VfB Stuttgart,31,Goalkeeper,Germany,700000.0,190.0,both,2027-06-30,135.0,16.0
+170517,Marius Funk,L1,Bundesliga,79,VfB Stuttgart,30,Goalkeeper,Germany,300000.0,187.0,right,2028-06-30,453.0,45.0
+388067,Stefan Drljaca,L1,Bundesliga,79,VfB Stuttgart,27,Goalkeeper,Germany,300000.0,192.0,right,2027-06-30,194.0,37.0
+924117,Finn Jeltsch,L1,Bundesliga,79,VfB Stuttgart,19,Centre-Back,Germany,35000000.0,188.0,right,2030-06-30,120.0,13.0
+436064,Ramon Hendriks,L1,Bundesliga,79,VfB Stuttgart,24,Centre-Back,Netherlands,25000000.0,189.0,left,2028-06-30,371.0,38.0
+303219,Jeff Chabot,L1,Bundesliga,79,VfB Stuttgart,28,Centre-Back,Germany,15000000.0,195.0,left,2028-06-30,171.0,28.0
+539798,Luca Jaquez,L1,Bundesliga,79,VfB Stuttgart,23,Centre-Back,Switzerland,10000000.0,187.0,right,2029-06-30,253.0,30.0
+620598,Ameen Al-Dakhil,L1,Bundesliga,79,VfB Stuttgart,24,Centre-Back,Belgium,3000000.0,187.0,right,2028-06-30,387.0,65.0
+344598,Dan-Axel Zagadou,L1,Bundesliga,79,VfB Stuttgart,27,Centre-Back,France,2000000.0,196.0,left,2027-06-30,937.0,134.0
+997861,Kauã Santos,L1,Bundesliga,24,Eintracht Frankfurt,23,Goalkeeper,Brazil,7000000.0,196.0,right,2030-06-30,195.0,15.0
+196813,Michael Zetterer,L1,Bundesliga,24,Eintracht Frankfurt,30,Goalkeeper,Germany,4000000.0,187.0,both,2029-06-30,790.0,82.0
+726120,Simon Simoni,L1,Bundesliga,24,Eintracht Frankfurt,21,Goalkeeper,Albania,600000.0,195.0,right,2027-06-30,153.0,43.0
+40034,Jens Grahl,L1,Bundesliga,24,Eintracht Frankfurt,37,Goalkeeper,Germany,200000.0,192.0,right,2027-06-30,475.0,52.0
+1079622,Amil Siljevic,L1,Bundesliga,24,Eintracht Frankfurt,19,Goalkeeper,Bosnia-Herzegovina,0.0,192.0,right,2029-06-30,203.0,23.0
+684315,Nnamdi Collins,L1,Bundesliga,24,Eintracht Frankfurt,22,Centre-Back,Germany,20000000.0,188.0,right,2030-06-30,209.0,19.0
+368891,Arthur Theate,L1,Bundesliga,24,Eintracht Frankfurt,26,Centre-Back,Belgium,17000000.0,185.0,left,2029-06-30,109.0,16.0
+328784,Robin Koch,L1,Bundesliga,24,Eintracht Frankfurt,29,Centre-Back,Germany,10000000.0,192.0,right,2030-06-30,363.0,66.0
+635645,Aurèle Amenda,L1,Bundesliga,24,Eintracht Frankfurt,22,Centre-Back,Switzerland,10000000.0,194.0,right,2029-06-30,149.0,14.0
+691892,Nathaniel Brown,L1,Bundesliga,24,Eintracht Frankfurt,23,Left-Back,Germany,40000000.0,176.0,left,2030-06-30,84.0,7.0
+55089,Oliver Baumann,L1,Bundesliga,533,TSG 1899 Hoffenheim,36,Goalkeeper,Germany,2500000.0,187.0,right,2028-06-30,171.0,19.0
+432671,Luca Philipp,L1,Bundesliga,533,TSG 1899 Hoffenheim,25,Goalkeeper,Germany,750000.0,192.0,right,,68.0,7.0
+718460,Lúkas Petersson,L1,Bundesliga,533,TSG 1899 Hoffenheim,22,Goalkeeper,Iceland,600000.0,195.0,right,,42.0,7.0
+579459,Albian Hajdari,L1,Bundesliga,533,TSG 1899 Hoffenheim,23,Centre-Back,Kosovo,25000000.0,189.0,left,2031-06-30,170.0,19.0
+361260,Ozan Kabak,L1,Bundesliga,533,TSG 1899 Hoffenheim,26,Centre-Back,Türkiye,15000000.0,187.0,right,2030-06-30,793.0,103.0
+620217,Robin Hranac,L1,Bundesliga,533,TSG 1899 Hoffenheim,26,Centre-Back,Czech Republic,10000000.0,189.0,right,2028-06-30,5.0,1.0
+415035,Koki Machida,L1,Bundesliga,533,TSG 1899 Hoffenheim,28,Centre-Back,Japan,6000000.0,190.0,left,2029-06-30,667.0,90.0
+875332,Arthur Chaves,L1,Bundesliga,533,TSG 1899 Hoffenheim,25,Centre-Back,Brazil,5000000.0,188.0,right,2029-06-30,24.0,5.0
+263380,Attila Szalai,L1,Bundesliga,533,TSG 1899 Hoffenheim,28,Centre-Back,Hungary,2000000.0,192.0,left,2027-06-30,95.0,14.0
+907277,Sean Dulic,L1,Bundesliga,533,TSG 1899 Hoffenheim,21,Centre-Back,Germany,1200000.0,187.0,both,2030-06-30,125.0,22.0
+526845,Noah Atubolu,L1,Bundesliga,60,SC Freiburg,24,Goalkeeper,Germany,25000000.0,190.0,right,2027-06-30,83.0,10.0
+620295,Mio Backhaus,L1,Bundesliga,60,SC Freiburg,22,Goalkeeper,Germany,15000000.0,194.0,right,,21.0,3.0
+284769,Florian Müller,L1,Bundesliga,60,SC Freiburg,28,Goalkeeper,Germany,1200000.0,190.0,left,,323.0,51.0
+160954,Jannik Huth,L1,Bundesliga,60,SC Freiburg,32,Goalkeeper,Germany,400000.0,185.0,right,,248.0,24.0
+863759,Bruno Ogbus,L1,Bundesliga,60,SC Freiburg,20,Centre-Back,Switzerland,15000000.0,188.0,right,,243.0,27.0
+225657,Philipp Lienhart,L1,Bundesliga,60,SC Freiburg,29,Centre-Back,Austria,10000000.0,189.0,right,,360.0,63.0
+599419,Max Rosenfelder,L1,Bundesliga,60,SC Freiburg,23,Centre-Back,Germany,6000000.0,186.0,right,,621.0,87.0
+124502,Matthias Ginter,L1,Bundesliga,60,SC Freiburg,32,Centre-Back,Germany,5000000.0,189.0,right,2027-06-30,245.0,32.0
+58995,Anthony Jung,L1,Bundesliga,60,SC Freiburg,34,Centre-Back,Germany,600000.0,186.0,left,2027-06-30,119.0,9.0
+907087,Berkay Yılmaz,L1,Bundesliga,60,SC Freiburg,21,Left-Back,Türkiye,7000000.0,178.0,left,,15.0,2.0
+160963,Robin Zentner,L1,Bundesliga,39,1.FSV Mainz 05,31,Goalkeeper,Germany,2500000.0,194.0,right,2028-06-30,560.0,72.0
+490609,Lasse Rieß,L1,Bundesliga,39,1.FSV Mainz 05,24,Goalkeeper,Germany,500000.0,192.0,right,2027-06-30,0.0,0.0
+817521,Maximilian Kinzig,L1,Bundesliga,39,1.FSV Mainz 05,22,Goalkeeper,Germany,150000.0,190.0,right,,70.0,11.0
+1073748,Kacper Potulski,L1,Bundesliga,39,1.FSV Mainz 05,18,Centre-Back,Poland,18000000.0,195.0,right,2028-06-30,0.0,0.0
+370683,Andreas Hanche-Olsen,L1,Bundesliga,39,1.FSV Mainz 05,29,Centre-Back,Norway,3500000.0,185.0,right,2028-06-30,399.0,60.0
+594731,Fabio Gruber,L1,Bundesliga,39,1.FSV Mainz 05,23,Centre-Back,Peru,3000000.0,188.0,right,2030-06-30,182.0,18.0
+118847,Dominik Kohr,L1,Bundesliga,39,1.FSV Mainz 05,32,Centre-Back,Germany,2000000.0,183.0,right,2028-06-30,218.0,25.0
+85906,Danny da Costa,L1,Bundesliga,39,1.FSV Mainz 05,32,Centre-Back,Germany,1200000.0,187.0,right,2027-06-30,300.0,36.0
+82350,Stefan Bell,L1,Bundesliga,39,1.FSV Mainz 05,34,Centre-Back,Germany,600000.0,192.0,right,2027-06-30,614.0,73.0
+934317,Maxim Dal,L1,Bundesliga,39,1.FSV Mainz 05,20,Centre-Back,Germany,150000.0,188.0,left,2027-06-30,519.0,68.0
+251299,Finn Dahmen,L1,Bundesliga,167,FC Augsburg,28,Goalkeeper,Germany,12000000.0,186.0,right,2027-06-30,153.0,9.0
+610190,Nediljko Labrovic,L1,Bundesliga,167,FC Augsburg,26,Goalkeeper,Croatia,2000000.0,196.0,right,2029-06-30,0.0,0.0
+569383,Chrislain Matsima,L1,Bundesliga,167,FC Augsburg,24,Centre-Back,France,22000000.0,193.0,right,2030-06-30,121.0,19.0
+923945,Noahkai Banks,L1,Bundesliga,167,FC Augsburg,19,Centre-Back,United States,20000000.0,193.0,right,2029-06-30,21.0,3.0
+413843,Keven Schlotterbeck,L1,Bundesliga,167,FC Augsburg,29,Centre-Back,Germany,6000000.0,188.0,left,2027-06-30,192.0,20.0
+382478,Cédric Zesiger,L1,Bundesliga,167,FC Augsburg,28,Centre-Back,Switzerland,5000000.0,194.0,left,2029-06-30,155.0,34.0
+358766,Calvin Brackelmann,L1,Bundesliga,167,FC Augsburg,26,Centre-Back,Germany,3000000.0,196.0,left,2030-06-30,645.0,38.0
+106405,Jeffrey Gouweleeuw,L1,Bundesliga,167,FC Augsburg,34,Centre-Back,Netherlands,1000000.0,188.0,right,2027-06-30,626.0,70.0
+1069641,Felix Meiser,L1,Bundesliga,167,FC Augsburg,19,Centre-Back,Germany,150000.0,189.0,right,2027-06-30,8.0,1.0
+295630,Dimitrios Giannoulis,L1,Bundesliga,167,FC Augsburg,30,Left-Back,Greece,3000000.0,178.0,left,2028-06-30,288.0,50.0
+493513,Karl Hein,L1,Bundesliga,86,SV Werder Bremen,24,Goalkeeper,Estonia,3000000.0,193.0,right,,276.0,33.0
+99451,Markus Kolke,L1,Bundesliga,86,SV Werder Bremen,35,Goalkeeper,Germany,300000.0,187.0,right,,119.0,16.0
+1025989,Stefan Smarkalev,L1,Bundesliga,86,SV Werder Bremen,19,Goalkeeper,Bulgaria,150000.0,188.0,right,2027-06-30,67.0,10.0
+1084638,Karim Coulibaly,L1,Bundesliga,86,SV Werder Bremen,19,Centre-Back,Germany,28000000.0,191.0,left,2029-06-30,47.0,6.0
+156990,Marco Friedl,L1,Bundesliga,86,SV Werder Bremen,28,Centre-Back,Austria,10000000.0,187.0,left,2028-06-30,237.0,29.0
+334221,Amos Pieper,L1,Bundesliga,86,SV Werder Bremen,28,Centre-Back,Germany,4000000.0,192.0,right,,501.0,49.0
+162434,Niklas Stark,L1,Bundesliga,86,SV Werder Bremen,31,Centre-Back,Germany,2500000.0,190.0,right,,293.0,37.0
+830108,Julián Malatini,L1,Bundesliga,86,SV Werder Bremen,25,Centre-Back,Argentina,2000000.0,191.0,right,,147.0,17.0
+1045986,Mick Schmetgens,L1,Bundesliga,86,SV Werder Bremen,18,Centre-Back,Germany,700000.0,190.0,right,2029-06-30,0.0,0.0
+393512,Felix Agu,L1,Bundesliga,86,SV Werder Bremen,26,Left-Back,Nigeria,4500000.0,180.0,right,2027-06-30,684.0,69.0
+160929,Marvin Schwäbe,L1,Bundesliga,3,1.FC Köln,31,Goalkeeper,Germany,3000000.0,190.0,right,2027-06-30,41.0,5.0
+21327,Ron-Robert Zieler,L1,Bundesliga,3,1.FC Köln,37,Goalkeeper,Germany,500000.0,188.0,right,2027-06-30,115.0,11.0
+227089,Matthias Köbbing,L1,Bundesliga,3,1.FC Köln,29,Goalkeeper,Germany,100000.0,196.0,both,2027-06-30,0.0,0.0
+942497,Jahmai Simpson-Pusey,L1,Bundesliga,3,1.FC Köln,20,Centre-Back,England,9000000.0,187.0,right,2030-06-30,32.0,4.0
+640556,Rav van den Berg,L1,Bundesliga,3,1.FC Köln,21,Centre-Back,Netherlands,7000000.0,191.0,right,2030-06-30,262.0,49.0
+322517,Joël Schmied,L1,Bundesliga,3,1.FC Köln,27,Centre-Back,Switzerland,3000000.0,188.0,right,2029-06-30,256.0,28.0
+744558,Julian Pauli,L1,Bundesliga,3,1.FC Köln,20,Centre-Back,Germany,2500000.0,190.0,right,2028-06-30,193.0,20.0
+345189,Luka Lochoshvili,L1,Bundesliga,3,1.FC Köln,28,Centre-Back,Georgia,2500000.0,192.0,left,2029-06-30,296.0,25.0
+236981,Timo Hübers,L1,Bundesliga,3,1.FC Köln,29,Centre-Back,Germany,1500000.0,190.0,right,2027-06-30,988.0,105.0
+795762,Elias Bakatukanda,L1,Bundesliga,3,1.FC Köln,22,Centre-Back,DR Congo,300000.0,195.0,both,2028-06-30,109.0,13.0
+284270,Moritz Nicolas,L1,Bundesliga,18,Borussia Mönchengladbach,28,Goalkeeper,Germany,8000000.0,193.0,right,2029-06-30,455.0,60.0
+455922,Jan Olschowsky,L1,Bundesliga,18,Borussia Mönchengladbach,24,Goalkeeper,Germany,450000.0,184.0,right,2027-06-30,241.0,22.0
+90317,Daniel Batz,L1,Bundesliga,18,Borussia Mönchengladbach,35,Goalkeeper,Germany,350000.0,191.0,both,2029-06-30,132.0,32.0
+31653,Tobias Sippel,L1,Bundesliga,18,Borussia Mönchengladbach,38,Goalkeeper,Germany,300000.0,183.0,right,2027-06-30,250.0,27.0
+192635,Nico Elvedi,L1,Bundesliga,18,Borussia Mönchengladbach,29,Centre-Back,Switzerland,8000000.0,189.0,right,2027-06-30,158.0,25.0
+335209,Kevin Diks,L1,Bundesliga,18,Borussia Mönchengladbach,29,Centre-Back,Indonesia,5000000.0,186.0,right,2030-06-30,285.0,40.0
+724104,Fabio Chiarodia,L1,Bundesliga,18,Borussia Mönchengladbach,21,Centre-Back,Italy,3000000.0,186.0,left,2028-06-30,124.0,21.0
+787151,Lukas Ullrich,L1,Bundesliga,18,Borussia Mönchengladbach,22,Left-Back,Germany,6000000.0,180.0,left,2029-06-30,101.0,20.0
+604358,David Herold,L1,Bundesliga,18,Borussia Mönchengladbach,23,Left-Back,Germany,4000000.0,185.0,left,2030-06-30,126.0,10.0
+504153,Joe Scally,L1,Bundesliga,18,Borussia Mönchengladbach,23,Right-Back,United States,7000000.0,184.0,right,2027-06-30,19.0,1.0
+107775,Frederik Rönnow,L1,Bundesliga,89,1.FC Union Berlin,33,Goalkeeper,Denmark,2000000.0,188.0,right,,286.0,30.0
+386685,Matheo Raab,L1,Bundesliga,89,1.FC Union Berlin,27,Goalkeeper,Germany,600000.0,186.0,right,,700.0,71.0
+161057,Carl Klaus,L1,Bundesliga,89,1.FC Union Berlin,32,Goalkeeper,Germany,350000.0,189.0,right,,73.0,15.0
+597432,Leopold Querfeld,L1,Bundesliga,89,1.FC Union Berlin,22,Centre-Back,Austria,20000000.0,190.0,right,,97.0,14.0
+738774,Zeno Van Den Bosch,L1,Bundesliga,89,1.FC Union Berlin,22,Centre-Back,Belgium,6000000.0,191.0,right,,9.0,2.0
+371141,Stanley Nsoki,L1,Bundesliga,89,1.FC Union Berlin,27,Centre-Back,France,2000000.0,184.0,left,,331.0,33.0
+196231,Marvin Friedrich,L1,Bundesliga,89,1.FC Union Berlin,30,Centre-Back,Germany,1800000.0,193.0,right,,293.0,34.0
+995520,Oluwaseun Ogbemudia,L1,Bundesliga,89,1.FC Union Berlin,19,Centre-Back,Germany,800000.0,188.0,right,2029-06-30,189.0,15.0
+798043,Tom Rothe,L1,Bundesliga,89,1.FC Union Berlin,21,Left-Back,Germany,10000000.0,193.0,left,,166.0,26.0
+391780,Derrick Köhn,L1,Bundesliga,89,1.FC Union Berlin,27,Left-Back,Ghana,4000000.0,180.0,left,2029-06-30,52.0,6.0
+549378,Sander Tangvik,L1,Bundesliga,41,Hamburger SV,23,Goalkeeper,Norway,3000000.0,193.0,right,2030-06-30,11.0,2.0
+84993,Daniel Heuer Fernandes,L1,Bundesliga,41,Hamburger SV,33,Goalkeeper,Portugal,1200000.0,188.0,right,2028-06-30,156.0,17.0
+1048715,Fernando Dickes,L1,Bundesliga,41,Hamburger SV,18,Goalkeeper,Germany,300000.0,193.0,left,2028-06-30,130.0,11.0
+649672,Nicolás Capaldo,L1,Bundesliga,41,Hamburger SV,27,Centre-Back,Argentina,8000000.0,177.0,right,2028-06-30,490.0,58.0
+711996,Warmed Omari,L1,Bundesliga,41,Hamburger SV,26,Centre-Back,Comoros,4000000.0,188.0,right,2030-06-30,273.0,51.0
+227110,Jordan Torunarigha,L1,Bundesliga,41,Hamburger SV,28,Centre-Back,Nigeria,4000000.0,191.0,left,2028-06-30,274.0,43.0
+529895,Daniel Elfadli,L1,Bundesliga,41,Hamburger SV,29,Centre-Back,Libya,3000000.0,188.0,right,2028-06-30,164.0,20.0
+1052420,Aboubaka Soumahoro,L1,Bundesliga,41,Hamburger SV,21,Centre-Back,France,1200000.0,187.0,left,2029-06-30,140.0,21.0
+1125079,Shafiq Nandja,L1,Bundesliga,41,Hamburger SV,19,Centre-Back,Germany,500000.0,195.0,right,,0.0,0.0
+815838,Joel Agyekum,L1,Bundesliga,41,Hamburger SV,21,Centre-Back,Germany,150000.0,190.0,left,,0.0,0.0
+85864,Loris Karius,L1,Bundesliga,33,FC Schalke 04,33,Goalkeeper,Germany,800000.0,191.0,right,2028-06-30,228.0,28.0
+774531,Luca Podlech,L1,Bundesliga,33,FC Schalke 04,21,Goalkeeper,Germany,125000.0,200.0,right,2028-06-30,0.0,0.0
+1047294,Johannes Siebeking,L1,Bundesliga,33,FC Schalke 04,20,Goalkeeper,Germany,125000.0,195.0,left,2029-06-30,400.0,32.0
+969376,Mertcan Ayhan,L1,Bundesliga,33,FC Schalke 04,19,Centre-Back,Türkiye,8000000.0,190.0,right,2028-06-30,164.0,13.0
+292812,Hasan Kuruçay,L1,Bundesliga,33,FC Schalke 04,28,Centre-Back,Türkiye,2000000.0,188.0,right,2027-06-30,39.0,4.0
+422051,Nikola Katic,L1,Bundesliga,33,FC Schalke 04,29,Centre-Back,Bosnia-Herzegovina,1800000.0,194.0,right,2028-06-30,436.0,68.0
+282349,Timo Becker,L1,Bundesliga,33,FC Schalke 04,29,Centre-Back,Germany,1500000.0,190.0,right,2029-06-30,369.0,40.0
+1103940,Felipe Sánchez,L1,Bundesliga,33,FC Schalke 04,22,Centre-Back,Argentina,800000.0,184.0,left,2028-06-30,0.0,0.0
+1188989,Dylan Leonard,L1,Bundesliga,33,FC Schalke 04,18,Centre-Back,Australia,400000.0,187.0,right,2030-06-30,80.0,10.0
+148657,Tomas Kalas,L1,Bundesliga,33,FC Schalke 04,33,Centre-Back,Czech Republic,250000.0,184.0,right,2027-06-30,1032.0,130.0
+349465,Nicolas Kristof,L1,Bundesliga,64,SV 07 Elversberg,26,Goalkeeper,Austria,2500000.0,187.0,both,2029-06-30,24.0,3.0
+85534,Tim Boss,L1,Bundesliga,64,SV 07 Elversberg,33,Goalkeeper,Germany,200000.0,186.0,both,2027-06-30,328.0,41.0
+44536,Frank Lehmann,L1,Bundesliga,64,SV 07 Elversberg,37,Goalkeeper,Germany,100000.0,193.0,right,2027-06-30,211.0,10.0
+448259,Lukas Pinckert,L1,Bundesliga,64,SV 07 Elversberg,26,Centre-Back,Germany,2500000.0,185.0,right,2028-06-30,62.0,6.0
+440386,Maximilian Rohr,L1,Bundesliga,64,SV 07 Elversberg,31,Centre-Back,Germany,800000.0,193.0,both,2028-06-30,459.0,67.0
+352332,Florian Le Joncour,L1,Bundesliga,64,SV 07 Elversberg,31,Centre-Back,France,500000.0,193.0,left,2027-06-30,247.0,36.0
+806007,Luis Seifert,L1,Bundesliga,64,SV 07 Elversberg,22,Centre-Back,Germany,200000.0,188.0,right,2028-06-30,105.0,13.0
+522245,Lasse Günther,L1,Bundesliga,64,SV 07 Elversberg,23,Left-Back,Germany,2500000.0,181.0,left,2030-06-30,368.0,35.0
+430034,Nicholas Mickelson,L1,Bundesliga,64,SV 07 Elversberg,26,Left-Back,Thailand,1000000.0,179.0,right,2027-06-30,384.0,48.0
+815322,Felix Keidel,L1,Bundesliga,64,SV 07 Elversberg,23,Right-Back,Germany,1200000.0,178.0,right,2028-06-30,78.0,12.0
+600942,Nahuel Noll,L1,Bundesliga,127,SC Paderborn 07,23,Goalkeeper,Germany,2000000.0,191.0,both,2027-06-30,54.0,5.0
+296741,Markus Schubert,L1,Bundesliga,127,SC Paderborn 07,28,Goalkeeper,Germany,500000.0,189.0,right,2028-06-30,206.0,25.0
+930013,Florian Pruhs,L1,Bundesliga,127,SC Paderborn 07,20,Goalkeeper,Germany,150000.0,190.0,right,,63.0,17.0
+694132,Mattes Hansen,L1,Bundesliga,127,SC Paderborn 07,22,Centre-Back,Germany,2500000.0,183.0,right,,236.0,33.0
+509650,Tjark Scheller,L1,Bundesliga,127,SC Paderborn 07,24,Centre-Back,Germany,2500000.0,192.0,both,,0.0,0.0
+330635,Felix Götze,L1,Bundesliga,127,SC Paderborn 07,28,Centre-Back,Germany,2000000.0,185.0,right,,191.0,26.0
+570152,Marcel Hoffmeier,L1,Bundesliga,127,SC Paderborn 07,26,Centre-Back,Germany,1000000.0,182.0,right,2028-06-30,284.0,34.0
+606220,Martin Ens,L1,Bundesliga,127,SC Paderborn 07,24,Centre-Back,Germany,450000.0,187.0,right,,0.0,0.0
+521331,Nyamekye Awortwie-Grant,L1,Bundesliga,127,SC Paderborn 07,25,Centre-Back,Germany,400000.0,193.0,right,,96.0,16.0
+798091,Tristan Zobel,L1,Bundesliga,127,SC Paderborn 07,22,Centre-Back,Germany,225000.0,195.0,left,2028-06-30,0.0,0.0
