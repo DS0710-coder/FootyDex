@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FootyDex — Football Transfer Intelligence Dashboard (v2.0 Enterprise)
+FootyDex — Football Transfer Intelligence Dashboard
 Streamlit Application: Narrative-first scouting briefing cards, Cosine Similarity alternatives,
 Interactive Radar comparisons, and Recruitment Index (RI) leaderboards.
 """
@@ -14,7 +14,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 st.set_page_config(
-    page_title="FootyDex | Recruitment Intelligence v2.0",
+    page_title="FootyDex | Recruitment Intelligence",
     page_icon="⚽",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -177,7 +177,7 @@ def select_club_cb(club_name):
     st.session_state["exp_selected_club"] = club_name
 
 def main():
-    st.markdown('<div class="main-header">FootyDex Recruitment Intelligence v2.0</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">FootyDex Recruitment Intelligence</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">"If your club had €50M to spend today... who is the smartest signing?" • Proprietary Transfer Valuation & Decision Support</div>', unsafe_allow_html=True)
     
     df, df_transfers = load_data()
@@ -267,18 +267,16 @@ def main():
                     logo_url = f"https://tmssl.akamaized.net/images/wappen/head/{c_id}.png"
                     
                     is_sel = (c_name == st.session_state.get("exp_selected_club"))
-                    border_color = "#00F2FE" if is_sel else "rgba(255,255,255,0.1)"
-                    bg_color = "rgba(0,242,254,0.15)" if is_sel else "rgba(22,27,34,0.6)"
                     btn_type = "primary" if is_sel else "secondary"
                     
                     st.markdown(f"""
-                    <div style="text-align:center;background:{bg_color};padding:0.5rem;border-radius:10px 10px 0 0;border:2px solid {border_color};border-bottom:none;">
-                        <img src="{logo_url}" style="height:45px;margin-bottom:0.1rem;" onerror="this.style.display='none'">
+                    <div style="text-align:center;margin-bottom:0.2rem;min-height:55px;display:flex;align-items:center;justify-content:center;">
+                        <img src="{logo_url}" style="max-height:50px;max-width:80%;" onerror="this.style.display='none'">
                     </div>
                     """, unsafe_allow_html=True)
                     
                     st.button(
-                        f"🛡️ {c_name}", 
+                        c_name, 
                         key=f"btn_club_{c_id}_{j}_{i}", 
                         on_click=select_club_cb,
                         args=(c_name,),
