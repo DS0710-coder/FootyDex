@@ -113,6 +113,16 @@ def run_recruitment_engine():
     else:
         df_merged = df_tm.copy()
         
+    if "club" not in df_merged.columns:
+        if "club_name" in df_merged.columns:
+            df_merged["club"] = df_merged["club_name"].fillna("Unknown Club")
+        else:
+            df_merged["club"] = "Unknown Club"
+    else:
+        if "club_name" in df_merged.columns:
+            df_merged["club"] = df_merged["club"].fillna(df_merged["club_name"])
+        df_merged["club"] = df_merged["club"].fillna("Unknown Club")
+        
     # Fill defaults for missing numerical columns
     feature_cols = ["minutes_played", "goals", "assists", "xg", "xag", "npxg", "prg_carries", "prg_passes", 
                     "pass_cmp_pct", "prg_pass_dist", "long_pass_cmp_pct", "final_third_passes", "key_passes", 
@@ -207,9 +217,13 @@ def run_recruitment_engine():
                 l_mult = v
                 break
         
-        # Base context from league multiplier and minutes played reliability
+        # Base context from league multiplier and minutes played reliability (with Big Club rotation cushion)
         mins = row.get("minutes_played", 0)
-        min_factor = min(1.0, mins / 1800.0) if mins > 0 else 0.5
+        elite_clubs_set = {normalize_name(ec) for ec in market_weights.get("elite_rotation_clubs", [])}
+        club_val = normalize_name(str(row.get("club", row.get("club_name", ""))))
+        is_elite_club = club_val in elite_clubs_set
+        min_divisor = 900.0 if is_elite_club else 1800.0
+        min_factor = min(1.0, mins / min_divisor) if mins > 0 else (0.75 if is_elite_club else 0.5)
         c_score = (l_mult * 75.0) + (min_factor * 20.0)
         context_scores.append(np.clip(c_score, 20.0, 98.0))
     df_merged["context_score"] = np.round(context_scores, 1)
@@ -257,7 +271,7 @@ def run_recruitment_engine():
         # Fair Market Valuation Range (€)
         # Baseline fair val derived from Ability, Context, Age, and Contract
         mv = row["market_value"]
-        ability_factor = (row["ability_score"] / 70.0) ** 1.3
+        ability_factor = (row["ability_score"] / 68.0) ** 1.25
         est_fair = mv * ability_factor * (c_mult ** 0.5) * (age_mult ** 0.5)
         
         low_val = round((est_fair * 0.90) / 1e6, 1)
@@ -429,11 +443,18 @@ def run_recruitment_engine():
         mv_m = row["market_value"] / 1e6
         fair_h = row["fair_val_high"]
         
-        if ri >= 86.0 and fair_h >= mv_m:
+        b_pos = row["broad_pos"]
+        is_expensive_def_gk = (b_pos in ["Centre-Back", "Full-Back", "Goalkeeper"]) and (mv_m >= 60.0)
+        is_mega_val = mv_m >= 80.0
+        
+        if ri >= 86.0 and fair_h >= mv_m and not is_expensive_def_gk and not is_mega_val:
             rec = "🟢 ELITE TARGET"
-        elif ri >= 78.0 and fair_h >= mv_m * 0.9:
+        # Explicit override: Generational Ballon d'Or level performers (RI >= 92.0) bypass expensive defender and mega-value caps when fair valuation supports the price
+        elif ri >= 92.0 and fair_h >= mv_m:
+            rec = "🟢 ELITE TARGET"
+        elif (ri >= 76.0 and fair_h >= mv_m * 0.95 and not is_mega_val) or (ri >= 65.0 and mv_m <= 45.0 and fair_h >= mv_m * 0.85):
             rec = "🟢 GOOD VALUE"
-        elif ri >= 68.0:
+        elif ri >= 60.0 or fair_h >= mv_m * 0.82:
             rec = "🟡 FAIR VALUE"
         else:
             rec = "🔴 OVERPRICED / AVOID"

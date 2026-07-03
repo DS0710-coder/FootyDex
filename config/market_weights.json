@@ -21,5 +21,17 @@
     "tier_1_extractors": ["Brighton & Hove Albion", "SL Benfica", "Ajax Amsterdam", "Sporting CP", "Atalanta BC", "Borussia Dortmund"],
     "tier_1_multiplier": 1.15,
     "default_multiplier": 1.00
-  }
+  },
+  "elite_rotation_clubs": [
+    "Barcelona", "FC Barcelona",
+    "Real Madrid", "Atletico Madrid", "Atletico de Madrid",
+    "Bayern Munich", "Borussia Dortmund", "Dortmund",
+    "Bayer 04 Leverkusen", "Leverkusen", "RB Leipzig",
+    "Paris Saint-Germain",
+    "Manchester City", "Arsenal", "Arsenal FC",
+    "Liverpool", "Liverpool FC", "Chelsea", "Chelsea FC",
+    "Manchester United", "Tottenham", "Tottenham Hotspur",
+    "Inter", "Inter Milan", "AC Milan", "Milan",
+    "Juventus", "Juventus FC", "Napoli", "SSC Napoli"
+  ]
 }
