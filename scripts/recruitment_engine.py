@@ -219,8 +219,8 @@ def run_recruitment_engine():
         
         # Base context from league multiplier and minutes played reliability (with Big Club rotation cushion)
         mins = row.get("minutes_played", 0)
-        elite_clubs_set = set(market_weights.get("elite_rotation_clubs", []))
-        club_val = str(row.get("club", row.get("club_name", "")))
+        elite_clubs_set = {normalize_name(ec) for ec in market_weights.get("elite_rotation_clubs", [])}
+        club_val = normalize_name(str(row.get("club", row.get("club_name", ""))))
         is_elite_club = club_val in elite_clubs_set
         min_divisor = 900.0 if is_elite_club else 1800.0
         min_factor = min(1.0, mins / min_divisor) if mins > 0 else (0.75 if is_elite_club else 0.5)
