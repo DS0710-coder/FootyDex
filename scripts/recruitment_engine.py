@@ -343,8 +343,9 @@ def run_recruitment_engine():
     most_similar_list = []
     cheaper_alt_list = []
     
-    for idx in range(len(df_merged)):
-        row = df_merged.iloc[idx]
+    records = df_merged[["player_name", "club", "broad_pos", "market_value"]].to_dict('records')
+    for idx in range(len(records)):
+        row = records[idx]
         target_pos = row["broad_pos"]
         target_mv = row["market_value"]
         
@@ -357,7 +358,7 @@ def run_recruitment_engine():
         for s_idx in sorted_indices:
             if s_idx == idx:
                 continue
-            cand = df_merged.iloc[s_idx]
+            cand = records[s_idx]
             if cand["broad_pos"] != target_pos:
                 continue
                 
@@ -374,6 +375,9 @@ def run_recruitment_engine():
                 alt_str = f"{cand['player_name']} ({cand['club']} | €{cand_mv_m}M | {match_pct}% Match | 👉 €{savings_m}M Savings)"
                 if len(alts) < 2:
                     alts.append(alt_str)
+                    
+            if len(sims) >= 3 and len(alts) >= 2:
+                break
                     
         most_similar_list.append(" • ".join(sims) if sims else "No direct positional matches found")
         cheaper_alt_list.append(" • ".join(alts) if alts else "No significant budget alternatives found")
