@@ -173,6 +173,9 @@ def get_badge_html(label):
     else:
         return f'<span class="badge badge-fair">{label}</span>'
 
+def select_club_cb(club_name):
+    st.session_state["exp_selected_club"] = club_name
+
 def main():
     st.markdown('<div class="main-header">FootyDex Recruitment Intelligence v2.0</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">"If your club had €50M to spend today... who is the smartest signing?" • Proprietary Transfer Valuation & Decision Support</div>', unsafe_allow_html=True)
@@ -250,8 +253,8 @@ def main():
         if "exp_selected_club" not in st.session_state or st.session_state["exp_selected_club"] not in clubs_in_comp:
             st.session_state["exp_selected_club"] = clubs_in_comp[0] if clubs_in_comp else ""
             
-        # 2. Club Blocks Grid with Logos
-        st.markdown(f"#### 🛡️ Clubs in {sel_comp_exp}")
+        # 2. Club Blocks Grid with Logos (Click the team button directly!)
+        st.markdown(f"#### 🛡️ Clubs in {sel_comp_exp} (Click Team to Open Squad)")
         
         cols_per_row = 5
         for i in range(0, len(clubs_in_comp), cols_per_row):
@@ -263,29 +266,28 @@ def main():
                     c_id = int(c_id_series.iloc[0]) if not c_id_series.empty else 0
                     logo_url = f"https://tmssl.akamaized.net/images/wappen/head/{c_id}.png"
                     
-                    is_sel = (c_name == st.session_state["exp_selected_club"])
+                    is_sel = (c_name == st.session_state.get("exp_selected_club"))
                     border_color = "#00F2FE" if is_sel else "rgba(255,255,255,0.1)"
                     bg_color = "rgba(0,242,254,0.15)" if is_sel else "rgba(22,27,34,0.6)"
+                    btn_type = "primary" if is_sel else "secondary"
                     
                     st.markdown(f"""
-                    <div style="text-align:center;background:{bg_color};padding:0.6rem;border-radius:10px;border:2px solid {border_color};margin-bottom:0.3rem;">
-                        <img src="{logo_url}" style="height:45px;margin-bottom:0.4rem;" onerror="this.style.display='none'">
-                        <div style="font-weight:700;font-size:0.85rem;color:#E2E8F0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{c_name}</div>
+                    <div style="text-align:center;background:{bg_color};padding:0.5rem;border-radius:10px 10px 0 0;border:2px solid {border_color};border-bottom:none;">
+                        <img src="{logo_url}" style="height:45px;margin-bottom:0.1rem;" onerror="this.style.display='none'">
                     </div>
                     """, unsafe_allow_html=True)
                     
-                    if st.button(f"👉 Select", key=f"btn_club_{c_id}_{j}_{i}", use_container_width=True):
-                        st.session_state["exp_selected_club"] = c_name
+                    st.button(
+                        f"🛡️ {c_name}", 
+                        key=f"btn_club_{c_id}_{j}_{i}", 
+                        on_click=select_club_cb,
+                        args=(c_name,),
+                        use_container_width=True,
+                        type=btn_type
+                    )
                         
         st.markdown("---")
-        
-        # Direct selectbox fallback synced with session state
-        curr_club = st.session_state["exp_selected_club"]
-        idx_curr = clubs_in_comp.index(curr_club) if curr_club in clubs_in_comp else 0
-        sel_club_direct = st.selectbox("Or choose club directly:", options=clubs_in_comp, index=idx_curr, key="exp_club_dropdown")
-        if sel_club_direct != curr_club:
-            st.session_state["exp_selected_club"] = sel_club_direct
-            curr_club = sel_club_direct
+        curr_club = st.session_state.get("exp_selected_club", clubs_in_comp[0] if clubs_in_comp else "")
             
         # 3. Squad Directory & Filters
         st.markdown(f"### 👥 {curr_club} Squad Directory")
