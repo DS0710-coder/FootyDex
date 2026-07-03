@@ -356,9 +356,9 @@ def main():
     with tab4:
         st.markdown("### 📈 Market Valuation vs. Recruitment Index Scatter")
         if not f_df.empty:
-            f_df["mv_m"] = f_df["market_value"] / 1e6
+            scatter_df = f_df.assign(mv_m=f_df["market_value"] / 1e6)
             fig_scatter = px.scatter(
-                f_df, x="mv_m", y="recruitment_index", color="recommendation", size="ability_score",
+                scatter_df, x="mv_m", y="recruitment_index", color="recommendation", size="ability_score",
                 hover_data=["player_name", "club_name", "age", "position"],
                 labels={"mv_m": "Market Valuation (€M)", "recruitment_index": "Recruitment Index (RI)"},
                 title="Finding Market Inefficiencies: High RI Targets at Low Valuation"
