@@ -1,42 +1,42 @@
 {
   "Goalkeeper": {
-    "primary": ["save_pct", "psxg_net_per_90", "cross_claims_pct", "sweeper_actions_per_90"],
-    "secondary": ["pass_cmp_pct", "long_pass_cmp_pct", "minutes_played"],
-    "negative": ["errors_to_shot", "errors_to_goal"]
+    "primary": ["pass_cmp_pct", "long_pass_cmp_pct", "clearances", "recoveries"],
+    "secondary": ["minutes_played", "aerial_won_pct"],
+    "negative": ["errors_to_shot"]
   },
   "Centre-Back": {
-    "primary": ["def_duels_won_pct", "aerial_won_pct", "interceptions_per_90", "blocks_per_90", "clearances_per_90"],
-    "secondary": ["recoveries_per_90", "prg_pass_dist_per_90", "long_pass_cmp_pct", "prg_carries_per_90"],
-    "negative": ["errors_to_shot", "errors_to_goal", "turnovers_per_90"]
+    "primary": ["def_duels_won_pct", "aerial_won_pct", "interceptions", "blocks", "clearances"],
+    "secondary": ["recoveries", "prg_pass_dist", "long_pass_cmp_pct", "prg_carries"],
+    "negative": ["errors_to_shot"]
   },
   "Full-Back": {
-    "primary": ["prg_carries_per_90", "prg_passes_per_90", "tackles_won_per_90", "interceptions_per_90", "recoveries_per_90"],
-    "secondary": ["cross_accuracy_pct", "carries_final_third_per_90", "xag_per_90", "dribble_success_pct"],
-    "negative": ["turnovers_per_90", "dispossessed_per_90"]
+    "primary": ["prg_carries", "prg_passes", "tackles_won", "interceptions", "recoveries"],
+    "secondary": ["final_third_passes", "xag", "dribble_success_pct", "successful_dribbles"],
+    "negative": ["errors_to_shot"]
   },
   "Defensive Midfield": {
-    "primary": ["recoveries_per_90", "interceptions_per_90", "tackles_won_per_90", "prg_passes_per_90", "press_resistance_pct"],
-    "secondary": ["def_duels_won_pct", "long_pass_cmp_pct", "switches_per_90", "pass_cmp_pct"],
-    "negative": ["turnovers_per_90", "dispossessed_per_90"]
+    "primary": ["recoveries", "interceptions", "tackles_won", "prg_passes", "pass_cmp_pct"],
+    "secondary": ["def_duels_won_pct", "long_pass_cmp_pct", "aerial_won_pct", "final_third_passes"],
+    "negative": ["errors_to_shot"]
   },
   "Central Midfield": {
-    "primary": ["prg_passes_per_90", "final_third_passes_per_90", "recoveries_per_90", "press_resistance_pct", "pass_cmp_pct"],
-    "secondary": ["prg_carries_per_90", "key_passes_per_90", "interceptions_per_90", "xag_per_90"],
-    "negative": ["turnovers_per_90", "dispossessed_per_90"]
+    "primary": ["prg_passes", "final_third_passes", "recoveries", "pass_cmp_pct", "through_balls"],
+    "secondary": ["prg_carries", "key_passes", "interceptions", "xag"],
+    "negative": ["errors_to_shot"]
   },
   "Attacking Midfield": {
-    "primary": ["xag_per_90", "key_passes_per_90", "through_balls_per_90", "sca_per_90", "gca_per_90"],
-    "secondary": ["ppa_per_90", "prg_passes_per_90", "goals_per_90", "prg_carries_per_90"],
-    "negative": ["turnovers_per_90", "dispossessed_per_90"]
+    "primary": ["xag", "key_passes", "through_balls", "sca", "gca"],
+    "secondary": ["final_third_passes", "prg_passes", "goals", "prg_carries"],
+    "negative": ["errors_to_shot"]
   },
   "Winger": {
-    "primary": ["successful_dribbles_per_90", "prg_carries_per_90", "carries_into_box_per_90", "xag_per_90", "sca_per_90"],
-    "secondary": ["key_passes_per_90", "touches_in_box_per_90", "goals_per_90", "npxg_per_90"],
-    "negative": ["turnovers_per_90", "dispossessed_per_90"]
+    "primary": ["successful_dribbles", "prg_carries", "touches_in_box", "xag", "sca"],
+    "secondary": ["key_passes", "goals", "npxg", "dribble_success_pct"],
+    "negative": ["errors_to_shot"]
   },
   "Striker": {
-    "primary": ["goals_per_90", "npxg_per_90", "goals_above_xg_per_90", "shot_conversion_pct", "touches_in_box_per_90"],
-    "secondary": ["shots_on_target_pct", "big_chances_converted_per_90", "xag_per_90", "prg_passes_received_per_90"],
-    "negative": ["turnovers_per_90", "dispossessed_per_90"]
+    "primary": ["goals", "npxg", "shot_conversion_pct", "touches_in_box", "shots_on_target_pct"],
+    "secondary": ["aerial_won_pct", "xag", "sca", "key_passes"],
+    "negative": ["errors_to_shot"]
   }
 }

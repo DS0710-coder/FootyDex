@@ -17,11 +17,11 @@ Built to uncover market inefficiencies, high-leverage contractual bargains, and 
 
 ---
 
-## 🏗️ Architecture: The 4-Pillar Recruitment Engine
+## 🏗️ Architecture: The 3-Pillar Recruitment Engine
 
 Unlike simple statistical dashboards that mix on-pitch output with market price, FootyDex separates recruitment analysis into distinct, logical pillars that mirror how professional Champions League scouting departments operate:
 
-```
+```text
 RAW DATA SOURCES
 ├── Transfermarkt Local Docker API (Biometrics, Transfers, Contract Expiry Date, Injuries, Market Value)
 ├── FBref / soccerdata (Standard, Shooting, Passing, Defense, Possession, GCA, Match Logs)
@@ -52,7 +52,7 @@ RECRUITMENT INTELLIGENCE MODELS (ML & Inference Layer)
 SCOUTING REPORT GENERATION (Narrative-First UI)
 ```
 
-```
+```text
 +------------------------------------------------------------------------------------+
 |                             FOOTYDEX DATA PIPELINE                                 |
 +------------------------------------------------------------------------------------+

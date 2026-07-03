@@ -149,9 +149,7 @@ def collect_fbref_stats(leagues=None, season=TARGET_SEASON):
         "shooting_standard_g/sh": "shot_conversion_pct"
     }
     
-    for old_col, new_col in rename_map.items():
-        if old_col in df_clean.columns:
-            df_clean[new_col] = df_clean[old_col]
+    df_clean.rename(columns=rename_map, inplace=True)
             
     # Ensure numerical formatting
     num_cols = ["minutes_played", "goals", "assists", "xg", "xag", "npxg", "prg_carries", "prg_passes", 
@@ -167,15 +165,18 @@ def collect_fbref_stats(leagues=None, season=TARGET_SEASON):
             df_clean[col] = 0.0
             
     out_path = "data/fbref_stats.csv"
+    write_fbref = True
     if os.path.exists(out_path) and not df_clean.empty:
         try:
             df_existing = pd.read_csv(out_path)
             df_clean = pd.concat([df_existing, df_clean], ignore_index=True).drop_duplicates(subset=["player_name", "club"], keep="last")
         except Exception as e:
-            logger.warning(f"Could not merge with existing {out_path}: {e}")
+            logger.error(f"Could not merge with existing {out_path}: {e}. Aborting write to protect historical data.")
+            write_fbref = False
             
-    df_clean.to_csv(out_path, index=False)
-    logger.info(f"Successfully saved {len(df_clean)} enriched multi-table player records to {out_path}.")
+    if write_fbref:
+        df_clean.to_csv(out_path, index=False)
+        logger.info(f"Successfully saved {len(df_clean)} enriched multi-table player records to {out_path}.")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Scrape FBref multi-table player stats.")

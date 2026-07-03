@@ -211,22 +211,28 @@ def collect_data(limit_per_club=None, max_clubs_per_league=None, target_league=N
     df_players = pd.DataFrame(players_data)
     df_transfers = pd.DataFrame(transfers_data)
     
+    write_players = True
     if os.path.exists("data/players.csv") and not df_players.empty:
         try:
             df_existing_p = pd.read_csv("data/players.csv")
             df_players = pd.concat([df_existing_p, df_players], ignore_index=True).drop_duplicates(subset=["player_id"], keep="last")
         except Exception as e:
-            logger.warning(f"Could not merge with existing players.csv: {e}")
+            logger.error(f"Could not merge with existing players.csv: {e}. Aborting write for players.csv to protect historical data.")
+            write_players = False
             
+    write_transfers = True
     if os.path.exists("data/transfers.csv") and not df_transfers.empty:
         try:
             df_existing_t = pd.read_csv("data/transfers.csv")
             df_transfers = pd.concat([df_existing_t, df_transfers], ignore_index=True).drop_duplicates(subset=["transfer_id"], keep="last")
         except Exception as e:
-            logger.warning(f"Could not merge with existing transfers.csv: {e}")
+            logger.error(f"Could not merge with existing transfers.csv: {e}. Aborting write for transfers.csv to protect historical data.")
+            write_transfers = False
             
-    df_players.to_csv("data/players.csv", index=False)
-    df_transfers.to_csv("data/transfers.csv", index=False)
+    if write_players:
+        df_players.to_csv("data/players.csv", index=False)
+    if write_transfers:
+        df_transfers.to_csv("data/transfers.csv", index=False)
     
     logger.info(f"\nData Collection Complete! Saved {len(df_players)} players to data/players.csv and {len(df_transfers)} transfers to data/transfers.csv.")
 

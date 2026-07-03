@@ -255,41 +255,35 @@ def main():
             """, unsafe_allow_html=True)
             
         with col_b2:
-            st.markdown(f"""
-            <div class="briefing-card">
-                <h4 style="color:#00F2FE;margin-bottom:1rem;">💡 Why Sign This Player? (Percentile-Backed Rationale)</h4>
-            """, unsafe_allow_html=True)
-            
             lines = str(p["explainability"]).split("\n")
+            explain_items_html = ""
             for l in lines:
                 if l.strip().startswith("[+]"):
-                    st.markdown(f'<div class="explain-pos">✔️ {l.replace("[+]", "").strip()}</div>', unsafe_allow_html=True)
+                    explain_items_html += f'<div class="explain-pos">✔️ {l.replace("[+]", "").strip()}</div>'
                 elif l.strip().startswith("[-]"):
-                    st.markdown(f'<div class="explain-neg">⚠️ {l.replace("[-]", "").strip()}</div>', unsafe_allow_html=True)
+                    explain_items_html += f'<div class="explain-neg">⚠️ {l.replace("[-]", "").strip()}</div>'
                 else:
-                    st.markdown(f'<div>• {l.strip()}</div>', unsafe_allow_html=True)
+                    explain_items_html += f'<div>• {l.strip()}</div>'
                     
-            st.markdown(f"""
+            card_html = f"""<div class="briefing-card">
+                <h4 style="color:#00F2FE;margin-bottom:1rem;">💡 Why Sign This Player? (Percentile-Backed Rationale)</h4>
+                {explain_items_html}
                 <hr style="border-color:rgba(255,255,255,0.1);margin:1rem 0;">
                 <p style="margin-bottom:0.3rem;"><b>Tactical System Fit:</b></p>
                 <code style="color:#FEE140;background:rgba(0,0,0,0.3);padding:0.4rem;border-radius:6px;display:block;">{p.get('system_fit', 'Possession: ★★★★☆')}</code>
-            </div>
-            """, unsafe_allow_html=True)
+            </div>"""
+            st.markdown(card_html, unsafe_allow_html=True)
             
         st.markdown("#### 🔍 Cosine Similarity Engine: Cheaper Budget Alternatives & Similar Profiles")
         sim_c1, sim_c2 = st.columns(2)
         with sim_c1:
-            st.markdown('<div class="metric-card"><h5 style="color:#00F2FE;">💎 Cheaper Budget Alternatives (High Match • Lower Valuation)</h5>', unsafe_allow_html=True)
             alts = str(p.get("cheaper_alternatives", "No alternatives found")).split(" • ")
-            for a in alts:
-                st.markdown(f'<p style="color:#38EF7D;margin:0.5rem 0;">👉 <b>{a}</b></p>', unsafe_allow_html=True)
-            st.markdown('</div>', unsafe_allow_html=True)
+            alts_html = "".join([f'<p style="color:#38EF7D;margin:0.5rem 0;">👉 <b>{a}</b></p>' for a in alts])
+            st.markdown(f'<div class="metric-card"><h5 style="color:#00F2FE;">💎 Cheaper Budget Alternatives (High Match • Lower Valuation)</h5>{alts_html}</div>', unsafe_allow_html=True)
         with sim_c2:
-            st.markdown('<div class="metric-card"><h5 style="color:#94A3B8;">👥 Most Similar European Profiles</h5>', unsafe_allow_html=True)
             sims = str(p.get("similar_players", "No similar players found")).split(" • ")
-            for s in sims:
-                st.markdown(f'<p style="color:#E2E8F0;margin:0.5rem 0;">• {s}</p>', unsafe_allow_html=True)
-            st.markdown('</div>', unsafe_allow_html=True)
+            sims_html = "".join([f'<p style="color:#E2E8F0;margin:0.5rem 0;">• {s}</p>' for s in sims])
+            st.markdown(f'<div class="metric-card"><h5 style="color:#94A3B8;">👥 Most Similar European Profiles</h5>{sims_html}</div>', unsafe_allow_html=True)
 
     # ==========================================
     # TAB 2: RI LEADERBOARD

@@ -72,7 +72,7 @@ def calculate_contract_years(contract_str):
             exp_year = int(parts[0])
             exp_month = int(parts[1]) if len(parts) >= 2 else 6
             now = datetime.datetime.now()
-            exp_date = datetime.datetime(exp_year, exp_month, 30)
+            exp_date = datetime.datetime(exp_year, exp_month, min(28, 30))
             diff_years = (exp_date - now).days / 365.25
             return max(0.1, round(diff_years, 2))
     except Exception:
@@ -199,8 +199,10 @@ def run_recruitment_engine():
     context_scores = []
     for _, row in df_merged.iterrows():
         comp_name = str(row.get("competition_name", row.get("league", "")))
-        l_mult = 0.75
+        l_mult = league_strength.get("default", 0.75)
         for k, v in league_strength.items():
+            if k == "default":
+                continue
             if k.lower() in comp_name.lower():
                 l_mult = v
                 break
@@ -223,31 +225,33 @@ def run_recruitment_engine():
     for _, row in df_merged.iterrows():
         # Contract leverage
         c_yrs = row["contract_years"]
-        if c_yrs < 1.0:
-            c_mult = 0.68
-        elif c_yrs < 2.0:
-            c_mult = 0.84
-        elif c_yrs < 3.5:
-            c_mult = 0.96
-        else:
-            c_mult = 1.10
+        c_mult = 1.10
+        for k_range, mult in market_weights.get("contract_leverage_curve", {}).items():
+            low_r, high_r = [float(x) for x in k_range.split("_")]
+            if low_r <= c_yrs < high_r:
+                c_mult = mult
+                break
             
         # Age curve
         age = row["age"]
-        if age <= 21:
-            age_mult = 1.15
-        elif age <= 25:
-            age_mult = 1.08
-        elif age <= 29:
-            age_mult = 1.00
-        else:
-            age_mult = 0.86
+        age_mult = 1.00
+        for k_range, val_dict in market_weights.get("age_potential_curve", {}).items():
+            low_a, high_a = [int(x) for x in k_range.split("_")]
+            if low_a <= age <= high_a:
+                age_mult = val_dict.get("multiplier", 1.00)
+                break
             
         # Injury penalty
         inj_days = row["total_days_injured"]
-        inj_pen = min(25.0, inj_days * 0.15)
+        inj_config = market_weights.get("injury_penalties", {})
+        inj_pen = min(25.0, inj_days * inj_config.get("penalty_factor_per_day", 0.0015) * 100.0)
         
-        m_score = (70.0 * c_mult * age_mult) - inj_pen
+        # Selling club leverage
+        club_name = str(row["club"])
+        sell_config = market_weights.get("selling_club_leverage", {})
+        sell_mult = sell_config.get("tier_1_multiplier", 1.15) if club_name in sell_config.get("tier_1_extractors", []) else sell_config.get("default_multiplier", 1.00)
+        
+        m_score = (70.0 * c_mult * age_mult * (2.0 - sell_mult)) - inj_pen
         market_scores.append(np.clip(m_score, 15.0, 99.0))
         
         # Fair Market Valuation Range (€)
@@ -321,7 +325,7 @@ def run_recruitment_engine():
         elif dom_pos == "Winger":
             label = "Inverted Scoring Winger / Inside Forward" if mean_att > 0.3 else "Wide Touchline Creator / Dribbler"
         else:
-            label = "Complete Complete Striker / False 9" if mean_prg_p > 0.1 else "Poacher / Box Predator"
+            label = "Complete Striker / False 9" if mean_prg_p > 0.1 else "Poacher / Box Predator"
         cluster_labels[c_id] = f"{label} (Cluster {c_id})"
         
     df_merged["tactical_profile"] = df_merged["cluster_id"].map(cluster_labels)
@@ -396,10 +400,14 @@ def run_recruitment_engine():
         
         # Data Quality
         has_fb = row.get("minutes_played", 0) > 0
-        has_inj = "total_days_injured" in row
+        has_inj = pd.notna(row.get("total_days_injured")) and row.get("total_days_injured", -1) >= 0
         has_cont = row.get("contract_years", 0) != 2.5
         dq = 98 if (has_fb and has_inj and has_cont) else (92 if has_fb else 75)
-        data_quality.append(f"{dq}% Complete (FBref ✓ | Contract ✓ | Injuries ✓)")
+        
+        fb_mark = "✓" if has_fb else "✗"
+        cont_mark = "✓" if has_cont else "✗"
+        inj_mark = "✓" if has_inj else "✗"
+        data_quality.append(f"{dq}% Complete (FBref {fb_mark} | Contract {cont_mark} | Injuries {inj_mark})")
         
         # Risk Axis
         inj_d = row.get("total_days_injured", 0)
