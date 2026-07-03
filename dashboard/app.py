@@ -117,7 +117,7 @@ h1, h2, h3, h4, h5, h6 {
 """
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
-@st.cache_data
+@st.cache_data(ttl=60)
 def load_data():
     ri_path = "data/recruitment_index.csv"
     tm_path = "data/moneyball_players.csv"
