@@ -197,6 +197,10 @@ def main():
         min_ri = st.slider("Min Recruitment Index (RI)", 10.0, 99.0, 50.0, step=1.0)
         max_price = st.slider("Max Market Valuation (€M)", 1.0, 200.0, 150.0, step=5.0)
         
+    # Build unique player display labels once, before filtering, so _label is
+    # available in all tabs and f_df inherits it via the shared df reference.
+    df["_label"] = df["player_name"] + " (" + df["club_name"].fillna("") + ")"
+
     # Filter dataset
     f_df = df[
         (df["competition_name"].isin(sel_leagues)) &
@@ -232,10 +236,11 @@ def main():
     # ==========================================
     with tab1:
         st.markdown("### 📋 Executive Scouting Briefing & Why-To-Buy Analysis")
-        player_names = sorted(f_df["player_name"].unique()) if not f_df.empty else sorted(df["player_name"].unique())
-        sel_player = st.selectbox("Select Target Player for Narrative Recruitment Briefing:", options=player_names)
-        
-        p = df[df["player_name"] == sel_player].iloc[0]
+        player_labels = sorted(df["_label"].unique())
+        sel_label = st.selectbox("Select Target Player for Narrative Recruitment Briefing (All Top 5 Leagues):", options=player_labels)
+
+        # Resolve label back to the correct unique row
+        p = df[df["_label"] == sel_label].iloc[0]
         
         col_b1, col_b2 = st.columns([1, 1.2])
         with col_b1:
@@ -298,12 +303,22 @@ def main():
     # ==========================================
     with tab2:
         st.markdown("### 🏆 Recruitment Index (RI) Global Leaderboard")
+        search_query = st.text_input("🔍 Search Players / Clubs (narrows current filters):", "").strip()
+        # Always start from sidebar-filtered f_df so league/position/RI/price scope is preserved;
+        # use regex=False so special characters in the query are treated as literals, not regex.
+        display_df = f_df
+        if search_query:
+            display_df = f_df[
+                f_df["player_name"].str.contains(search_query, case=False, na=False, regex=False) |
+                f_df["club_name"].str.contains(search_query, case=False, na=False, regex=False)
+            ]
+            
         display_cols = ["player_name", "club_name", "competition_name", "position", "age", "mv_display", 
                         "recruitment_index", "ability_score", "context_score", "market_score", "recommendation", "risk_profile"]
-        valid_cols = [c for c in display_cols if c in f_df.columns]
+        valid_cols = [c for c in display_cols if c in display_df.columns]
         
         st.dataframe(
-            f_df[valid_cols].sort_values("recruitment_index", ascending=False).rename(columns={
+            display_df[valid_cols].sort_values("recruitment_index", ascending=False).rename(columns={
                 "player_name": "Player", "club_name": "Club", "competition_name": "League", "position": "Position",
                 "age": "Age", "mv_display": "Market Val", "recruitment_index": "RI ⭐", "ability_score": "Ability",
                 "context_score": "Context", "market_score": "Market", "recommendation": "Recommendation", "risk_profile": "Risk"
@@ -321,12 +336,12 @@ def main():
         st.markdown("### ⚔️ Head-to-Head Player Scouting Radar")
         rc1, rc2 = st.columns(2)
         with rc1:
-            p1_name = st.selectbox("Select Player 1:", options=player_names, index=0)
+            p1_label = st.selectbox("Select Player 1:", options=player_labels, index=0)
         with rc2:
-            p2_name = st.selectbox("Select Player 2:", options=player_names, index=min(1, len(player_names)-1))
-            
-        p1 = df[df["player_name"] == p1_name].iloc[0]
-        p2 = df[df["player_name"] == p2_name].iloc[0]
+            p2_label = st.selectbox("Select Player 2:", options=player_labels, index=min(1, len(player_labels)-1))
+
+        p1 = df[df["_label"] == p1_label].iloc[0]
+        p2 = df[df["_label"] == p2_label].iloc[0]
         
         # Plotly Radar Chart
         categories = ["Ability Score", "Context Score", "Market Score", "RI Master Score", "Minutes Reliability", "Age Potential"]
