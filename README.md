@@ -6,6 +6,10 @@
 ![Docker](https://img.shields.io/badge/Docker-Self--Hosted_API-2496ED?style=for-the-badge&logo=docker)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
+<div align="center">
+  <img src="assets/logo.png" alt="FootyDex Logo" width="180"/>
+</div>
+
 **FootyDex** is an enterprise-grade football recruitment intelligence and transfer valuation platform. 
 
 > **FootyDex doesn't try to answer:**  

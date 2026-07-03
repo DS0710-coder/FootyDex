@@ -15,10 +15,13 @@ import plotly.graph_objects as go
 
 st.set_page_config(
     page_title="FootyDex | Recruitment Intelligence",
-    page_icon="⚽",
+    page_icon="assets/logo.png" if os.path.exists("assets/logo.png") else "⚽",
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+if os.path.exists("assets/logo.png") and hasattr(st, "logo"):
+    st.logo("assets/logo.png")
 
 CUSTOM_CSS = """
 <style>
@@ -187,6 +190,9 @@ def main():
         
     # Sidebar Filters
     with st.sidebar:
+        if os.path.exists("assets/logo.png"):
+            st.image("assets/logo.png", use_container_width=True)
+            st.markdown("---")
         st.markdown("### ⚙️ Recruitment Scope")
         leagues = sorted(df["competition_name"].dropna().unique())
         sel_leagues = st.multiselect("Filter Competitions", options=leagues, default=leagues)
