@@ -113,6 +113,11 @@ def run_recruitment_engine():
     else:
         df_merged = df_tm.copy()
         
+    if "club" not in df_merged.columns:
+        df_merged["club"] = df_merged.get("club_name", "Unknown Club")
+    else:
+        df_merged["club"] = df_merged["club"].fillna(df_merged.get("club_name", "Unknown Club"))
+        
     # Fill defaults for missing numerical columns
     feature_cols = ["minutes_played", "goals", "assists", "xg", "xag", "npxg", "prg_carries", "prg_passes", 
                     "pass_cmp_pct", "prg_pass_dist", "long_pass_cmp_pct", "final_third_passes", "key_passes", 
@@ -207,9 +212,11 @@ def run_recruitment_engine():
                 l_mult = v
                 break
         
-        # Base context from league multiplier and minutes played reliability
+        # Base context from league multiplier and minutes played reliability (with Big Club rotation cushion)
         mins = row.get("minutes_played", 0)
-        min_factor = min(1.0, mins / 1800.0) if mins > 0 else 0.5
+        is_elite_club = any(ec in str(row.get("club", "")).lower() or ec in str(row.get("club_name", "")).lower() for ec in ["barcelona", "madrid", "bayern", "psg", "paris", "city", "arsenal", "liverpool", "chelsea", "united", "inter", "milan", "juve", "dortmund", "atletico", "leverkusen"])
+        min_divisor = 900.0 if is_elite_club else 1800.0
+        min_factor = min(1.0, mins / min_divisor) if mins > 0 else (0.75 if is_elite_club else 0.5)
         c_score = (l_mult * 75.0) + (min_factor * 20.0)
         context_scores.append(np.clip(c_score, 20.0, 98.0))
     df_merged["context_score"] = np.round(context_scores, 1)
@@ -257,11 +264,13 @@ def run_recruitment_engine():
         # Fair Market Valuation Range (€)
         # Baseline fair val derived from Ability, Context, Age, and Contract
         mv = row["market_value"]
-        ability_factor = (row["ability_score"] / 70.0) ** 1.3
+        is_elite = any(ec in str(row.get("club", "")).lower() or ec in str(row.get("club_name", "")).lower() for ec in ["barcelona", "madrid", "bayern", "psg", "paris", "city", "arsenal", "liverpool", "chelsea", "united", "inter", "milan", "juve", "dortmund", "atletico", "leverkusen"])
+        elite_mult = 1.25 if is_elite else 1.0
+        ability_factor = ((row["ability_score"] / 60.0) ** 1.1) * elite_mult
         est_fair = mv * ability_factor * (c_mult ** 0.5) * (age_mult ** 0.5)
         
         low_val = round((est_fair * 0.90) / 1e6, 1)
-        high_val = round((est_fair * 1.12) / 1e6, 1)
+        high_val = round((est_fair * 1.15) / 1e6, 1)
         fair_val_lows.append(max(0.5, low_val))
         fair_val_highs.append(max(0.8, high_val))
         
@@ -429,11 +438,12 @@ def run_recruitment_engine():
         mv_m = row["market_value"] / 1e6
         fair_h = row["fair_val_high"]
         
-        if ri >= 86.0 and fair_h >= mv_m:
+        is_elite = any(ec in str(row.get("club", "")).lower() or ec in str(row.get("club_name", "")).lower() for ec in ["barcelona", "madrid", "bayern", "psg", "paris", "city", "arsenal", "liverpool", "chelsea", "united", "inter", "milan", "juve", "dortmund", "atletico", "leverkusen"])
+        if (ri >= 82.0 and fair_h >= mv_m * 0.95) or (is_elite and ri >= 72.0 and fair_h >= mv_m * 0.9):
             rec = "🟢 ELITE TARGET"
-        elif ri >= 78.0 and fair_h >= mv_m * 0.9:
+        elif (ri >= 72.0 and fair_h >= mv_m * 0.85) or (is_elite and ri >= 64.0 and fair_h >= mv_m * 0.8):
             rec = "🟢 GOOD VALUE"
-        elif ri >= 68.0:
+        elif ri >= 58.0 or fair_h >= mv_m * 0.75:
             rec = "🟡 FAIR VALUE"
         else:
             rec = "🔴 OVERPRICED / AVOID"
