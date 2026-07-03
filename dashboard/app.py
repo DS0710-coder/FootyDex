@@ -13,12 +13,23 @@ import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 
+import sys
+if os.path.abspath(".") not in sys.path:
+    sys.path.insert(0, os.path.abspath("."))
+try:
+    from scripts.squad_utils import assign_squad_numbers
+except ImportError:
+    from squad_utils import assign_squad_numbers
+
 st.set_page_config(
     page_title="FootyDex | Recruitment Intelligence",
-    page_icon="⚽",
+    page_icon="assets/logo.png" if os.path.exists("assets/logo.png") else "⚽",
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+if os.path.exists("assets/logo.png") and hasattr(st, "logo"):
+    st.logo("assets/logo.png")
 
 CUSTOM_CSS = """
 <style>
@@ -155,6 +166,8 @@ def load_data():
         df["cheaper_alternatives"] = "No budget alternatives found"
     if "system_fit" not in df.columns:
         df["system_fit"] = "Possession Build-Up: ★★★★☆ | High Pressing: ★★★★☆"
+    if "shirt_number" not in df.columns or df["shirt_number"].isna().any() or (df["shirt_number"] <= 0).any():
+        df = assign_squad_numbers(df)
         
     df["mv_display"] = df["market_value"].apply(lambda x: f"€{x/1e6:.1f}M" if x >= 1e6 else f"€{x/1e3:.0f}K")
     
@@ -187,6 +200,9 @@ def main():
         
     # Sidebar Filters
     with st.sidebar:
+        if os.path.exists("assets/logo.png"):
+            st.image("assets/logo.png", use_container_width=True)
+            st.markdown("---")
         st.markdown("### ⚙️ Recruitment Scope")
         leagues = sorted(df["competition_name"].dropna().unique())
         sel_leagues = st.multiselect("Filter Competitions", options=leagues, default=leagues)
@@ -334,7 +350,7 @@ def main():
             ("⚡ Attackers", ["Centre-Forward", "Left Winger", "Right Winger", "Second Striker", "Attacker", "Winger"])
         ]
         
-        display_cols = ["player_name", "position", "age", "foot", "mv_display", "contract_expires", "recruitment_index", "recommendation", "risk_profile"]
+        display_cols = ["shirt_number", "player_name", "position", "age", "foot", "mv_display", "contract_expires", "recruitment_index", "recommendation", "risk_profile"]
         valid_cols = [c for c in display_cols if c in club_squad.columns]
         
         for group_title, pos_list in pos_buckets:
@@ -345,13 +361,14 @@ def main():
             else:
                 st.dataframe(
                     sub_squad[valid_cols].rename(columns={
-                        "player_name": "Player Name", "position": "Position", "age": "Age",
+                        "shirt_number": "#", "player_name": "Player Name", "position": "Position", "age": "Age",
                         "foot": "Foot", "mv_display": "Market Value", "contract_expires": "Contract Expires",
                         "recruitment_index": "RI ⭐", "recommendation": "Recommendation", "risk_profile": "Risk"
                     }).style.format({
                         "RI ⭐": "{:.1f}"
                     }),
                     use_container_width=True,
+                    hide_index=True,
                     height=min(350, 40 + len(sub_squad)*36)
                 )
 
@@ -437,19 +454,20 @@ def main():
                 f_df["club_name"].str.contains(search_query, case=False, na=False, regex=False)
             ]
             
-        display_cols = ["player_name", "club_name", "competition_name", "position", "age", "mv_display", 
+        display_cols = ["shirt_number", "player_name", "club_name", "competition_name", "position", "age", "mv_display", 
                         "recruitment_index", "ability_score", "context_score", "market_score", "recommendation", "risk_profile"]
         valid_cols = [c for c in display_cols if c in display_df.columns]
         
         st.dataframe(
             display_df[valid_cols].sort_values("recruitment_index", ascending=False).rename(columns={
-                "player_name": "Player", "club_name": "Club", "competition_name": "League", "position": "Position",
+                "shirt_number": "#", "player_name": "Player", "club_name": "Club", "competition_name": "League", "position": "Position",
                 "age": "Age", "mv_display": "Market Val", "recruitment_index": "RI ⭐", "ability_score": "Ability",
                 "context_score": "Context", "market_score": "Market", "recommendation": "Recommendation", "risk_profile": "Risk"
             }).style.format({
                 "RI ⭐": "{:.1f}", "Ability": "{:.1f}", "Context": "{:.1f}", "Market": "{:.1f}"
             }),
             use_container_width=True,
+            hide_index=True,
             height=500
         )
 

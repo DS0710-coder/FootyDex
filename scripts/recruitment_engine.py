@@ -20,6 +20,14 @@ from sklearn.cluster import KMeans
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import StandardScaler
 
+import sys
+if os.path.abspath(".") not in sys.path:
+    sys.path.insert(0, os.path.abspath("."))
+try:
+    from scripts.squad_utils import assign_squad_numbers
+except ImportError:
+    from squad_utils import assign_squad_numbers
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("FootyDex.RecruitmentEngine")
 
@@ -507,6 +515,7 @@ def run_recruitment_engine():
     df_merged["explainability"] = explainability_notes
     
     # Save Enriched Output
+    df_merged = assign_squad_numbers(df_merged)
     out_file = "data/recruitment_index.csv"
     df_merged.to_csv(out_file, index=False)
     logger.info(f"Successfully generated FootyDex v2.0 Recruitment Index dataset with {len(df_merged)} players -> {out_file}!")
