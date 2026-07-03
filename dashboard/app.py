@@ -232,8 +232,9 @@ def main():
     # ==========================================
     with tab1:
         st.markdown("### 📋 Executive Scouting Briefing & Why-To-Buy Analysis")
-        player_names = sorted(f_df["player_name"].unique()) if not f_df.empty else sorted(df["player_name"].unique())
-        sel_player = st.selectbox("Select Target Player for Narrative Recruitment Briefing:", options=player_names)
+        # Allow searching across ALL loaded Top 5 European leagues regardless of sidebar filters
+        player_names = sorted(df["player_name"].unique())
+        sel_player = st.selectbox("Select Target Player for Narrative Recruitment Briefing (All Top 5 Leagues):", options=player_names)
         
         p = df[df["player_name"] == sel_player].iloc[0]
         
@@ -298,12 +299,20 @@ def main():
     # ==========================================
     with tab2:
         st.markdown("### 🏆 Recruitment Index (RI) Global Leaderboard")
+        search_query = st.text_input("🔍 Quick Player / Club Search across all Top 5 Leagues:", "").strip()
+        display_df = df if search_query else f_df
+        if search_query:
+            display_df = display_df[
+                display_df["player_name"].str.contains(search_query, case=False, na=False) |
+                display_df["club_name"].str.contains(search_query, case=False, na=False)
+            ]
+            
         display_cols = ["player_name", "club_name", "competition_name", "position", "age", "mv_display", 
                         "recruitment_index", "ability_score", "context_score", "market_score", "recommendation", "risk_profile"]
-        valid_cols = [c for c in display_cols if c in f_df.columns]
+        valid_cols = [c for c in display_cols if c in display_df.columns]
         
         st.dataframe(
-            f_df[valid_cols].sort_values("recruitment_index", ascending=False).rename(columns={
+            display_df[valid_cols].sort_values("recruitment_index", ascending=False).rename(columns={
                 "player_name": "Player", "club_name": "Club", "competition_name": "League", "position": "Position",
                 "age": "Age", "mv_display": "Market Val", "recruitment_index": "RI ⭐", "ability_score": "Ability",
                 "context_score": "Context", "market_score": "Market", "recommendation": "Recommendation", "risk_profile": "Risk"
