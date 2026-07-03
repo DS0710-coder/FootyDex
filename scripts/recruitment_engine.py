@@ -63,6 +63,44 @@ def map_broad_position(pos_str):
         return "Striker"
     return "Central Midfield"
 
+def assign_squad_numbers(df):
+    d = df.copy()
+    if "shirt_number" in d.columns and not d["shirt_number"].isna().all():
+        return d
+    pos_map = {
+        "Goalkeeper": [1, 13, 22, 30, 31, 12, 25],
+        "Centre-Back": [4, 5, 6, 14, 24, 15, 26, 33, 3],
+        "Left-Back": [3, 15, 21, 12, 32, 26, 18],
+        "Right-Back": [2, 12, 20, 22, 28, 14, 31],
+        "Central Midfield": [8, 6, 16, 18, 20, 14, 23, 24, 25],
+        "Defensive Midfield": [6, 16, 4, 18, 24, 22, 30, 15],
+        "Attacking Midfield": [10, 20, 25, 8, 18, 19, 21, 11],
+        "Right Winger": [7, 17, 23, 11, 19, 27, 20, 14],
+        "Left Winger": [11, 21, 17, 7, 19, 27, 22, 20],
+        "Centre-Forward": [9, 19, 29, 11, 18, 14, 7, 23]
+    }
+    club_col = "club" if "club" in d.columns else "club_name"
+    d["shirt_number"] = 0
+    for _, c_df in d.groupby(club_col):
+        used = set()
+        c_df_sorted = c_df.sort_values(by=["ability_score", "recruitment_index"], ascending=False)
+        for idx, row in c_df_sorted.iterrows():
+            pos = row.get("position", "Central Midfield")
+            pref_list = pos_map.get(pos, [8, 14, 16, 18, 20, 22, 24, 25, 26])
+            assigned = None
+            for n in pref_list:
+                if n not in used:
+                    assigned = n
+                    break
+            if not assigned:
+                for n in range(1, 99):
+                    if n not in used:
+                        assigned = n
+                        break
+            used.add(assigned)
+            d.at[idx, "shirt_number"] = assigned
+    return d
+
 def calculate_contract_years(contract_str):
     if not contract_str or not isinstance(contract_str, str):
         return 2.5
@@ -507,6 +545,7 @@ def run_recruitment_engine():
     df_merged["explainability"] = explainability_notes
     
     # Save Enriched Output
+    df_merged = assign_squad_numbers(df_merged)
     out_file = "data/recruitment_index.csv"
     df_merged.to_csv(out_file, index=False)
     logger.info(f"Successfully generated FootyDex v2.0 Recruitment Index dataset with {len(df_merged)} players -> {out_file}!")
