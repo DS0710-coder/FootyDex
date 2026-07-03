@@ -114,9 +114,14 @@ def run_recruitment_engine():
         df_merged = df_tm.copy()
         
     if "club" not in df_merged.columns:
-        df_merged["club"] = df_merged.get("club_name", "Unknown Club")
+        if "club_name" in df_merged.columns:
+            df_merged["club"] = df_merged["club_name"].fillna("Unknown Club")
+        else:
+            df_merged["club"] = "Unknown Club"
     else:
-        df_merged["club"] = df_merged["club"].fillna(df_merged.get("club_name", "Unknown Club"))
+        if "club_name" in df_merged.columns:
+            df_merged["club"] = df_merged["club"].fillna(df_merged["club_name"])
+        df_merged["club"] = df_merged["club"].fillna("Unknown Club")
         
     # Fill defaults for missing numerical columns
     feature_cols = ["minutes_played", "goals", "assists", "xg", "xag", "npxg", "prg_carries", "prg_passes", 
@@ -214,7 +219,9 @@ def run_recruitment_engine():
         
         # Base context from league multiplier and minutes played reliability (with Big Club rotation cushion)
         mins = row.get("minutes_played", 0)
-        is_elite_club = any(ec in str(row.get("club", "")).lower() or ec in str(row.get("club_name", "")).lower() for ec in ["barcelona", "madrid", "bayern", "psg", "paris", "city", "arsenal", "liverpool", "chelsea", "united", "inter", "milan", "juve", "dortmund", "atletico", "leverkusen"])
+        elite_clubs_set = set(market_weights.get("elite_rotation_clubs", []))
+        club_val = str(row.get("club", row.get("club_name", "")))
+        is_elite_club = club_val in elite_clubs_set
         min_divisor = 900.0 if is_elite_club else 1800.0
         min_factor = min(1.0, mins / min_divisor) if mins > 0 else (0.75 if is_elite_club else 0.5)
         c_score = (l_mult * 75.0) + (min_factor * 20.0)
@@ -442,6 +449,7 @@ def run_recruitment_engine():
         
         if ri >= 86.0 and fair_h >= mv_m and not is_expensive_def_gk and not is_mega_val:
             rec = "🟢 ELITE TARGET"
+        # Explicit override: Generational Ballon d'Or level performers (RI >= 92.0) bypass expensive defender and mega-value caps when fair valuation supports the price
         elif ri >= 92.0 and fair_h >= mv_m:
             rec = "🟢 ELITE TARGET"
         elif (ri >= 76.0 and fair_h >= mv_m * 0.95 and not is_mega_val) or (ri >= 65.0 and mv_m <= 45.0 and fair_h >= mv_m * 0.85):
