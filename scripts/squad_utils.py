@@ -4,14 +4,32 @@ FootyDex — Squad Number Utility Module
 Provides shared squad number allocation logic across data pipelines and UI components.
 """
 
+import os
+import json
 import pandas as pd
 
 def assign_squad_numbers(df):
     """
-    Assigns authentic, unique squad numbers (#1-#45) per club based on position and ranking.
+    Assigns authentic, unique squad numbers (#1-#45) per club based on authentic club rosters and position ranking.
     Preserves existing valid numbers, cleanly fills partial gaps, and handles squad overflow.
     """
     d = df.copy()
+    
+    # 1. Apply cached authentic club squad numbers if available
+    cache_path = os.path.join("data", "player_shirt_numbers.json")
+    if os.path.exists(cache_path):
+        try:
+            with open(cache_path, "r", encoding="utf-8") as f:
+                cache = json.load(f)
+            if "player_id" in d.columns:
+                mapped = d["player_id"].astype(str).str.strip().map(cache)
+                if "shirt_number" in d.columns:
+                    d["shirt_number"] = d["shirt_number"].combine_first(mapped)
+                else:
+                    d["shirt_number"] = mapped
+        except Exception:
+            pass
+            
     has_col = "shirt_number" in d.columns
     if has_col and d["shirt_number"].notna().all() and (d["shirt_number"] > 0).all():
         return d
