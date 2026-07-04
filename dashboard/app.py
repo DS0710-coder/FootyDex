@@ -417,16 +417,16 @@ def main():
     # TAB SCOUT: AI SCOUT MODE MATCHMAKER
     # ==========================================
     with tab_scout:
-        st.markdown("### 🎯 Scout Mode — Tactical AI Matchmaker")
-        st.markdown("Specify your transfer budget, tactical philosophy, and positional needs. The engine synthesizes 6,200+ FBref metrics and financial models to deliver the **Top 5 Tailored Targets** with tactical justification.")
+        st.markdown("### 🎯 Scout Mode — AI Tactical Matchmaker")
+        st.markdown("Specify your transfer budget, positional needs, preferred age range, and tactical philosophy. The engine evaluates 6,200+ FBref metrics and financial models to deliver the **Top 10 Tailored Recommendations** ranked by Moneyball score with customized justification.")
         
         sc1, sc2, sc3, sc4 = st.columns([2, 2, 2, 3])
         with sc1:
             scout_pos = st.selectbox("Position Needed:", options=["All Positions", "Striker", "Winger", "Attacking Midfield", "Central Midfield", "Defensive Midfield", "Full-Back", "Centre-Back", "Goalkeeper"], index=1)
         with sc2:
-            scout_budget = st.slider("Max Budget (€M):", min_value=5.0, max_value=150.0, value=30.0, step=5.0)
+            scout_budget = st.slider("Max Budget (€M):", min_value=1.0, max_value=150.0, value=30.0, step=1.0)
         with sc3:
-            scout_age = st.slider("Max Age:", min_value=18, max_value=35, value=26, step=1)
+            scout_age_range = st.slider("Preferred Age Range:", min_value=16, max_value=38, value=(18, 28), step=1)
         with sc4:
             scout_style = st.selectbox("Tactical Philosophy:", options=[
                 "High Pressing & Gegenpress (High Intensity & Ball Recovery)",
@@ -435,51 +435,53 @@ def main():
                 "Defensive Block & Aerial Anchor (Tackling & Aerial Dominance)"
             ])
             
-        # Filter candidates by budget, age, minutes, and position
-        scout_df = df[(df["market_value"] / 1e6 <= scout_budget) & (df["age"] <= scout_age) & (df["minutes_played"] >= 500)].copy()
+        # Filter candidates by budget, age range, minutes, and position
+        scout_df = df[(df["market_value"] / 1e6 <= scout_budget) & (df["age"] >= scout_age_range[0]) & (df["age"] <= scout_age_range[1]) & (df["minutes_played"] >= 500)].copy()
         if scout_pos != "All Positions":
             scout_df = scout_df[scout_df["broad_pos"] == scout_pos]
             
-        # Apply tactical fit weighting
+        # Determine metric names based on tactical philosophy
         if "Pressing" in scout_style:
-            scout_df["tactical_fit"] = scout_df["recruitment_index"] * 0.7 + scout_df.get("pct_tackles_won", 50) * 0.3
-            style_reason = "elite off-ball intensity and defensive work rate suited for Gegenpress systems"
             p_metric_col = "pct_tackles_won"
             p_metric_name = "tackling & ball recovery"
+            style_reason = "elite off-ball intensity and high-pressing work rate"
         elif "Possession" in scout_style:
-            scout_df["tactical_fit"] = scout_df["recruitment_index"] * 0.7 + scout_df.get("pct_prg_passes", 50) * 0.3
-            style_reason = "exceptional ball progression and pass completion under high-line build-up"
             p_metric_col = "pct_prg_passes"
-            p_metric_name = "progressive passing"
+            p_metric_name = "progressive passing & retention"
+            style_reason = "exceptional ball progression and pass completion under pressure"
         elif "Transition" in scout_style:
-            scout_df["tactical_fit"] = scout_df["recruitment_index"] * 0.7 + scout_df.get("pct_prg_carries", 50) * 0.3
-            style_reason = "explosive ball-carrying and direct progression in transition moments"
             p_metric_col = "pct_prg_carries"
             p_metric_name = "progressive carrying & dribbling"
+            style_reason = "explosive ball-carrying and direct progression in transition"
         else:
-            scout_df["tactical_fit"] = scout_df["recruitment_index"] * 0.7 + scout_df.get("pct_aerial_won_pct", 50) * 0.3
-            style_reason = "commanding aerial win rates and structural discipline for defensive solidity"
             p_metric_col = "pct_aerial_won_pct"
-            p_metric_name = "aerial duels won"
+            p_metric_name = "aerial duels & defensive clearance"
+            style_reason = "commanding aerial win rates and structural discipline"
             
-        top_scouted = scout_df.sort_values(by="tactical_fit", ascending=False).head(5)
+        # Sort top 10 recommended players by Moneyball score
+        sort_col = "moneyball_score" if "moneyball_score" in scout_df.columns else "recruitment_index"
+        top_scouted = scout_df.sort_values(by=[sort_col, "recruitment_index"], ascending=[False, False]).head(10)
         
         if top_scouted.empty:
-            st.warning("No players matched your exact budget and age criteria. Try increasing your budget or max age.")
+            st.warning("No players matched your exact budget and age range criteria. Try widening your filters.")
         else:
-            st.markdown(f"#### 🔥 Top 5 Tailored Recommendations for **{scout_pos}** (Under €{scout_budget}M, Age ≤ {scout_age})")
+            st.markdown(f"#### 🔥 Top 10 Recommended Players for **{scout_pos}** (Budget ≤ €{scout_budget}M, Age {scout_age_range[0]}–{scout_age_range[1]})")
             for idx_num, (_, s_row) in enumerate(top_scouted.iterrows()):
                 mv_str = f"€{s_row['market_value']/1e6:.1f}M"
                 rec_badge = get_badge_html(s_row["recommendation"])
                 ftv = s_row.get("fee_to_value_ratio", 1.0)
                 val_note = "Undervalued Market Opportunity" if ftv < 0.9 else ("Fairly Priced" if ftv <= 1.15 else "Premium Price Required")
                 pct_val = s_row.get(p_metric_col, 75)
+                mb_score = s_row.get("moneyball_score", s_row["recruitment_index"])
                 
-                with st.expander(f"⭐ #{idx_num+1} — {s_row['player_name']} ({s_row['club_name']} | {mv_str} | RI: {s_row['recruitment_index']} | Match: {s_row['tactical_fit']:.1f})", expanded=(idx_num==0)):
+                # Clear 'Why sign this player?' one-liner
+                one_liner = f"**Why sign this player?** {s_row['player_name']} provides {style_reason}, ranking in the **{pct_val:.0f}th percentile** for {p_metric_name} with **{s_row.get('goals_per_90', 0) + s_row.get('assists_per_90', 0):.2f} goal contributions/90** and an elite Moneyball rating of **{mb_score:.1f}**."
+                
+                with st.expander(f"⭐ #{idx_num+1} — {s_row['player_name']} ({s_row['club_name']} | {mv_str} | Moneyball Score: {mb_score:.1f} | RI: {s_row['recruitment_index']})", expanded=(idx_num==0)):
+                    st.markdown(f'<div style="background: rgba(0, 242, 254, 0.1); border-left: 4px solid #00F2FE; padding: 0.8rem; border-radius: 4px; margin-bottom: 0.8rem;">{one_liner}</div>', unsafe_allow_html=True)
                     col_a, col_b = st.columns([3, 2])
                     with col_a:
                         st.markdown(f"**Tactical Archetype**: `{s_row.get('tactical_profile', s_row.get('broad_pos'))}`")
-                        st.markdown(f"**Why They Fit Your System**: Exhibits {style_reason}, ranking in the **{pct_val:.0f}th percentile** for {p_metric_name} and delivering **{s_row.get('goals_per_90', 0) + s_row.get('assists_per_90', 0):.2f} goal contributions/90** across {int(s_row.get('minutes_played', 0))} minutes.")
                         st.markdown(f"**Financial Verdict**: {rec_badge} ({val_note}). Estimated fair valuation ceiling is **€{s_row.get('fair_val_high', 0):.1f}M**.", unsafe_allow_html=True)
                     with col_b:
                         st.markdown(f"**Age**: {int(s_row['age'])} yrs | **Contract**: {s_row.get('contract_years', 2.0)} yrs left")
@@ -614,7 +616,7 @@ def main():
         ))
         fig_radar.add_trace(go.Scatterpolar(
             r=get_radar_vals(p2), theta=categories, fill='toself', name=p2['player_name'],
-            line=dict(color='#FF007A', width=3), fillcolor='rgba(255, 0, 122, 0.25)'
+            line=dict(color='#FF0844', width=3), fillcolor='rgba(255, 8, 68, 0.25)'
         ))
         
         fig_radar.update_layout(
@@ -634,7 +636,7 @@ def main():
         runner = p2 if p1_score >= p2_score else p1
         diff = abs(p1_score - p2_score)
         
-        win_color = "#00F2FE" if winner['player_name'] == p1['player_name'] else "#FF007A"
+        win_color = "#00F2FE" if winner['player_name'] == p1['player_name'] else "#FF0844"
         
         st.markdown(f"""
         <div style="background: rgba(22, 27, 34, 0.85); border-left: 5px solid {win_color}; padding: 1.25rem; border-radius: 8px; margin-top: 1rem;">

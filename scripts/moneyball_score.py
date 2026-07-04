@@ -116,6 +116,11 @@ def engineer_features(df_players, df_transfers, df_fbref):
     # Fill missing values
     df["transfer_fee"] = df["transfer_fee"].fillna(0.0)
     df["market_value_at_transfer"] = df["market_value_at_transfer"].fillna(df["market_value"])
+    
+    # Deduplicate before median imputation using player_id if available, else player_name
+    dedup_key = "player_id" if "player_id" in df.columns else "player_name"
+    df["market_value"] = pd.to_numeric(df["market_value"], errors="coerce")
+    df = df.sort_values(by="market_value", ascending=False, kind="mergesort").drop_duplicates(subset=[dedup_key], keep="first")
     df["market_value"] = df["market_value"].replace(0, np.nan).fillna(df["market_value"].median() or 10_000_000.0)
     
     # 3. fee_to_value_ratio = transfer fee / market value (>1 means overpriced, <1 means bargain)
@@ -193,9 +198,12 @@ def calculate_moneyball_score(df):
     else:
         scaled = np.full(len(df), 50.0)
         
-    # Apply minutes played damping factor: players with < 500 minutes get penalized heavily
-    damping = np.where(df["minutes_played"] < 500, np.maximum(0.25, (df["minutes_played"] / 500.0) ** 0.5), 1.0)
-    scaled = scaled * damping
+    # Minimum 500 minutes threshold — players below this get a score penalty of 20 points
+    penalty = np.where(df["minutes_played"] < 500, 20.0, 0.0)
+    scaled = scaled - penalty
+    
+    # Minimum market value floor of €500K — players below this are capped/filtered out of top rankings entirely
+    scaled = np.where(df["market_value"] < 500_000, np.minimum(scaled, 45.0), scaled)
         
     df["moneyball_score"] = np.round(np.clip(scaled, 0.0, 100.0), 1)
     return df
@@ -212,9 +220,11 @@ def label_players(df):
         mins = row.get("minutes_played", 0)
         l_mult = row.get("league_strength_mult", 0.75)
         
-        # Guardrail 1: Low sample size or unknown lower league bench players cannot be Bargains/Hidden Gems
+        # Guardrails: Low sample size or low market value players cannot be in top categories
         if mins < 500:
             label = "Sample Size Risk"
+        elif mv < 500_000:
+            label = "Low Valuation / Unverified"
         elif age > 29 and (fee > mv or ftv > 1.1):
             label = "High Risk"
         elif mv < 15_000_000 and score > 72 and l_mult >= 0.85 and mins >= 600:
