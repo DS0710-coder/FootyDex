@@ -121,6 +121,9 @@ def run_recruitment_engine():
     else:
         df_merged = df_tm.copy()
         
+    df_merged["market_value"] = pd.to_numeric(df_merged["market_value"], errors="coerce").fillna(0.0)
+    df_merged = df_merged.sort_values(by="market_value", ascending=False).drop_duplicates(subset=["player_name"], keep="first")
+        
     if "club" not in df_merged.columns:
         if "club_name" in df_merged.columns:
             df_merged["club"] = df_merged["club_name"].fillna("Unknown Club")
@@ -302,6 +305,10 @@ def run_recruitment_engine():
     # ---------------------------------------------------------
     logger.info("Calculating Recruitment Index (RI) and Replacement Values...")
     ri_vals = (df_merged["ability_score"] * 0.45) + (df_merged["context_score"] * 0.25) + (df_merged["market_score"] * 0.30)
+    # Minimum 500 minutes threshold — players below this get a score penalty of 20 points
+    ri_vals = np.where(df_merged["minutes_played"] < 500, ri_vals - 20.0, ri_vals)
+    # Minimum market value floor of €500K — players below this are capped/filtered out of top rankings
+    ri_vals = np.where(df_merged["market_value"] < 500_000, np.minimum(ri_vals, 45.0), ri_vals)
     df_merged["recruitment_index"] = np.round(np.clip(ri_vals, 10.0, 99.4), 1)
     
     # Replacement Value (+X above position average)
