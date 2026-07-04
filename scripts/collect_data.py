@@ -232,8 +232,8 @@ def collect_data(limit_per_club=None, max_clubs_per_league=None, target_league=N
             try:
                 df_existing_p = pd.read_csv("data/players.csv")
                 df_players = pd.concat([df_existing_p, df_players], ignore_index=True)
-                df_players["market_value"] = pd.to_numeric(df_players["market_value"], errors="coerce").fillna(0.0)
-                df_players = df_players.sort_values(by="market_value", ascending=False).drop_duplicates(subset=["player_name"], keep="first")
+                df_players["market_value"] = pd.to_numeric(df_players["market_value"], errors="coerce")
+                df_players = df_players.sort_values(by="market_value", ascending=False, kind="mergesort").drop_duplicates(subset=["player_id"], keep="first")
             except Exception as e:
                 logger.error(f"Could not merge with existing players.csv: {e}. Aborting write for players.csv to protect historical data.")
                 write_players = False
@@ -252,8 +252,8 @@ def collect_data(limit_per_club=None, max_clubs_per_league=None, target_league=N
                 write_transfers = False
             
     if write_players:
-        df_players["market_value"] = pd.to_numeric(df_players["market_value"], errors="coerce").fillna(0.0)
-        df_players = df_players.sort_values(by="market_value", ascending=False).drop_duplicates(subset=["player_name"], keep="first")
+        df_players["market_value"] = pd.to_numeric(df_players["market_value"], errors="coerce")
+        df_players = df_players.sort_values(by="market_value", ascending=False, kind="mergesort").drop_duplicates(subset=["player_id"], keep="first")
         df_players.to_csv("data/players.csv", index=False)
     if write_transfers:
         df_transfers.to_csv("data/transfers.csv", index=False)

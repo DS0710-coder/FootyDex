@@ -116,10 +116,12 @@ def engineer_features(df_players, df_transfers, df_fbref):
     # Fill missing values
     df["transfer_fee"] = df["transfer_fee"].fillna(0.0)
     df["market_value_at_transfer"] = df["market_value_at_transfer"].fillna(df["market_value"])
-    df["market_value"] = df["market_value"].replace(0, np.nan).fillna(df["market_value"].median() or 10_000_000.0)
     
-    # Deduplicate on player_name keeping the row with highest market_value
-    df = df.sort_values(by="market_value", ascending=False).drop_duplicates(subset=["player_name"], keep="first")
+    # Deduplicate before median imputation using player_id if available, else player_name
+    dedup_key = "player_id" if "player_id" in df.columns else "player_name"
+    df["market_value"] = pd.to_numeric(df["market_value"], errors="coerce")
+    df = df.sort_values(by="market_value", ascending=False, kind="mergesort").drop_duplicates(subset=[dedup_key], keep="first")
+    df["market_value"] = df["market_value"].replace(0, np.nan).fillna(df["market_value"].median() or 10_000_000.0)
     
     # 3. fee_to_value_ratio = transfer fee / market value (>1 means overpriced, <1 means bargain)
     df["fee_to_value_ratio"] = np.where(
