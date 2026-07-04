@@ -122,6 +122,7 @@ def engineer_features(df_players, df_transfers, df_fbref):
     df["market_value"] = pd.to_numeric(df["market_value"], errors="coerce")
     df = df.sort_values(by="market_value", ascending=False, kind="mergesort").drop_duplicates(subset=[dedup_key], keep="first")
     df["market_value"] = df["market_value"].replace(0, np.nan).fillna(df["market_value"].median() or 10_000_000.0)
+    df["is_ooc_pro"] = (df["minutes_played"].fillna(0) == 0) & (df["market_value"].fillna(0) >= 1_500_000)
     
     # 3. fee_to_value_ratio = transfer fee / market value (>1 means overpriced, <1 means bargain)
     df["fee_to_value_ratio"] = np.where(
@@ -199,7 +200,7 @@ def calculate_moneyball_score(df):
         scaled = np.full(len(df), 50.0)
         
     # Minimum 500 minutes threshold — players below this get a score penalty of 20 points (exempting out-of-coverage senior pros)
-    is_ooc_pro = (df["minutes_played"].fillna(0) == 0) & (df["market_value"] >= 1_500_000)
+    is_ooc_pro = df["is_ooc_pro"] if "is_ooc_pro" in df.columns else ((df["minutes_played"].fillna(0) == 0) & (df["market_value"].fillna(0) >= 1_500_000))
     penalty = np.where((df["minutes_played"] < 500) & ~is_ooc_pro, 20.0, 0.0)
     scaled = scaled - penalty
     
@@ -220,7 +221,7 @@ def label_players(df):
         fee = row["transfer_fee"]
         mins = row.get("minutes_played", 0)
         l_mult = row.get("league_strength_mult", 0.75)
-        is_ooc_pro = (mins == 0) and (mv >= 1_500_000)
+        is_ooc_pro = row.get("is_ooc_pro", False)
         
         # Guardrails: Low sample size or low market value players cannot be in top categories
         if mins < 500 and not is_ooc_pro:

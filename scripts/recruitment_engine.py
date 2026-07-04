@@ -158,6 +158,7 @@ def run_recruitment_engine():
         df_merged["market_value"] = 1000000.0
     else:
         df_merged["market_value"] = pd.to_numeric(df_merged["market_value"], errors="coerce").fillna(1000000.0)
+    df_merged["is_ooc_pro"] = (df_merged["minutes_played"].fillna(0) == 0) & (df_merged["market_value"].fillna(0) >= 1_500_000)
     
     # ---------------------------------------------------------
     # 1. FEATURE STORE NORMALIZATION (Z-Scores by Position)
@@ -212,7 +213,7 @@ def run_recruitment_engine():
         score += np.clip(xg_diff * 2.0, -5.0, 8.0)
         
         mins = row.get("minutes_played", 0)
-        is_ooc_pro = (mins == 0) and (row.get("market_value", 0) >= 1_500_000)
+        is_ooc_pro = row.get("is_ooc_pro", False)
         if mins < 500 and not is_ooc_pro:
             score = score * np.maximum(0.3, (mins / 500.0) ** 0.5)
         
@@ -236,7 +237,7 @@ def run_recruitment_engine():
         
         # Base context from league multiplier and minutes played reliability (with Big Club rotation cushion)
         mins = row.get("minutes_played", 0)
-        is_ooc_pro = (mins == 0) and (row.get("market_value", 0) >= 1_500_000)
+        is_ooc_pro = row.get("is_ooc_pro", False)
         elite_clubs_set = {normalize_name(ec) for ec in market_weights.get("elite_rotation_clubs", [])}
         club_val = normalize_name(str(row.get("club", row.get("club_name", ""))))
         is_elite_club = club_val in elite_clubs_set
@@ -309,7 +310,7 @@ def run_recruitment_engine():
     logger.info("Calculating Recruitment Index (RI) and Replacement Values...")
     ri_vals = (df_merged["ability_score"] * 0.45) + (df_merged["context_score"] * 0.25) + (df_merged["market_score"] * 0.30)
     # Minimum 500 minutes threshold — players below this get a score penalty of 20 points (exempting out-of-coverage senior pros)
-    is_ooc_pro = (df_merged["minutes_played"].fillna(0) == 0) & (df_merged["market_value"] >= 1_500_000)
+    is_ooc_pro = df_merged["is_ooc_pro"] if "is_ooc_pro" in df_merged.columns else ((df_merged["minutes_played"].fillna(0) == 0) & (df_merged["market_value"].fillna(0) >= 1_500_000))
     ri_vals = np.where((df_merged["minutes_played"] < 500) & ~is_ooc_pro, ri_vals - 20.0, ri_vals)
     # Minimum market value floor of €500K — players below this are capped/filtered out of top rankings
     ri_vals = np.where(df_merged["market_value"] < 500_000, np.minimum(ri_vals, 45.0), ri_vals)
@@ -438,7 +439,7 @@ def run_recruitment_engine():
     for _, row in df_merged.iterrows():
         # Confidence
         mins = row.get("minutes_played", 0)
-        is_ooc_pro = (mins == 0) and (row.get("market_value", 0) >= 1_500_000)
+        is_ooc_pro = row.get("is_ooc_pro", False)
         c_pct = 95 if mins >= 2200 else (88 if mins >= 1400 else (74 if mins >= 800 else (72 if is_ooc_pro else 54)))
         conf_scores.append(f"{c_pct}%")
         
