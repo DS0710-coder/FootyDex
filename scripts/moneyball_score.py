@@ -8,6 +8,7 @@ labels players into strategic categories, and outputs data/moneyball_players.csv
 
 import os
 import re
+import json
 import logging
 import unicodedata
 import pandas as pd
@@ -141,7 +142,7 @@ def engineer_features(df_players, df_transfers, df_fbref):
     return df
 
 def calculate_moneyball_score(df):
-    logger.info("Calculating Moneyball Scores using normalized z-scores on real FBref performance...")
+    logger.info("Calculating Moneyball Scores using normalized z-scores on real FBref performance and league difficulty...")
     if len(df) < 2:
         df["moneyball_score"] = 50.0
         return df
@@ -152,15 +153,39 @@ def calculate_moneyball_score(df):
             return np.zeros(len(series))
         return (series - series.mean()) / std
 
-    # Weight: low fee-to-value (40%), high goal contributions/90 (30%), optimal age 21-26 (20%), minutes played (10%)
+    # Load league strength multipliers
+    league_map = {}
+    if os.path.exists("config/league_strength.json"):
+        try:
+            with open("config/league_strength.json", "r") as f:
+                league_map = json.load(f)
+        except Exception as e:
+            logger.warning(f"Could not load league_strength.json: {e}")
+            
+    def get_league_mult(comp):
+        comp_str = str(comp)
+        for k, v in league_map.items():
+            if k == "default": continue
+            if k.lower() in comp_str.lower():
+                return v
+        return league_map.get("default", 0.75)
+        
+    l_mults = df["competition_name"].apply(get_league_mult) if "competition_name" in df.columns else np.ones(len(df))
+    df["league_strength_mult"] = l_mults
+    
+    # Weight goal contributions by league difficulty
+    weighted_gc = df["goal_contributions_per_90"] * l_mults
+    
+    # Weight: low fee-to-value (30%), league-weighted goal contributions/90 (35%), league strength (15%), optimal age 21-26 (10%), minutes played (10%)
     z_low_fee = safe_zscore(-np.log1p(df["fee_to_value_ratio"]))
-    z_gc = safe_zscore(df["goal_contributions_per_90"])
+    z_gc = safe_zscore(weighted_gc)
+    z_league = safe_zscore(l_mults)
     
     age_optimality = np.exp(-((df["age"] - 23.5) ** 2) / 18.0)
     z_age = safe_zscore(age_optimality)
     z_min = safe_zscore(np.log1p(df["minutes_played"]))
     
-    raw_score = 0.40 * z_low_fee + 0.30 * z_gc + 0.20 * z_age + 0.10 * z_min
+    raw_score = 0.30 * z_low_fee + 0.35 * z_gc + 0.15 * z_league + 0.10 * z_age + 0.10 * z_min
     
     min_val, max_val = raw_score.min(), raw_score.max()
     if max_val > min_val:
@@ -168,11 +193,15 @@ def calculate_moneyball_score(df):
     else:
         scaled = np.full(len(df), 50.0)
         
+    # Apply minutes played damping factor: players with < 500 minutes get penalized heavily
+    damping = np.where(df["minutes_played"] < 500, np.maximum(0.25, (df["minutes_played"] / 500.0) ** 0.5), 1.0)
+    scaled = scaled * damping
+        
     df["moneyball_score"] = np.round(np.clip(scaled, 0.0, 100.0), 1)
     return df
 
 def label_players(df):
-    logger.info("Assigning strategic Moneyball labels based on real valuation metrics...")
+    logger.info("Assigning strategic Moneyball labels based on real valuation metrics and sample size guardrails...")
     labels = []
     for _, row in df.iterrows():
         score = row["moneyball_score"]
@@ -180,19 +209,24 @@ def label_players(df):
         mv = row["market_value"]
         age = row["age"]
         fee = row["transfer_fee"]
+        mins = row.get("minutes_played", 0)
+        l_mult = row.get("league_strength_mult", 0.75)
         
-        if age > 29 and (fee > mv or ftv > 1.1):
+        # Guardrail 1: Low sample size or unknown lower league bench players cannot be Bargains/Hidden Gems
+        if mins < 500:
+            label = "Sample Size Risk"
+        elif age > 29 and (fee > mv or ftv > 1.1):
             label = "High Risk"
-        elif mv < 15_000_000 and score > 70:
+        elif mv < 15_000_000 and score > 72 and l_mult >= 0.85 and mins >= 600:
             label = "Hidden Gem"
-        elif score > 75 and ftv < 0.8:
+        elif score > 75 and ftv < 0.8 and l_mult >= 0.85 and mins >= 600:
             label = "Bargain"
         elif score < 40 and ftv > 1.3:
             label = "Overpriced"
         elif 40 <= score <= 75:
             label = "Fair Value"
         else:
-            if score > 75:
+            if score > 75 and l_mult >= 0.80:
                 label = "Bargain"
             elif score < 40:
                 label = "Overpriced"

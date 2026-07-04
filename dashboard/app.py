@@ -139,6 +139,14 @@ def load_data():
         
     df = pd.read_csv(path_to_use)
     
+    # Merge moneyball metrics if reading from recruitment index
+    if path_to_use == ri_path and os.path.exists(tm_path):
+        try:
+            mb_df = pd.read_csv(tm_path)[["player_name", "club_name", "moneyball_score", "moneyball_label"]].drop_duplicates(subset=["player_name", "club_name"])
+            df = pd.merge(df, mb_df, on=["player_name", "club_name"], how="left")
+        except Exception:
+            pass
+            
     # Ensure standard display columns
     if "recruitment_index" not in df.columns:
         df["recruitment_index"] = df.get("moneyball_score", 50.0)
@@ -229,6 +237,38 @@ def main():
         ((df["market_value"] / 1e6) <= max_price)
     ]
     
+    # Transfer Window Storytelling Quick-Select Showcase
+    st.markdown("### ⚡ Summer 2026/27 Transfer Window: Quick Scouting Narratives")
+    st.markdown("Select a narrative below to instantly focus the database on high-priority transfer strategies:")
+    story_col1, story_col2, story_col3, story_col4 = st.columns(4)
+    
+    if "story_mode" not in st.session_state:
+        st.session_state["story_mode"] = "all"
+        
+    with story_col1:
+        if st.button("🔥 Best Signings Under €20M", use_container_width=True):
+            st.session_state["story_mode"] = "under20"
+    with story_col2:
+        if st.button("⚡ U21 Breakout Wonders", use_container_width=True):
+            st.session_state["story_mode"] = "u21"
+    with story_col3:
+        if st.button("💎 Elite Low-Fee Gems", use_container_width=True):
+            st.session_state["story_mode"] = "gems"
+    with story_col4:
+        if st.button("🔄 Reset All Filters", use_container_width=True):
+            st.session_state["story_mode"] = "all"
+            
+    active_story = st.session_state.get("story_mode", "all")
+    if active_story == "under20":
+        f_df = f_df[(f_df["market_value"] / 1e6 <= 20.0) & (f_df["recruitment_index"] >= 72.0) & (f_df["minutes_played"] >= 600)]
+        st.info("🔥 **Active Narrative**: Displaying the highest-rated European targets available for a market fee under **€20.0M**.")
+    elif active_story == "u21":
+        f_df = f_df[(f_df["age"] <= 21) & (f_df["minutes_played"] >= 600) & (f_df["recruitment_index"] >= 65.0)]
+        st.info("⚡ **Active Narrative**: Highlighting Under-21 breakout stars with over 600 senior minutes and strong underlying metrics.")
+    elif active_story == "gems":
+        f_df = f_df[(f_df["moneyball_label"].isin(["Bargain", "Hidden Gem"])) & (f_df["minutes_played"] >= 600)]
+        st.info("💎 **Active Narrative**: Displaying data-backed Bargains and Hidden Gems with high undervaluation leverage.")
+    
     # Top KPI Bar
     kpi1, kpi2, kpi3, kpi4 = st.columns(4)
     with kpi1:
@@ -243,8 +283,9 @@ def main():
         bargain_cnt = len(f_df[f_df["recommendation"].str.contains("GOOD|ELITE", na=False) & f_df["risk_profile"].str.contains("LOW", na=False)])
         st.markdown(f'<div class="metric-card"><div class="metric-label">Low-Risk Bargains</div><div class="metric-value" style="color:#FEE140;">{bargain_cnt}</div></div>', unsafe_allow_html=True)
         
-    tab0, tab1, tab2, tab3, tab4 = st.tabs([
+    tab0, tab_scout, tab1, tab2, tab3, tab4 = st.tabs([
         "🏟️ Squad & Club Explorer",
+        "🎯 Scout Mode (AI Matchmaker)",
         "🔎 Executive Narrative Briefing", 
         "📊 Recruitment Index Leaderboard", 
         "⚔️ Interactive Radar & Compare", 
@@ -373,6 +414,79 @@ def main():
                 )
 
     # ==========================================
+    # TAB SCOUT: AI SCOUT MODE MATCHMAKER
+    # ==========================================
+    with tab_scout:
+        st.markdown("### 🎯 Scout Mode — Tactical AI Matchmaker")
+        st.markdown("Specify your transfer budget, tactical philosophy, and positional needs. The engine synthesizes 6,200+ FBref metrics and financial models to deliver the **Top 5 Tailored Targets** with tactical justification.")
+        
+        sc1, sc2, sc3, sc4 = st.columns([2, 2, 2, 3])
+        with sc1:
+            scout_pos = st.selectbox("Position Needed:", options=["All Positions", "Striker", "Winger", "Attacking Midfield", "Central Midfield", "Defensive Midfield", "Full-Back", "Centre-Back", "Goalkeeper"], index=1)
+        with sc2:
+            scout_budget = st.slider("Max Budget (€M):", min_value=5.0, max_value=150.0, value=30.0, step=5.0)
+        with sc3:
+            scout_age = st.slider("Max Age:", min_value=18, max_value=35, value=26, step=1)
+        with sc4:
+            scout_style = st.selectbox("Tactical Philosophy:", options=[
+                "High Pressing & Gegenpress (High Intensity & Ball Recovery)",
+                "Possession Mastery & Build-Up (Pass Accuracy & Progression)",
+                "Transition & Counter-Attack (Speed & Direct Threat)",
+                "Defensive Block & Aerial Anchor (Tackling & Aerial Dominance)"
+            ])
+            
+        # Filter candidates by budget, age, minutes, and position
+        scout_df = df[(df["market_value"] / 1e6 <= scout_budget) & (df["age"] <= scout_age) & (df["minutes_played"] >= 500)].copy()
+        if scout_pos != "All Positions":
+            scout_df = scout_df[scout_df["broad_pos"] == scout_pos]
+            
+        # Apply tactical fit weighting
+        if "Pressing" in scout_style:
+            scout_df["tactical_fit"] = scout_df["recruitment_index"] * 0.7 + scout_df.get("pct_tackles_won", 50) * 0.3
+            style_reason = "elite off-ball intensity and defensive work rate suited for Gegenpress systems"
+            p_metric_col = "pct_tackles_won"
+            p_metric_name = "tackling & ball recovery"
+        elif "Possession" in scout_style:
+            scout_df["tactical_fit"] = scout_df["recruitment_index"] * 0.7 + scout_df.get("pct_prg_passes", 50) * 0.3
+            style_reason = "exceptional ball progression and pass completion under high-line build-up"
+            p_metric_col = "pct_prg_passes"
+            p_metric_name = "progressive passing"
+        elif "Transition" in scout_style:
+            scout_df["tactical_fit"] = scout_df["recruitment_index"] * 0.7 + scout_df.get("pct_prg_carries", 50) * 0.3
+            style_reason = "explosive ball-carrying and direct progression in transition moments"
+            p_metric_col = "pct_prg_carries"
+            p_metric_name = "progressive carrying & dribbling"
+        else:
+            scout_df["tactical_fit"] = scout_df["recruitment_index"] * 0.7 + scout_df.get("pct_aerial_won_pct", 50) * 0.3
+            style_reason = "commanding aerial win rates and structural discipline for defensive solidity"
+            p_metric_col = "pct_aerial_won_pct"
+            p_metric_name = "aerial duels won"
+            
+        top_scouted = scout_df.sort_values(by="tactical_fit", ascending=False).head(5)
+        
+        if top_scouted.empty:
+            st.warning("No players matched your exact budget and age criteria. Try increasing your budget or max age.")
+        else:
+            st.markdown(f"#### 🔥 Top 5 Tailored Recommendations for **{scout_pos}** (Under €{scout_budget}M, Age ≤ {scout_age})")
+            for idx_num, (_, s_row) in enumerate(top_scouted.iterrows()):
+                mv_str = f"€{s_row['market_value']/1e6:.1f}M"
+                rec_badge = get_badge_html(s_row["recommendation"])
+                ftv = s_row.get("fee_to_value_ratio", 1.0)
+                val_note = "Undervalued Market Opportunity" if ftv < 0.9 else ("Fairly Priced" if ftv <= 1.15 else "Premium Price Required")
+                pct_val = s_row.get(p_metric_col, 75)
+                
+                with st.expander(f"⭐ #{idx_num+1} — {s_row['player_name']} ({s_row['club_name']} | {mv_str} | RI: {s_row['recruitment_index']} | Match: {s_row['tactical_fit']:.1f})", expanded=(idx_num==0)):
+                    col_a, col_b = st.columns([3, 2])
+                    with col_a:
+                        st.markdown(f"**Tactical Archetype**: `{s_row.get('tactical_profile', s_row.get('broad_pos'))}`")
+                        st.markdown(f"**Why They Fit Your System**: Exhibits {style_reason}, ranking in the **{pct_val:.0f}th percentile** for {p_metric_name} and delivering **{s_row.get('goals_per_90', 0) + s_row.get('assists_per_90', 0):.2f} goal contributions/90** across {int(s_row.get('minutes_played', 0))} minutes.")
+                        st.markdown(f"**Financial Verdict**: {rec_badge} ({val_note}). Estimated fair valuation ceiling is **€{s_row.get('fair_val_high', 0):.1f}M**.", unsafe_allow_html=True)
+                    with col_b:
+                        st.markdown(f"**Age**: {int(s_row['age'])} yrs | **Contract**: {s_row.get('contract_years', 2.0)} yrs left")
+                        st.markdown(f"**Moneyball Label**: `{s_row.get('moneyball_label', 'Fair Value')}`")
+                        st.markdown(f"**Similar Profiles**: {str(s_row.get('similar_players', 'N/A'))[:120]}...")
+
+    # ==========================================
     # TAB 1: EXECUTIVE NARRATIVE BRIEFING
     # ==========================================
     with tab1:
@@ -494,8 +608,14 @@ def main():
             return [row["ability_score"], row["context_score"], row["market_score"], row["recruitment_index"], mins_score, age_score]
             
         fig_radar = go.Figure()
-        fig_radar.add_trace(go.Scatterpolar(r=get_radar_vals(p1), theta=categories, fill='toself', name=p1['player_name'], line_color='#00F2FE'))
-        fig_radar.add_trace(go.Scatterpolar(r=get_radar_vals(p2), theta=categories, fill='toself', name=p2['player_name'], line_color='#38EF7D'))
+        fig_radar.add_trace(go.Scatterpolar(
+            r=get_radar_vals(p1), theta=categories, fill='toself', name=p1['player_name'],
+            line=dict(color='#00F2FE', width=3), fillcolor='rgba(0, 242, 254, 0.25)'
+        ))
+        fig_radar.add_trace(go.Scatterpolar(
+            r=get_radar_vals(p2), theta=categories, fill='toself', name=p2['player_name'],
+            line=dict(color='#FF007A', width=3), fillcolor='rgba(255, 0, 122, 0.25)'
+        ))
         
         fig_radar.update_layout(
             polar=dict(radialaxis=dict(visible=True, range=[0, 100], gridcolor='rgba(255,255,255,0.1)')),
@@ -506,6 +626,23 @@ def main():
             margin=dict(l=40, r=40, t=40, b=40)
         )
         st.plotly_chart(fig_radar, use_container_width=True)
+
+        # Automated Tactical Winner & Trade-Off Analysis
+        p1_score = p1["recruitment_index"]
+        p2_score = p2["recruitment_index"]
+        winner = p1 if p1_score >= p2_score else p2
+        runner = p2 if p1_score >= p2_score else p1
+        diff = abs(p1_score - p2_score)
+        
+        win_color = "#00F2FE" if winner['player_name'] == p1['player_name'] else "#FF007A"
+        
+        st.markdown(f"""
+        <div style="background: rgba(22, 27, 34, 0.85); border-left: 5px solid {win_color}; padding: 1.25rem; border-radius: 8px; margin-top: 1rem;">
+            <h4 style="margin-top: 0; color: {win_color};">⭐ Scout Verdict: {winner['player_name']} (+{diff:.1f} RI Advantage)</h4>
+            <p style="margin-bottom: 0.5rem;"><b>Why {winner['player_name']} wins the comparison:</b> Higher overall Recruitment Index (<b>{winner['recruitment_index']}</b> vs <b>{runner['recruitment_index']}</b>), backed by an Ability score of <b>{winner['ability_score']}</b> and Market leverage score of <b>{winner['market_score']}</b>.</p>
+            <p style="margin-bottom: 0; font-size: 0.95rem; color: #94A3B8;"><b>Trade-off Analysis:</b> {winner['player_name']} offers superior squad value ({winner['recommendation']}) at roughly €{winner['market_value']/1e6:.1f}M valuation, compared to {runner['player_name']} (€{runner['market_value']/1e6:.1f}M).</p>
+        </div>
+        """, unsafe_allow_html=True)
 
     # ==========================================
     # TAB 4: MARKET VALUATION vs RI ANALYTICS

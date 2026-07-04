@@ -207,6 +207,10 @@ def run_recruitment_engine():
         xg_diff = row["goals"] - row["xg"]
         score += np.clip(xg_diff * 2.0, -5.0, 8.0)
         
+        mins = row.get("minutes_played", 0)
+        if mins < 500:
+            score = score * np.maximum(0.3, (mins / 500.0) ** 0.5)
+        
         ability_scores.append(np.clip(score, 15.0, 99.0))
     df_merged["ability_score"] = np.round(ability_scores, 1)
     
@@ -233,6 +237,8 @@ def run_recruitment_engine():
         min_divisor = 900.0 if is_elite_club else 1800.0
         min_factor = min(1.0, mins / min_divisor) if mins > 0 else (0.75 if is_elite_club else 0.5)
         c_score = (l_mult * 75.0) + (min_factor * 20.0)
+        if mins < 500:
+            c_score = c_score * np.maximum(0.3, (mins / 500.0) ** 0.5)
         context_scores.append(np.clip(c_score, 20.0, 98.0))
     df_merged["context_score"] = np.round(context_scores, 1)
     
@@ -455,7 +461,9 @@ def run_recruitment_engine():
         is_expensive_def_gk = (b_pos in ["Centre-Back", "Full-Back", "Goalkeeper"]) and (mv_m >= 60.0)
         is_mega_val = mv_m >= 80.0
         
-        if ri >= 86.0 and fair_h >= mv_m and not is_expensive_def_gk and not is_mega_val:
+        if mins < 500:
+            rec = "🟡 SAMPLE SIZE RISK"
+        elif ri >= 86.0 and fair_h >= mv_m and not is_expensive_def_gk and not is_mega_val:
             rec = "🟢 ELITE TARGET"
         # Explicit override: Generational Ballon d'Or level performers (RI >= 92.0) bypass expensive defender and mega-value caps when fair valuation supports the price
         elif ri >= 92.0 and fair_h >= mv_m:
