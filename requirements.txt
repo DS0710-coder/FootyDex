@@ -7,3 +7,4 @@ streamlit>=1.30.0
 plotly>=5.18.0
 tqdm>=4.65.0
 soccerdata>=1.5.0
+rapidfuzz>=3.0.0

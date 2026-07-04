@@ -13,14 +13,22 @@ import unicodedata
 import pandas as pd
 import numpy as np
 from scipy.stats import zscore
+from rapidfuzz import process, fuzz
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("FootyDex.Moneyball")
 
 def normalize_name(name):
-    """Standardizes player names by stripping accents/diacritics and formatting to lowercase for reliable cross-source merging."""
+    """Standardizes player names by mapping special characters and stripping diacritics for reliable cross-source merging."""
     if not isinstance(name, str) or not name:
         return ""
+    replacements = {
+        'ø': 'o', 'Ø': 'o', 'æ': 'ae', 'Æ': 'ae', 'ß': 'ss',
+        'đ': 'd', 'Đ': 'd', 'ł': 'l', 'Ł': 'l', 'œ': 'oe', 'Œ': 'oe',
+        'ä': 'a', 'ö': 'o', 'ü': 'u', 'Ä': 'a', 'Ö': 'o', 'Ü': 'u'
+    }
+    for k, v in replacements.items():
+        name = name.replace(k, v)
     n = unicodedata.normalize("NFKD", name).encode("ASCII", "ignore").decode("ASCII")
     n = re.sub(r"[^a-zA-Z0-9\s]", "", n).lower().strip()
     return re.sub(r"\s+", " ", n)
@@ -38,6 +46,45 @@ def engineer_features(df_players, df_transfers, df_fbref):
         fbref_dedup = df_fbref.drop_duplicates(subset=["name_norm"], keep="first")
         fbref_cols = ["name_norm", "goals", "assists", "minutes_played", "xg"]
         df = pd.merge(df_players, fbref_dedup[fbref_cols], on="name_norm", how="left")
+        
+        # Calculate exact match statistics
+        exact_matches_cnt = df["minutes_played"].notna().sum()
+        unmatched_mask = df["minutes_played"].isna()
+        unmatched_players_cnt = unmatched_mask.sum()
+        
+        # Fuzzy matching using rapidfuzz for unmatched players (threshold ~85)
+        logger.info(f"Exact name matches: {exact_matches_cnt}. Performing rapidfuzz fuzzy matching for {unmatched_players_cnt} unmatched players...")
+        fbref_names = fbref_dedup["name_norm"].tolist()
+        fbref_stats_map = fbref_dedup.set_index("name_norm")[["goals", "assists", "minutes_played", "xg"]].to_dict("index")
+        
+        fuzzy_matches_cnt = 0
+        for idx in df[unmatched_mask].index:
+            p_name = df.loc[idx, "name_norm"]
+            match = process.extractOne(p_name, fbref_names, scorer=fuzz.WRatio)
+            if match and match[1] >= 85:
+                fuzzy_matches_cnt += 1
+                matched_stats = fbref_stats_map[match[0]]
+                df.loc[idx, "goals"] = matched_stats["goals"]
+                df.loc[idx, "assists"] = matched_stats["assists"]
+                df.loc[idx, "minutes_played"] = matched_stats["minutes_played"]
+                df.loc[idx, "xg"] = matched_stats["xg"]
+                
+        total_matched_cnt = df["minutes_played"].notna().sum()
+        still_unmatched_cnt = len(df) - total_matched_cnt
+        logger.info(f"\n=== MERGE STATISTICS ===")
+        logger.info(f"Total Transfermarkt Players: {len(df)}")
+        logger.info(f"Exact Matches: {exact_matches_cnt} ({exact_matches_cnt/len(df)*100:.1f}%)")
+        logger.info(f"Fuzzy Matches (>=85 WRatio): {fuzzy_matches_cnt} ({fuzzy_matches_cnt/len(df)*100:.1f}%)")
+        logger.info(f"Total Combined Matches: {total_matched_cnt} ({total_matched_cnt/len(df)*100:.1f}%)")
+        logger.info(f"Unmatched Players: {still_unmatched_cnt} ({still_unmatched_cnt/len(df)*100:.1f}%)")
+        
+        # Print samples of unmatched names from both sides
+        sample_unmatched_tm = df[df["minutes_played"].isna()]["player_name"].head(10).tolist()
+        matched_fbref_norms = set(df[df["minutes_played"].notna()]["name_norm"])
+        sample_unmatched_fbref = fbref_dedup[~fbref_dedup["name_norm"].isin(matched_fbref_norms)]["player_name"].head(10).tolist()
+        logger.info(f"Sample Unmatched Transfermarkt Players: {sample_unmatched_tm}")
+        logger.info(f"Sample Unmatched FBref Players: {sample_unmatched_fbref}")
+        logger.info("========================\n")
     else:
         logger.warning("FBref dataset is empty! Defaulting stats to 0.")
         df = df_players.copy()
