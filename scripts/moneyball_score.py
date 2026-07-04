@@ -198,8 +198,9 @@ def calculate_moneyball_score(df):
     else:
         scaled = np.full(len(df), 50.0)
         
-    # Minimum 500 minutes threshold — players below this get a score penalty of 20 points
-    penalty = np.where(df["minutes_played"] < 500, 20.0, 0.0)
+    # Minimum 500 minutes threshold — players below this get a score penalty of 20 points (exempting out-of-coverage senior pros)
+    is_ooc_pro = (df["minutes_played"].fillna(0) == 0) & (df["market_value"] >= 1_500_000)
+    penalty = np.where((df["minutes_played"] < 500) & ~is_ooc_pro, 20.0, 0.0)
     scaled = scaled - penalty
     
     # Minimum market value floor of €500K — players below this are capped/filtered out of top rankings entirely
@@ -219,17 +220,18 @@ def label_players(df):
         fee = row["transfer_fee"]
         mins = row.get("minutes_played", 0)
         l_mult = row.get("league_strength_mult", 0.75)
+        is_ooc_pro = (mins == 0) and (mv >= 1_500_000)
         
         # Guardrails: Low sample size or low market value players cannot be in top categories
-        if mins < 500:
+        if mins < 500 and not is_ooc_pro:
             label = "Sample Size Risk"
         elif mv < 500_000:
             label = "Low Valuation / Unverified"
         elif age > 29 and (fee > mv or ftv > 1.1):
             label = "High Risk"
-        elif mv < 15_000_000 and score > 72 and l_mult >= 0.85 and mins >= 600:
+        elif mv < 15_000_000 and score > 72 and l_mult >= 0.85 and (mins >= 600 or is_ooc_pro):
             label = "Hidden Gem"
-        elif score > 75 and ftv < 0.8 and l_mult >= 0.85 and mins >= 600:
+        elif score > 75 and ftv < 0.8 and l_mult >= 0.85 and (mins >= 600 or is_ooc_pro):
             label = "Bargain"
         elif score < 40 and ftv > 1.3:
             label = "Overpriced"

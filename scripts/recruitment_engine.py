@@ -212,7 +212,8 @@ def run_recruitment_engine():
         score += np.clip(xg_diff * 2.0, -5.0, 8.0)
         
         mins = row.get("minutes_played", 0)
-        if mins < 500:
+        is_ooc_pro = (mins == 0) and (row.get("market_value", 0) >= 1_500_000)
+        if mins < 500 and not is_ooc_pro:
             score = score * np.maximum(0.3, (mins / 500.0) ** 0.5)
         
         ability_scores.append(np.clip(score, 15.0, 99.0))
@@ -235,13 +236,14 @@ def run_recruitment_engine():
         
         # Base context from league multiplier and minutes played reliability (with Big Club rotation cushion)
         mins = row.get("minutes_played", 0)
+        is_ooc_pro = (mins == 0) and (row.get("market_value", 0) >= 1_500_000)
         elite_clubs_set = {normalize_name(ec) for ec in market_weights.get("elite_rotation_clubs", [])}
         club_val = normalize_name(str(row.get("club", row.get("club_name", ""))))
         is_elite_club = club_val in elite_clubs_set
         min_divisor = 900.0 if is_elite_club else 1800.0
         min_factor = min(1.0, mins / min_divisor) if mins > 0 else (0.75 if is_elite_club else 0.5)
         c_score = (l_mult * 75.0) + (min_factor * 20.0)
-        if mins < 500:
+        if mins < 500 and not is_ooc_pro:
             c_score = c_score * np.maximum(0.3, (mins / 500.0) ** 0.5)
         context_scores.append(np.clip(c_score, 20.0, 98.0))
     df_merged["context_score"] = np.round(context_scores, 1)
@@ -306,8 +308,9 @@ def run_recruitment_engine():
     # ---------------------------------------------------------
     logger.info("Calculating Recruitment Index (RI) and Replacement Values...")
     ri_vals = (df_merged["ability_score"] * 0.45) + (df_merged["context_score"] * 0.25) + (df_merged["market_score"] * 0.30)
-    # Minimum 500 minutes threshold — players below this get a score penalty of 20 points
-    ri_vals = np.where(df_merged["minutes_played"] < 500, ri_vals - 20.0, ri_vals)
+    # Minimum 500 minutes threshold — players below this get a score penalty of 20 points (exempting out-of-coverage senior pros)
+    is_ooc_pro = (df_merged["minutes_played"].fillna(0) == 0) & (df_merged["market_value"] >= 1_500_000)
+    ri_vals = np.where((df_merged["minutes_played"] < 500) & ~is_ooc_pro, ri_vals - 20.0, ri_vals)
     # Minimum market value floor of €500K — players below this are capped/filtered out of top rankings
     ri_vals = np.where(df_merged["market_value"] < 500_000, np.minimum(ri_vals, 45.0), ri_vals)
     df_merged["recruitment_index"] = np.round(np.clip(ri_vals, 10.0, 99.4), 1)
@@ -435,7 +438,8 @@ def run_recruitment_engine():
     for _, row in df_merged.iterrows():
         # Confidence
         mins = row.get("minutes_played", 0)
-        c_pct = 95 if mins >= 2200 else (88 if mins >= 1400 else (74 if mins >= 800 else 54))
+        is_ooc_pro = (mins == 0) and (row.get("market_value", 0) >= 1_500_000)
+        c_pct = 95 if mins >= 2200 else (88 if mins >= 1400 else (74 if mins >= 800 else (72 if is_ooc_pro else 54)))
         conf_scores.append(f"{c_pct}%")
         
         # Data Quality
@@ -469,7 +473,7 @@ def run_recruitment_engine():
         is_expensive_def_gk = (b_pos in ["Centre-Back", "Full-Back", "Goalkeeper"]) and (mv_m >= 60.0)
         is_mega_val = mv_m >= 80.0
         
-        if mins < 500:
+        if mins < 500 and not is_ooc_pro:
             rec = "🟡 SAMPLE SIZE RISK"
         elif ri >= 86.0 and fair_h >= mv_m and not is_expensive_def_gk and not is_mega_val:
             rec = "🟢 ELITE TARGET"
