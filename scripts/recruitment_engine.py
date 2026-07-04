@@ -122,7 +122,8 @@ def run_recruitment_engine():
         df_merged = df_tm.copy()
         
     df_merged["market_value"] = pd.to_numeric(df_merged["market_value"], errors="coerce")
-    df_merged = df_merged.sort_values(by="market_value", ascending=False, kind="mergesort").drop_duplicates(subset=["player_name"], keep="first")
+    dedup_key = "player_id" if "player_id" in df_merged.columns else "player_name"
+    df_merged = df_merged.sort_values(by="market_value", ascending=False, kind="mergesort").drop_duplicates(subset=[dedup_key], keep="first")
         
     if "club" not in df_merged.columns:
         if "club_name" in df_merged.columns:
