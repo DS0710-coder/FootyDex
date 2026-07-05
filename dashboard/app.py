@@ -259,15 +259,16 @@ def main():
             st.session_state["story_mode"] = "all"
             
     active_story = st.session_state.get("story_mode", "all")
+    is_ooc_pro = f_df["is_ooc_pro"] if "is_ooc_pro" in f_df.columns else False
     if active_story == "under20":
-        f_df = f_df[(f_df["market_value"] / 1e6 <= 20.0) & (f_df["recruitment_index"] >= 72.0) & (f_df["minutes_played"] >= 600)]
-        st.info("🔥 **Active Narrative**: Displaying the highest-rated European targets available for a market fee under **€20.0M**.")
+        f_df = f_df[(f_df["market_value"] / 1e6 <= 20.0) & (f_df["recruitment_index"] >= 72.0) & ((f_df["minutes_played"] >= 600) | is_ooc_pro)]
+        st.info("🔥 **Active Narrative**: Displaying the highest-rated European targets available for a market fee under **€20.0M** (exempting senior out-of-coverage pros from minute thresholds).")
     elif active_story == "u21":
-        f_df = f_df[(f_df["age"] <= 21) & (f_df["minutes_played"] >= 600) & (f_df["recruitment_index"] >= 65.0)]
-        st.info("⚡ **Active Narrative**: Highlighting Under-21 breakout stars with over 600 senior minutes and strong underlying metrics.")
+        f_df = f_df[(f_df["age"] <= 21) & ((f_df["minutes_played"] >= 600) | is_ooc_pro) & (f_df["recruitment_index"] >= 65.0)]
+        st.info("⚡ **Active Narrative**: Highlighting Under-21 breakout stars with over 600 senior minutes (or verified out-of-coverage senior pros) and strong underlying metrics.")
     elif active_story == "gems":
-        f_df = f_df[(f_df["moneyball_label"].isin(["Bargain", "Hidden Gem"])) & (f_df["minutes_played"] >= 600)]
-        st.info("💎 **Active Narrative**: Displaying data-backed Bargains and Hidden Gems with high undervaluation leverage.")
+        f_df = f_df[(f_df["moneyball_label"].isin(["Bargain", "Hidden Gem"])) & ((f_df["minutes_played"] >= 600) | is_ooc_pro)]
+        st.info("💎 **Active Narrative**: Displaying data-backed Bargains and Hidden Gems with high undervaluation leverage (exempting senior out-of-coverage pros from minute thresholds).")
     
     # Top KPI Bar
     kpi1, kpi2, kpi3, kpi4 = st.columns(4)
