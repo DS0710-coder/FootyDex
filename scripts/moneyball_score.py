@@ -200,7 +200,7 @@ def calculate_moneyball_score(df):
         scaled = np.full(len(df), 50.0)
         
     # Minimum 500 minutes threshold — players below this get a score penalty of 20 points (exempting out-of-coverage senior pros)
-    is_ooc_pro = df["is_ooc_pro"] if "is_ooc_pro" in df.columns else ((df["minutes_played"].fillna(0) == 0) & (df["market_value"].fillna(0) >= 1_500_000))
+    is_ooc_pro = df["is_ooc_pro"] if "is_ooc_pro" in df.columns else False
     penalty = np.where((df["minutes_played"] < 500) & ~is_ooc_pro, 20.0, 0.0)
     scaled = scaled - penalty
     

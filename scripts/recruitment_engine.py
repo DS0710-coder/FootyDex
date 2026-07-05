@@ -310,7 +310,7 @@ def run_recruitment_engine():
     logger.info("Calculating Recruitment Index (RI) and Replacement Values...")
     ri_vals = (df_merged["ability_score"] * 0.45) + (df_merged["context_score"] * 0.25) + (df_merged["market_score"] * 0.30)
     # Minimum 500 minutes threshold — players below this get a score penalty of 20 points (exempting out-of-coverage senior pros)
-    is_ooc_pro = df_merged["is_ooc_pro"] if "is_ooc_pro" in df_merged.columns else ((df_merged["minutes_played"].fillna(0) == 0) & (df_merged["market_value"].fillna(0) >= 1_500_000))
+    is_ooc_pro = df_merged["is_ooc_pro"] if "is_ooc_pro" in df_merged.columns else False
     ri_vals = np.where((df_merged["minutes_played"] < 500) & ~is_ooc_pro, ri_vals - 20.0, ri_vals)
     # Minimum market value floor of €500K — players below this are capped/filtered out of top rankings
     ri_vals = np.where(df_merged["market_value"] < 500_000, np.minimum(ri_vals, 45.0), ri_vals)

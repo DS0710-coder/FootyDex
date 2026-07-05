@@ -259,7 +259,7 @@ def main():
             st.session_state["story_mode"] = "all"
             
     active_story = st.session_state.get("story_mode", "all")
-    is_ooc_pro = f_df["is_ooc_pro"] if "is_ooc_pro" in f_df.columns else ((f_df["minutes_played"].fillna(0) == 0) & (f_df["market_value"].fillna(0) >= 1_500_000))
+    is_ooc_pro = f_df["is_ooc_pro"] if "is_ooc_pro" in f_df.columns else False
     if active_story == "under20":
         f_df = f_df[(f_df["market_value"] / 1e6 <= 20.0) & (f_df["recruitment_index"] >= 72.0) & ((f_df["minutes_played"] >= 600) | is_ooc_pro)]
         st.info("🔥 **Active Narrative**: Displaying the highest-rated European targets available for a market fee under **€20.0M**.")
