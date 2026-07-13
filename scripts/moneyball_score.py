@@ -122,7 +122,7 @@ def engineer_features(df_players, df_transfers, df_fbref):
     df["market_value"] = pd.to_numeric(df["market_value"], errors="coerce")
     df = df.sort_values(by="market_value", ascending=False, kind="mergesort").drop_duplicates(subset=[dedup_key], keep="first")
     df["market_value"] = df["market_value"].replace(0, np.nan).fillna(df["market_value"].median() or 10_000_000.0)
-    df["is_ooc_pro"] = (df["minutes_played"].fillna(0) == 0) & (df["market_value"].fillna(0) >= 1_500_000)
+    df["is_ooc_pro"] = (df["minutes_played"].fillna(0) < 500) & (df["market_value"].fillna(0) >= 1_500_000)
     
     # 3. fee_to_value_ratio = transfer fee / market value (>1 means overpriced, <1 means bargain)
     df["fee_to_value_ratio"] = np.where(

@@ -158,7 +158,7 @@ def run_recruitment_engine():
         df_merged["market_value"] = 1000000.0
     else:
         df_merged["market_value"] = pd.to_numeric(df_merged["market_value"], errors="coerce").fillna(1000000.0)
-    df_merged["is_ooc_pro"] = (df_merged["minutes_played"].fillna(0) == 0) & (df_merged["market_value"].fillna(0) >= 1_500_000)
+    df_merged["is_ooc_pro"] = (df_merged["minutes_played"].fillna(0) < 500) & (df_merged["market_value"].fillna(0) >= 1_500_000)
     
     # ---------------------------------------------------------
     # 1. FEATURE STORE NORMALIZATION (Z-Scores by Position)
