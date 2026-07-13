@@ -223,10 +223,8 @@ def label_players(df):
         l_mult = row.get("league_strength_mult", 0.75)
         is_ooc_pro = row.get("is_ooc_pro", False)
         
-        # Guardrails: Low sample size or low market value players cannot be in top categories
-        if mins < 500 and not is_ooc_pro:
-            label = "Sample Size Risk"
-        elif mv < 500_000:
+        # Guardrails: Low market value players cannot be in top categories
+        if mv < 500_000:
             label = "Low Valuation / Unverified"
         elif age > 29 and (fee > mv or ftv > 1.1):
             label = "High Risk"

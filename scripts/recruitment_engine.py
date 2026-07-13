@@ -474,9 +474,7 @@ def run_recruitment_engine():
         is_expensive_def_gk = (b_pos in ["Centre-Back", "Full-Back", "Goalkeeper"]) and (mv_m >= 60.0)
         is_mega_val = mv_m >= 80.0
         
-        if mins < 500 and not is_ooc_pro:
-            rec = "🟡 SAMPLE SIZE RISK"
-        elif ri >= 86.0 and fair_h >= mv_m and not is_expensive_def_gk and not is_mega_val:
+        if ri >= 86.0 and fair_h >= mv_m and not is_expensive_def_gk and not is_mega_val:
             rec = "🟢 ELITE TARGET"
         # Explicit override: Generational Ballon d'Or level performers (RI >= 92.0) bypass expensive defender and mega-value caps when fair valuation supports the price
         elif ri >= 92.0 and fair_h >= mv_m:
