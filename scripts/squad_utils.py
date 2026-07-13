@@ -8,6 +8,25 @@ import os
 import json
 import pandas as pd
 
+def compute_is_ooc_pro(df):
+    """
+    Identifies genuinely out-of-coverage senior professionals (<= 90 FBref minutes and market value >= €1.5M).
+    Provides full exemption from sample size penalties without treating limited-sample players as zero-minute players.
+    """
+    mins = df["minutes_played"].fillna(0) if "minutes_played" in df.columns else pd.Series(0, index=df.index)
+    mv = df["market_value"].fillna(0) if "market_value" in df.columns else pd.Series(0, index=df.index)
+    return (mins <= 90) & (mv >= 1_500_000)
+
+def compute_sample_size_warning(df):
+    """
+    Flags limited-sample players (<500 minutes, not OOC pro, market value >= €500K)
+    with a data-quality signal without undoing their market-value classification.
+    """
+    mins = df["minutes_played"].fillna(0) if "minutes_played" in df.columns else pd.Series(0, index=df.index)
+    mv = df["market_value"].fillna(0) if "market_value" in df.columns else pd.Series(0, index=df.index)
+    is_ooc = compute_is_ooc_pro(df)
+    return (mins < 500) & (~is_ooc) & (mv >= 500_000)
+
 def assign_squad_numbers(df):
     """
     Assigns authentic, unique squad numbers (#1-#45) per club based on authentic club rosters and position ranking.

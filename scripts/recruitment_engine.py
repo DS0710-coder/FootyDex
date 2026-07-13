@@ -24,9 +24,9 @@ import sys
 if os.path.abspath(".") not in sys.path:
     sys.path.insert(0, os.path.abspath("."))
 try:
-    from scripts.squad_utils import assign_squad_numbers
+    from scripts.squad_utils import assign_squad_numbers, compute_is_ooc_pro, compute_sample_size_warning
 except ImportError:
-    from squad_utils import assign_squad_numbers
+    from squad_utils import assign_squad_numbers, compute_is_ooc_pro, compute_sample_size_warning
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("FootyDex.RecruitmentEngine")
@@ -158,7 +158,8 @@ def run_recruitment_engine():
         df_merged["market_value"] = 1000000.0
     else:
         df_merged["market_value"] = pd.to_numeric(df_merged["market_value"], errors="coerce").fillna(1000000.0)
-    df_merged["is_ooc_pro"] = (df_merged["minutes_played"].fillna(0) == 0) & (df_merged["market_value"].fillna(0) >= 1_500_000)
+    df_merged["is_ooc_pro"] = compute_is_ooc_pro(df_merged)
+    df_merged["sample_size_warning"] = compute_sample_size_warning(df_merged)
     
     # ---------------------------------------------------------
     # 1. FEATURE STORE NORMALIZATION (Z-Scores by Position)
@@ -474,9 +475,7 @@ def run_recruitment_engine():
         is_expensive_def_gk = (b_pos in ["Centre-Back", "Full-Back", "Goalkeeper"]) and (mv_m >= 60.0)
         is_mega_val = mv_m >= 80.0
         
-        if mins < 500 and not is_ooc_pro:
-            rec = "🟡 SAMPLE SIZE RISK"
-        elif ri >= 86.0 and fair_h >= mv_m and not is_expensive_def_gk and not is_mega_val:
+        if ri >= 86.0 and fair_h >= mv_m and not is_expensive_def_gk and not is_mega_val:
             rec = "🟢 ELITE TARGET"
         # Explicit override: Generational Ballon d'Or level performers (RI >= 92.0) bypass expensive defender and mega-value caps when fair valuation supports the price
         elif ri >= 92.0 and fair_h >= mv_m:
@@ -522,6 +521,8 @@ def run_recruitment_engine():
             neg_notes.append(f"[-] Availability deduction (Sidelined {int(row['total_days_injured'])} days in recent seasons)")
         if row.get("pct_errors_to_shot", 0) >= 75:
             neg_notes.append(f"[-] Prone to defensive errors ({row['pct_errors_to_shot']}th percentile Errors Leading to Shot)")
+        if row.get("sample_size_warning", False):
+            neg_notes.insert(0, f"[-] Limited sample size warning ({int(row.get('minutes_played', 0))} senior minutes recorded)")
         if not neg_notes:
             neg_notes.append("[-] No critical physical or contractual flags identified")
             
